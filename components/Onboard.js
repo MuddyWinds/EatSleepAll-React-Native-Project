@@ -1,6 +1,8 @@
 import React, {useState} from 'react';
 import { StatusBar, View, Text, StyleSheet, SafeAreaView, Image, Pressable, ScrollView } from 'react-native';
 
+// First page when user enters 
+
 const images = [
     "onboard_sleep.jpg",
     "onboard_eat.jpg",

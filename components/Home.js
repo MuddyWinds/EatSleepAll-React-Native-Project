@@ -4,6 +4,7 @@ import { TouchableOpacity,SafeAreaView, View, StatusBar, Text, TextInput, FlatLi
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Restaurant_data from '../assets/data/Restaurant_data';
 import Restaurants from './Restaurants';
+import { LinearGradient } from 'expo-linear-gradient';
 const {width} = Dimensions.get('screen');
 
 const Home = ({navigation}) => {
@@ -12,6 +13,7 @@ const Home = ({navigation}) => {
     {title: 'Book a hotel for staycation', img: require('../assets/nice_hotel.jpg')},
     {title: 'Find the closet Michelin restaurant', img: require('../assets/nice_restaurant.jpg')},
     {title: 'Plan your next trip now', img: require('../assets/nice_airlines.jpg')},
+    {title: 'Nearest washroom around you', img: require('../assets/nice_toilet.jpg')},
   ];
 
   const discoverList = ['Top Rated', 'Trending', 'Nearest', 'Discounts'];
@@ -23,7 +25,7 @@ const Home = ({navigation}) => {
     // Write function to display different values when filter options are chosen
 
     return (
-      <ScrollView horizontal={true} style={style.categoryListContainer}>
+      <View style={style.categoryListContainer}>
         {discoverList.map((category, index) => (
           <Pressable
             key={index}
@@ -37,7 +39,7 @@ const Home = ({navigation}) => {
             </Text>
           </Pressable>
         ))}
-      </ScrollView>
+      </View>
     );
   };
 
@@ -45,15 +47,15 @@ const Home = ({navigation}) => {
     return (
       <View style={style.optionListsContainer}>
         {optionsList.map((option, index) => (
-          <View style={style.optionsCard} key={index}>
+          <LinearGradient colors={["#e8f4f8", "#f3f3f3"]} style={style.optionsCard} key={index}>
             {/* Hotel image */}
             <Image source={option.img} style={style.optionsCardImage} />
 
             {/* Option title */}
-            <Text style={{marginLeft: 5, marginTop: 10, fontSize: 15, fontWeight: 'bold'}}>
+            <Text style={{marginLeft: 5, marginTop: 12, fontSize: 12, fontWeight: 'bold', color: "#053466"}}>
               {option.title}
             </Text>
-          </View>
+          </LinearGradient>
         ))}
       </View>
     );
@@ -65,7 +67,7 @@ const Home = ({navigation}) => {
       <Pressable
         activeOpacity={0.8}
         onPress={() => navigation.navigate('Restaurants', restau)}>
-        <View style={style.card}>
+        <View style={[style.card, style.shadowProp]}>
 
           {/* Restaurant image */}
           <Image source={restau.image} style={style.cardImage} /> 
@@ -78,7 +80,7 @@ const Home = ({navigation}) => {
                 justifyContent: 'space-between',
                 marginTop: 10,
               }}>
-              <Text style={{fontSize: 16, fontWeight: 'bold'}}>
+              <Text style={{fontSize: 16, fontWeight: 'bold', color: "#053466"}}>
                 {restau.title}
               </Text>
               <Text
@@ -146,7 +148,7 @@ const Home = ({navigation}) => {
             justifyContent: 'space-between',
             paddingRight: 5,
           }}>
-          <View style={style.searchInputContainer}>
+          <LinearGradient colors={["#AFE6FE", "#C9E2FA"]} style={style.searchInputContainer}>
             <View style={style.searchRow}>
                 <Icon name="search" color="grey" size={25} style={style.searchIcon}/>
                 <TextInput style={style.barText} placeholder="Search address, city, location" />
@@ -155,7 +157,7 @@ const Home = ({navigation}) => {
             <View style={style.sortBtn}>
                 <Icon name="tune" color="white" size={20} />
             </View>
-          </View>
+          </LinearGradient>
         </View>
 
         {/* Render list options */}
@@ -182,11 +184,17 @@ const Home = ({navigation}) => {
 
 const style = StyleSheet.create({
   header: {
-    paddingTop: 20,
-    paddingBottom: 5,
+    paddingTop: 10,
+    paddingBottom: 12,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    paddingHorizontal: 20,
+    paddingHorizontal: 22,
+  },
+  shadowProp: {
+    shadowColor: '#171717',
+    shadowOffset: {width: 0, height: 4},
+    shadowOpacity: 0.2,
+    shadowRadius: 3,
   },
   profileImage: {
     width: 40,
@@ -200,12 +208,12 @@ const style = StyleSheet.create({
   },
   searchInputContainer: {
     height: 35,
-    backgroundColor: "#ADD8E6",
     flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    marginHorizontal: 20,
+    marginLeft: 20,
+    marginRight: 16,
     borderRadius: 12,
     marginBottom: 5,
   },
@@ -226,7 +234,7 @@ const style = StyleSheet.create({
     borderRadius: 12,
     justifyContent: 'center',
     alignItems: 'center',
-    marginLeft: 10,
+    marginRight: 5,
   },
   discoverScroller: {
   },
@@ -251,7 +259,7 @@ const style = StyleSheet.create({
     justifyContent: 'space-between',
     marginTop: 10,
     paddingHorizontal: 12,
-    marginBottom: 14
+    marginBottom: 8,
   },
   categoryListText: {
     fontSize: 15,
@@ -267,9 +275,9 @@ const style = StyleSheet.create({
   },
   categoryListContainer: {
     flexDirection: 'row',
-    // justifyContent: 'space-between',
+    justifyContent: 'space-between',
     marginTop: 15,
-    paddingHorizontal: 40,
+    paddingHorizontal: 10,
   },
   card: {
     height: 250,
