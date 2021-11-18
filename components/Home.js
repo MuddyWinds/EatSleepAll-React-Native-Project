@@ -9,42 +9,46 @@ const Home = ({navigation}) => {
   const optionsList = [
     {title: 'Book a hotel for staycation', img: require('../assets/nice_hotel.jpg')},
     {title: 'Find the closet Michelin restaurant', img: require('../assets/nice_restaurant.jpg')},
+    {title: 'Plan your next trip now', img: require('../assets/nice_airlines.jpg')},
   ];
 
-  const categoryList = ['Popular', 'Recommended', 'Nearest'];
+  const discoverList = ['Top Rated', 'Trending', 'Nearest', 'Discounts', 'Cheapest'];
 
 
   const ListCategories = () => {
-    const [selectedCategoryIndex, setSelectedCategoryIndex] = React.useState(0);
+    const [selectedDiscoverIndex, setSelectedDiscoverIndex] = React.useState(0);
+
+    // Write function to display different values when filter options are chosen
+
     return (
-      <View style={style.categoryListContainer}>
-        {categoryList.map((category, index) => (
+      <ScrollView horizontal={true} style={style.categoryListContainer}>
+        {discoverList.map((category, index) => (
           <Pressable
             key={index}
-            onPress={() => setSelectedCategoryIndex(index)}>
+            onPress={() => setSelectedDiscoverIndex(index)}>
             <Text
               style={[
                 style.categoryListText,
-                index == selectedCategoryIndex && style.activeCategoryListText,
+                index == selectedDiscoverIndex && style.activeCategoryListText,
               ]}>
               {category}
             </Text>
           </Pressable>
         ))}
-      </View>
+      </ScrollView>
     );
   };
 
-  const ListOptions = () => {
+  const DiscoverOptions = () => {
     return (
       <View style={style.optionListsContainer}>
         {optionsList.map((option, index) => (
           <View style={style.optionsCard} key={index}>
-            {/* House image */}
+            {/* Hotel image */}
             <Image source={option.img} style={style.optionsCardImage} />
 
             {/* Option title */}
-            <Text style={{marginTop: 10, fontSize: 18, fontWeight: 'bold'}}>
+            <Text style={{marginLeft: 5, marginTop: 10, fontSize: 15, fontWeight: 'bold'}}>
               {option.title}
             </Text>
           </View>
@@ -103,6 +107,7 @@ const Home = ({navigation}) => {
       </Pressable>
     );
   };
+
   return (
     <SafeAreaView style={{backgroundColor: "white", flex: 1 }}>
 
@@ -118,7 +123,7 @@ const Home = ({navigation}) => {
       <View style={style.header}>
         <View>
           <Text style={{color: "grey"}}>Location</Text>
-          <Text style={{color: "black", fontSize: 20, fontWeight: 'bold'}}>
+          <Text style={{color: "#053466", fontSize: 20, fontWeight: 'bold'}}>
             Sai Wan
           </Text>
         </View>
@@ -134,21 +139,24 @@ const Home = ({navigation}) => {
           style={{
             flexDirection: 'row',
             justifyContent: 'space-between',
-            paddingLeft: 10,
-            paddingRight: 20,
+            paddingRight: 5,
           }}>
           <View style={style.searchInputContainer}>
-            <Icon name="search" color="grey" size={25} style={style.searchIcon}/>
-            <TextInput style={style.barText} placeholder="Search address, city, location" />
-          </View>
+            <View style={style.searchRow}>
+                <Icon name="search" color="grey" size={25} style={style.searchIcon}/>
+                <TextInput style={style.barText} placeholder="Search address, city, location" />
+            </View>
 
-          <View style={style.sortBtn}>
-            <Icon name="tune" color="white" size={25} />
+            <View style={style.sortBtn}>
+                <Icon name="tune" color="white" size={20} />
+            </View>
           </View>
         </View>
 
         {/* Render list options */}
-        <ListOptions />
+        <ScrollView horizontal={true} style={style.discoverScroller}>
+            <DiscoverOptions />
+        </ScrollView>
 
         {/* Render categories */}
         <ListCategories />
@@ -172,7 +180,7 @@ const Home = ({navigation}) => {
 const style = StyleSheet.create({
   header: {
     paddingTop: 20,
-    paddingBottom: 15,
+    paddingBottom: 5,
     flexDirection: 'row',
     justifyContent: 'space-between',
     paddingHorizontal: 20,
@@ -193,33 +201,40 @@ const style = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
+    justifyContent: 'space-between',
     paddingHorizontal: 20,
     borderRadius: 12,
   },
   searchIcon: {
     paddingLeft: 5,
   },
+  searchRow: {
+    flexDirection: 'row',
+  },
   barText: {
-    paddingLeft: 0,
+    paddingLeft: 10,
   },
   sortBtn: {
-    backgroundColor: "black",
-    height: 50,
-    width: 50,
+    backgroundColor: "#053466",
+    height: 30,
+    width: 30,
     borderRadius: 12,
     justifyContent: 'center',
     alignItems: 'center',
     marginLeft: 10,
   },
+  discoverScroller: {
+  },
   optionsCard: {
     height: 210,
     width: width / 2 - 30,
     elevation: 15,
-    alignItems: 'center',
+    alignItems: 'flex-start',
     backgroundColor: "white",
     borderRadius: 20,
-    paddingTop: 10,
-    paddingHorizontal: 10,
+    paddingTop: 12,
+    paddingHorizontal: 12,
+    marginHorizontal: 6,
   },
   optionsCardImage: {
     height: 140,
@@ -229,24 +244,26 @@ const style = StyleSheet.create({
   optionListsContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginTop: 20,
+    marginTop: 8,
     paddingHorizontal: 20,
+    marginBottom: 14
   },
   categoryListText: {
-    fontSize: 16,
+    fontSize: 15,
     fontWeight: 'bold',
     paddingBottom: 5,
     color: "grey",
+    marginHorizontal: 10,
   },
   activeCategoryListText: {
-    color: "black",
+    color: "#000058",
     borderBottomWidth: 1,
     paddingBottom: 5,
   },
   categoryListContainer: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginTop: 40,
+    // justifyContent: 'space-between',
+    marginTop: 15,
     paddingHorizontal: 40,
   },
   card: {
