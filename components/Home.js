@@ -2,6 +2,8 @@ import { FontAwesome } from '@expo/vector-icons';
 import React from 'react';
 import { TouchableOpacity,SafeAreaView, View, StatusBar, Text, TextInput, FlatList, Dimensions, StyleSheet,Image,Pressable, ScrollView, } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import Restaurant_data from '../assets/data/Restaurant_data';
+import Restaurants from './Restaurants';
 const {width} = Dimensions.get('screen');
 
 const Home = ({navigation}) => {
@@ -12,7 +14,7 @@ const Home = ({navigation}) => {
     {title: 'Plan your next trip now', img: require('../assets/nice_airlines.jpg')},
   ];
 
-  const discoverList = ['Top Rated', 'Trending', 'Nearest', 'Discounts', 'Cheapest'];
+  const discoverList = ['Top Rated', 'Trending', 'Nearest', 'Discounts'];
 
 
   const ListCategories = () => {
@@ -57,14 +59,17 @@ const Home = ({navigation}) => {
     );
   };
 
-  const Card = ({house}) => {
+  const Card = ({restau}) => {
+
     return (
       <Pressable
         activeOpacity={0.8}
-        onPress={() => navigation.navigate('DetailsScreen', house)}>
+        onPress={() => navigation.navigate('Restaurants', restau)}>
         <View style={style.card}>
-          {/* House image */}
-          <Image source={house.image} style={style.cardImage} />
+
+          {/* Restaurant image */}
+          <Image source={restau.image} style={style.cardImage} /> 
+
           <View style={{marginTop: 10}}>
             {/* Title and price container */}
             <View
@@ -74,7 +79,7 @@ const Home = ({navigation}) => {
                 marginTop: 10,
               }}>
               <Text style={{fontSize: 16, fontWeight: 'bold'}}>
-                {house.title}
+                {restau.title}
               </Text>
               <Text
                 style={{fontWeight: 'bold', color: "#053466", fontSize: 16}}>
@@ -84,7 +89,7 @@ const Home = ({navigation}) => {
 
             {/* Location text */}
             <Text style={{color: "grey", fontSize: 14, marginTop: 5}}>
-              {house.location}
+              {restau.location}
             </Text>
 
             {/* Facilities container */}
@@ -161,17 +166,15 @@ const Home = ({navigation}) => {
         {/* Render categories */}
         <ListCategories />
 
-        {/* Render Card */}
-        {/*
+        {/* Render Card */} 
         <FlatList
           snapToInterval={width - 20}
           showsHorizontalScrollIndicator={false}
           contentContainerStyle={{paddingLeft: 20, paddingVertical: 20}}
           horizontal
-          data={houses}
-          renderItem={({item}) => <Card house={item} />}
+          data={Restaurant_data}
+          renderItem={({item}) => <Card restau={item} />}
         />
-        */}
       </ScrollView>
     </SafeAreaView>
   );
@@ -196,23 +199,25 @@ const style = StyleSheet.create({
     borderWidth: 1,
   },
   searchInputContainer: {
-    height: 50,
-    backgroundColor: "white",
+    height: 35,
+    backgroundColor: "#ADD8E6",
     flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    paddingHorizontal: 20,
+    marginHorizontal: 20,
     borderRadius: 12,
+    marginBottom: 5,
   },
   searchIcon: {
-    paddingLeft: 5,
+    paddingLeft: 10,
+    paddingTop: 2,
   },
   searchRow: {
     flexDirection: 'row',
   },
   barText: {
-    paddingLeft: 10,
+    paddingLeft: 8,
   },
   sortBtn: {
     backgroundColor: "#053466",
@@ -244,8 +249,8 @@ const style = StyleSheet.create({
   optionListsContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginTop: 8,
-    paddingHorizontal: 20,
+    marginTop: 10,
+    paddingHorizontal: 12,
     marginBottom: 14
   },
   categoryListText: {
