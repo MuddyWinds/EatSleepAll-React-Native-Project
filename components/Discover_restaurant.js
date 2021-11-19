@@ -45,17 +45,17 @@ const Discover_restaurant = ({navigation}) => {
                   justifyContent: 'space-between',
                 }}>
                 <Text style={{fontSize: 15, fontWeight: 'bold', color: "#053466"}}>
-                  {restaurant_info.title}
+                  {restaurant_info.name}
                 </Text>
                 <Text
                   style={{fontWeight: 'bold', color: "#053466", fontSize: 15}}>
-                  $1,500
+                  {restaurant_info.price_range}
                 </Text>
               </View>
 
               {/* Location text */}
               <Text style={{color: "grey", fontSize: 14, marginTop: 3.5}}>
-                {restaurant_info.location}
+                {restaurant_info.address}
               </Text>
 
               {/* Facilities container */}
@@ -70,7 +70,7 @@ const Discover_restaurant = ({navigation}) => {
                 </View>
                 <View style={styles.facility}>
                   <Icon name="aspect-ratio" size={18} />
-                  <Text style={styles.facilityText}>100m</Text>
+                  <Text style={styles.facilityText}>{restaurant_info.website}</Text>
                 </View>
               </View>
             </View>
@@ -97,17 +97,17 @@ const Discover_restaurant = ({navigation}) => {
                   justifyContent: 'space-between',
                 }}>
                 <Text style={{fontSize: 15, fontWeight: 'bold', color: "#053466"}}>
-                  {restaurant_info.title}
+                  {restaurant_info.name}
                 </Text>
                 <Text
                   style={{fontWeight: 'bold', color: "#053466", fontSize: 15}}>
-                  $1,500
+                  {restaurant_info.price_range}
                 </Text>
               </View>
 
               {/* Location text */}
               <Text style={{color: "grey", fontSize: 14, marginTop: 3.5}}>
-                {restaurant_info.location}
+                {restaurant_info.address}
               </Text>
 
               {/* Facilities container */}
@@ -122,7 +122,7 @@ const Discover_restaurant = ({navigation}) => {
                 </View>
                 <View style={styles.facility}>
                   <Icon name="aspect-ratio" size={18} />
-                  <Text style={styles.facilityText}>100m</Text>
+                  <Text style={styles.facilityText}>{restaurant_info.website}</Text>
                 </View>
               </View>
             </View>

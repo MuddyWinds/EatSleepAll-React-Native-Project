@@ -86,17 +86,17 @@ const Entry_home = ({navigation}) => {
                 marginTop: 10,
               }}>
               <Text style={{fontSize: 16, fontWeight: 'bold', color: "#053466"}}>
-                {restau.title}
+                {restau.name}
               </Text>
               <Text
                 style={{fontWeight: 'bold', color: "#053466", fontSize: 16}}>
-                $1,500
+                {restau.price_range}
               </Text>
             </View>
 
             {/* Location text */}
             <Text style={{color: "grey", fontSize: 14, marginTop: 5}}>
-              {restau.location}
+              {restau.address}
             </Text>
 
             {/* Facilities container */}
@@ -111,7 +111,7 @@ const Entry_home = ({navigation}) => {
               </View>
               <View style={style.facility}>
                 <Icon name="aspect-ratio" size={18} />
-                <Text style={style.facilityText}>100m</Text>
+                <Text style={style.facilityText}>{restau.website}</Text>
               </View>
             </View>
           </View>

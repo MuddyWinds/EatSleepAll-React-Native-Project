@@ -1,51 +1,48 @@
 import React from 'react';
 
 const Restaurant_data = [
-    {
-      id: '1',
-      title: 'Entire guest suite',
-      location: 'East Side Cedar Cottage Toronto',
-      image: require('../sushi.jpg'),
-      details: `This building is located in the Oliver area, withing walking distance of shops...`,
-      interiors: [
-      ],
-    },
-    {
-      id: '2',
-      title: 'Entire guest suite',
-      location: 'East Side Cedar Cottage Toronto',
-      image: require('../sushi.jpg'),
-      details: `This building is located in the Oliver area, withing walking distance of shops...`,
-      interiors: [
-      ],
-    },
-    {
-      id: '3',
-      title: 'Entire guest suite',
-      location: 'East Side Cedar Cottage Toronto',
-      image: require('../sushi.jpg'),
-      details: `This building is located in the Oliver area, withing walking distance of shops...`,
-      interiors: [
-      ],
-    },
-    {
-      id: '4',
-      title: 'Entire guest suite',
-      location: 'East Side Cedar Cottage Toronto',
-      image: require('../sushi.jpg'),
-      details: `This building is located in the Oliver area, withing walking distance of shops...`,
-      interiors: [
-      ],
-    },
-    {
-      id: '5',
-      title: 'Entire guest suite',
-      location: 'East Side Cedar Cottage Toronto',
-      image: require('../sushi.jpg'),
-      details: `This building is located in the Oliver area, withing walking distance of shops...`,
-      interiors: [
-      ],
-    },
-]
+  {website: 'TripAdvisor',
+  name: 'Wildfire Pizzabar (Sai Wan)',
+  url: 'https://www.tripadvisor.com.hk/Restaurant_Review-g294217-d17632665-Reviews-Wildfire_Pizzabar_Sai_Wan-Hong_Kong.html',
+  address: '西環堅尼地城科士街36號, 香港, 中國',
+  price_range: '$200-400',
+  image: require('../sushi.jpg'),
+  id: 1},
+  {website: 'TripAdvisor',
+  name: '海寶漁港 (西灣河)',
+  url: 'https://www.tripadvisor.com.hk/Restaurant_Review-g294217-d17632665-Reviews-Wildfire_Pizzabar_Sai_Wan-Hong_Kong.html',
+  address: '西灣河筲箕灣道41號一樓, 香港, 中國',
+  price_range: '$100-200',
+  image: require('../sushi.jpg'),
+  id: 2},
+  {website: 'TripAdvisor',
+  name: 'Artisan Cafe (石塘嘴)',
+  url: 'https://www.tripadvisor.com.hk/Restaurant_Review-g294217-d17632665-Reviews-Wildfire_Pizzabar_Sai_Wan-Hong_Kong.html',
+  address: '石塘嘴南里8-12號地鋪, 香港, 中國',
+  price_range: '$100-200',
+  image: require('../sushi.jpg'),
+  id: 3},
+  {website: 'Openrice',
+  name: 'Seam Eett Taiwan Noodles 西門町台灣麵食',
+  url: 'https://www.openrice.com/en/hongkong/r-seam-eett-taiwan-noodles-mong-kok-taiwan-r7723',
+  address: 'G/F, 2N Hung Kwong Buildling, 2 Tung Choi Street',
+  price_range: '$50-100',
+  image: require('../sushi.jpg'),
+  id: 4},
+  {website: 'Openrice',
+  name: 'Caf&#233; Circles',
+  url: 'https://www.openrice.com/en/hongkong/r-cafe-circles-tsuen-wan-western-buffet-r19824',
+  address: '9/F, Nina Hotel Tsuen Wan West, 8 Yeung Uk Road',
+  price_range: '$100-200',
+  image: require('../sushi.jpg'),
+  id: 5},
+  {website: 'Openrice',
+  name: '至尊雲吞麵雞煲',
+  url: 'https://www.openrice.com/en/hongkong/r-%E8%87%B3%E5%B0%8A%E9%9B%B2%E5%90%9E%E9%BA%B5%E9%9B%9E%E7%85%B2-tuen-mun-hong-kong-style-chicken-hot-pot-r523695',
+  address: 'Shop D, G/F, Tuen King Building, 8 Tsing Hoi Circuit',
+  price_range: '$100-200',
+  image: require('../sushi.jpg'),
+  id: 6}]
+
 
 export default Restaurant_data;
