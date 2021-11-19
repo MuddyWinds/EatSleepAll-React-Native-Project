@@ -1,16 +1,18 @@
-import AppLoading from 'expo-app-loading';
-import React from 'react';
-import { StatusBar,StyleSheet, Text, View, SafeAreaView } from 'react-native';
-import { useFonts, Poppins_500Medium } from '@expo-google-fonts/poppins';
-import Hotel from './Hotel';
-import Restaurants from './Restaurants';
-import SearchBar from './SearchBar';
-import { FontAwesome } from 'react-native-elements/dist/icons/Icon';
-// import Bookmark from './Bookmark';
+import React, {StatusBar} from 'react';
+import { StyleSheet, Text, View, SafeAreaView } from 'react-native';
+import Restaurants from './toBeDeleted_Restaurants';
+import SearchBar from './toBeDeleted_SearchBar';
 
-const Discover= () => {
+const Discover_hotel = () => {
   return (
     <SafeAreaView style={styles.container}>
+
+    {/* Customise status bar */}
+    <StatusBar
+      translucent={false}
+      backgroundColor="white"
+      barStyle="dark-content"
+    />
 
       { /* Today's specials */ }
       <SafeAreaView style={styles.specialWrapper}>
@@ -23,14 +25,11 @@ const Discover= () => {
 
           <View style={styles.items}>
           {/* All Special Discounts, hotels, restaurants will be stated here */}
-            <Hotel text={'hotel 1'}/>
-            <Hotel text={'hotel 2'}/>
             <Restaurants text={'Restaurant 1'}/>
             <Restaurants text={'Restaurant 2'}/>
           </View>
 
       </SafeAreaView>   
-
     </SafeAreaView> 
   );
 }
@@ -70,4 +69,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Discover;
+export default Discover_hotel;

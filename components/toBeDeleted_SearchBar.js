@@ -2,6 +2,7 @@ import React from 'react';
 import { TextInput, StyleSheet, SafeAreaView, View } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 
+// To be deleted. Replacement in Home.js
 
 const SearchBar = () => {
     return (

@@ -3,11 +3,12 @@ import React from 'react';
 import { TouchableOpacity,SafeAreaView, View, StatusBar, Text, TextInput, FlatList, Dimensions, StyleSheet,Image,Pressable, ScrollView, } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Restaurant_data from '../assets/data/Restaurant_data';
-import Restaurants from './Restaurants';
 import { LinearGradient } from 'expo-linear-gradient';
 const {width} = Dimensions.get('screen');
 
-const Home = ({navigation}) => {
+
+
+const Entry_home = ({navigation}) => {
 
   const optionsList = [
     {title: 'Book a hotel for staycation', img: require('../assets/nice_hotel.jpg')},
@@ -44,29 +45,33 @@ const Home = ({navigation}) => {
   };
 
   const DiscoverOptions = () => {
+
+    const Discover_linkage = ["Discover_hotel", "Discover_restaurant", "Discover_airline", "Discover_washroom"]
+
     return (
       <View style={style.optionListsContainer}>
         {optionsList.map((option, index) => (
-          <LinearGradient colors={["#e8f4f8", "#f3f3f3"]} style={style.optionsCard} key={index}>
-            {/* Hotel image */}
-            <Image source={option.img} style={style.optionsCardImage} />
+          <TouchableOpacity key={index} onPress={() => navigation.push("Discover", {screen: `${Discover_linkage[index]}`})}>
+          <LinearGradient colors={["#e8f4f8", "#f3f3f3"]} style={style.optionsCard}>
+            {/* Option image */}
+            <Image source={option.img} style={style.optionsCardImage} onload={console.log(index)}/>
 
             {/* Option title */}
             <Text style={{marginLeft: 5, marginTop: 12, fontSize: 12, fontWeight: 'bold', color: "#053466"}}>
               {option.title}
             </Text>
           </LinearGradient>
+          </TouchableOpacity>
         ))}
       </View>
     );
   };
 
   const Card = ({restau}) => {
-
     return (
       <Pressable
         activeOpacity={0.8}
-        onPress={() => navigation.navigate('Restaurants', restau)}>
+        onPress={() => navigation.push("Discover", {screen: "Discover_restaurant"} )}>
         <View style={[style.card, style.shadowProp]}>
 
           {/* Restaurant image */}
@@ -117,6 +122,7 @@ const Home = ({navigation}) => {
 
   return (
     <SafeAreaView style={{backgroundColor: "white", flex: 1 }}>
+
 
       {/* Customise status bar */}
       <StatusBar
@@ -297,4 +303,4 @@ const style = StyleSheet.create({
   facilityText: {marginLeft: 5, color: "grey"},
 });
 
-export default Home;
+export default Entry_home;

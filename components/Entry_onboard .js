@@ -10,7 +10,7 @@ const images = [
 ];
 
 
-const Onboard = ({navigation}) => {
+const Entry_onboard = ({navigation}) => {
     
     /** Auto-chaning image here */
     const [value, setvalue] = React.useState(0);
@@ -51,7 +51,7 @@ const Onboard = ({navigation}) => {
             <View style={{flex: 1, justifyContent: 'flex-end', paddingBottom: 25,}}>
 
                 {/* button */}
-                <Pressable onPress={() => navigation.navigate('Home')}>
+                <Pressable onPress={() => navigation.navigate('Entry_home')}>
                     <View style={style.btn}>
                         <Text style={{color: 'white'}}>Discover Your Day</Text>
                     </View>
@@ -108,4 +108,4 @@ const style = StyleSheet.create({
     },
 });
 
-export default Onboard;
+export default Entry_onboard;

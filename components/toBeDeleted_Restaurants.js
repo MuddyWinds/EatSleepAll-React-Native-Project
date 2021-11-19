@@ -2,6 +2,9 @@ import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 
+// This page will be deleted soon
+
+
 const Restaurants = (props) => {
     /** Required scraping function imported */
 
