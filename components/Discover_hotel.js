@@ -1,6 +1,5 @@
 import React, {StatusBar} from 'react';
 import { StyleSheet, Text, View, SafeAreaView } from 'react-native';
-import Restaurants from './toBeDeleted_Restaurants';
 import SearchBar from './toBeDeleted_SearchBar';
 
 const Discover_hotel = () => {
