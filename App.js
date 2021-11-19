@@ -10,7 +10,7 @@ const RootStack = createStackNavigator();
 export default function App() {
   return (
     <NavigationContainer>
-      <RootStack.Navigator>
+      <RootStack.Navigator screenOptions={{headerShown: false}}>
         <RootStack.Screen name="Entry" component={EntranceStackNavigator}/>
         <RootStack.Screen name="Discover" component={DiscoverStackNavigator}/>
         <RootStack.Screen name="UserInfo" component={UserInfoStackNavigator}/>

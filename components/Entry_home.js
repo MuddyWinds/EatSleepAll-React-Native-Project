@@ -54,7 +54,7 @@ const Entry_home = ({navigation}) => {
           <TouchableOpacity key={index} onPress={() => navigation.push("Discover", {screen: `${Discover_linkage[index]}`})}>
           <LinearGradient colors={["#e8f4f8", "#f3f3f3"]} style={style.optionsCard}>
             {/* Option image */}
-            <Image source={option.img} style={style.optionsCardImage} onload={console.log(index)}/>
+            <Image source={option.img} style={style.optionsCardImage}/>
 
             {/* Option title */}
             <Text style={{marginLeft: 5, marginTop: 12, fontSize: 12, fontWeight: 'bold', color: "#053466"}}>
@@ -72,7 +72,7 @@ const Entry_home = ({navigation}) => {
       <Pressable
         activeOpacity={0.8}
         onPress={() => navigation.push("Discover", {screen: "Discover_restaurant"} )}>
-        <View style={[style.card, style.shadowProp]}>
+        <LinearGradient colors={["#e8f4f8", "#f3f3f3"]} style={style.card}>
 
           {/* Restaurant image */}
           <Image source={restau.image} style={style.cardImage} /> 
@@ -115,7 +115,7 @@ const Entry_home = ({navigation}) => {
               </View>
             </View>
           </View>
-        </View>
+        </LinearGradient>
       </Pressable>
     );
   };
@@ -167,7 +167,7 @@ const Entry_home = ({navigation}) => {
         </View>
 
         {/* Render list options */}
-        <ScrollView horizontal={true} style={style.discoverScroller}>
+        <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} style={style.discoverScroller}>
             <DiscoverOptions />
         </ScrollView>
 
@@ -183,6 +183,7 @@ const Entry_home = ({navigation}) => {
           data={Restaurant_data}
           renderItem={({item}) => <Card restau={item} />}
         />
+
       </ScrollView>
     </SafeAreaView>
   );
