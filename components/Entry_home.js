@@ -4,6 +4,7 @@ import { TouchableOpacity,SafeAreaView, View, StatusBar, Text, TextInput, FlatLi
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Restaurant_data from '../assets/data/Restaurant_data';
 import { LinearGradient } from 'expo-linear-gradient';
+import BottomBar from './Bottom_bar';
 const {width} = Dimensions.get('screen');
 
 
@@ -184,6 +185,10 @@ const Entry_home = ({navigation}) => {
         />
 
       </ScrollView>
+
+      {/* Render Bottom_bar */}
+      <BottomBar />
+
     </SafeAreaView>
   );
 };

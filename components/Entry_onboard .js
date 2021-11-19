@@ -4,9 +4,9 @@ import { StatusBar, View, Text, StyleSheet, SafeAreaView, Image, Pressable, Scro
 // First page when user enters 
 
 const images = [
-    "onboard_sleep.jpg",
-    "onboard_eat.jpg",
-    "onboard_sport.jpg",
+    require("../assets/onboard_sleep.jpg"),
+    require("../assets/onboard_eat.jpg"),
+    require("../assets/onboard_sport.jpg"),
 ];
 
 
@@ -18,9 +18,8 @@ const Entry_onboard = ({navigation}) => {
     React.useEffect(() => {
         const interval = setInterval(() => {
             setvalue((v) => (v === 2 ? 0 : v + 1));
-        }, 1000);
+        }, 5000);
     }, []);
-    const rPic = "../assets/" + images[value];
 
     // INCOMPLETE UNTIL HERE
 
@@ -29,7 +28,7 @@ const Entry_onboard = ({navigation}) => {
             <StatusBar translucent backgroundColor={'rgba(52, 52, 52, 0.8)'} />
             
             {/* Onboarding Image */}
-            <Image source={require("../assets/onboard_sport.jpg")} style={style.image}/> 
+            <Image source={images[value]} style={style.image}/> 
 
             {/* Indicator container */}
             <View style={style.indicatorContainer}>
