@@ -13,8 +13,7 @@ const Entry_home = ({navigation}) => {
   const optionsList = [
     {title: 'Book a hotel for staycation', img: require('../assets/nice_hotel.jpg')},
     {title: 'Find the closet Michelin restaurant', img: require('../assets/nice_restaurant.jpg')},
-    {title: 'Plan your next trip now', img: require('../assets/nice_airlines.jpg')},
-    {title: 'Nearest washroom around you', img: require('../assets/nice_toilet.jpg')},
+    {title: 'Explore your district', img: require('../assets/nice_airlines.jpg')},
   ];
 
   const discoverList = ['Top Rated', 'Trending', 'Nearest', 'Discounts'];
@@ -46,7 +45,7 @@ const Entry_home = ({navigation}) => {
 
   const DiscoverOptions = () => {
 
-    const Discover_linkage = ["Discover_hotel", "Discover_restaurant", "Discover_airline", "Discover_washroom"]
+    const Discover_linkage = ["Discover_hotel", "Discover_restaurant", "Discover_washroom"]
 
     return (
       <View style={style.optionListsContainer}>
