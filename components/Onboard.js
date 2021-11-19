@@ -4,23 +4,23 @@ import { StatusBar, View, Text, StyleSheet, SafeAreaView, Image, Pressable, Scro
 // First page when user enters 
 
 const images = [
-    "onboard_sleep.jpg",
-    "onboard_eat.jpg",
-    "onboard_sport.jpg",
+    require("../assets/onboard_sleep.jpg"),
+    require("../assets/onboard_eat.jpg"),
+    require("../assets/onboard_sport.jpg"),
 ];
 
 
 const Onboard = ({navigation}) => {
     
-    /** Auto-chaning image here */
+    /** Auto-changing image here */
     const [value, setvalue] = React.useState(0);
 
     React.useEffect(() => {
         const interval = setInterval(() => {
             setvalue((v) => (v === 2 ? 0 : v + 1));
-        }, 1000);
+        }, 5000);
     }, []);
-    const rPic = "../assets/" + images[value];
+
 
     // INCOMPLETE UNTIL HERE
 
@@ -29,14 +29,14 @@ const Onboard = ({navigation}) => {
             <StatusBar translucent backgroundColor={'rgba(52, 52, 52, 0.8)'} />
             
             {/* Onboarding Image */}
-            <Image source={require("../assets/onboard_sport.jpg")} style={style.image}/> 
+            <Image source={images[value]} style={style.image}/> 
 
-            {/* Indicator container */}
+            {/* Indicator container
             <View style={style.indicatorContainer}>
                 <View style={style.indicator} />
                 <View style={style.indicator} />
                 <View style={[style.indicator, style.indicatorActive]} />
-            </View>
+            </View> */}
 
             {/* Title and text container */}
             <View style={{paddingHorizontal: 20, paddingTop: 30}}>

@@ -5,6 +5,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import Restaurant_data from '../assets/data/Restaurant_data';
 import Restaurants from './Restaurants';
 import { LinearGradient } from 'expo-linear-gradient';
+
 const {width} = Dimensions.get('screen');
 
 const Home = ({navigation}) => {
@@ -115,6 +116,7 @@ const Home = ({navigation}) => {
     );
   };
 
+
   return (
     <SafeAreaView style={{backgroundColor: "white", flex: 1 }}>
 
@@ -178,6 +180,42 @@ const Home = ({navigation}) => {
           renderItem={({item}) => <Card restau={item} />}
         />
       </ScrollView>
+
+      {/* Bottom Bar */}
+      <LinearGradient colors={["#e8f4f8", "#f3f3f3"]}
+          style={{
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            width: width,
+            position: 'absolute',
+            bottom: 0,
+            paddingHorizontal: 40,
+            backgroundColor: 'transparent',
+          }}>
+          <TouchableOpacity style={{width: 50,
+                                  height: 50,
+                                  borderRadius: 60,
+                                  justifyContent: 'center',
+                                  alignItems: 'center',}}>
+            <FontAwesome name="heart" color="#194466"size={40}/>
+        </TouchableOpacity>
+        <TouchableOpacity style={{width: 50,
+                                  height: 50,
+                                  borderRadius: 60,
+                                  justifyContent: 'center',
+                                  alignItems: 'center',}}>
+            <FontAwesome name="home" color="#194466"size={40}/>
+        </TouchableOpacity>
+        <TouchableOpacity style={{width: 50,
+                                  height: 50,
+                                  borderRadius: 60,
+                                  justifyContent: 'center',
+                                  alignItems: 'center',}}>
+            <FontAwesome name="bell" color="#194466"size={40}/>
+        </TouchableOpacity>
+      </LinearGradient>
+
+
     </SafeAreaView>
   );
 };
