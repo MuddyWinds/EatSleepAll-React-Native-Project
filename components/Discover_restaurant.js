@@ -35,7 +35,7 @@ const Discover_restaurant = ({navigation}) => {
         <Pressable 
           activeOpacity={0.8}
           onPress={() => navigation.push("Discover", {screen: "Discover_restaurant"})}>
-          <LinearGradient colors={["#DCDCDC", "#f3f3f3"]} style={styles.card2}>
+          <LinearGradient colors={["#EFF5F6", "#f3f3f3"]} style={styles.card2}>
             
             <View>
               {/* Title and price container */}
@@ -44,22 +44,22 @@ const Discover_restaurant = ({navigation}) => {
                   flexDirection: 'row',
                   justifyContent: 'space-between',
                 }}>
-                <Text style={{fontSize: 16, fontWeight: 'bold', color: "#053466"}}>
+                <Text style={{fontSize: 15, fontWeight: 'bold', color: "#053466"}}>
                   {restaurant_info.title}
                 </Text>
                 <Text
-                  style={{fontWeight: 'bold', color: "#053466", fontSize: 16}}>
+                  style={{fontWeight: 'bold', color: "#053466", fontSize: 15}}>
                   $1,500
                 </Text>
               </View>
 
               {/* Location text */}
-              <Text style={{color: "grey", fontSize: 14, marginTop: 5}}>
+              <Text style={{color: "grey", fontSize: 14, marginTop: 3.5}}>
                 {restaurant_info.location}
               </Text>
 
               {/* Facilities container */}
-              <View style={{marginTop: 10, flexDirection: 'row'}}>
+              <View style={{marginTop: 8, flexDirection: 'row'}}>
                 <View style={styles.facility}>
                   <Icon name="hotel" size={18} />
                   <Text style={styles.facilityText}>2</Text>
@@ -84,35 +84,34 @@ const Discover_restaurant = ({navigation}) => {
         <Pressable 
           activeOpacity={0.8}
           onPress={() => navigation.push("Discover", {screen: "Discover_restaurant"})}>
-          <LinearGradient colors={["#e8f4f8", "#f3f3f3"]} style={styles.card}>
+          <LinearGradient colors={["#8BDCEC", "#D0E9EE"]} style={styles.card}>
 
             {/* Restauarant image */}
             <Image source={restaurant_info.image} style={styles.cardImage} />
             
-            <View style={{marginTop: 10}}>
+            <View style={{marginTop: 8, marginHorizontal: 1}}>
               {/* Title and price container */}
               <View
                 style={{
                   flexDirection: 'row',
                   justifyContent: 'space-between',
-                  marginTop: 10,
                 }}>
-                <Text style={{fontSize: 16, fontWeight: 'bold', color: "#053466"}}>
+                <Text style={{fontSize: 15, fontWeight: 'bold', color: "#053466"}}>
                   {restaurant_info.title}
                 </Text>
                 <Text
-                  style={{fontWeight: 'bold', color: "#053466", fontSize: 16}}>
+                  style={{fontWeight: 'bold', color: "#053466", fontSize: 15}}>
                   $1,500
                 </Text>
               </View>
 
               {/* Location text */}
-              <Text style={{color: "grey", fontSize: 14, marginTop: 5}}>
+              <Text style={{color: "grey", fontSize: 14, marginTop: 3.5}}>
                 {restaurant_info.location}
               </Text>
 
               {/* Facilities container */}
-              <View style={{marginTop: 10, flexDirection: 'row'}}>
+              <View style={{marginTop: 8, flexDirection: 'row'}}>
                 <View style={styles.facility}>
                   <Icon name="hotel" size={18} />
                   <Text style={styles.facilityText}>2</Text>
@@ -134,13 +133,19 @@ const Discover_restaurant = ({navigation}) => {
 
     return (
       <SafeAreaView style={styles.container}>
-        <Pressable style={{marginLeft: 16, flexDirection: 'row', alignItems: 'center',}}
+        <Pressable style={{marginLeft: 8, flexDirection: 'row', alignItems: 'center',}}
            onPress={() => navigation.navigate("Entry", {screen: "Entry_home"})}>
-          <Icon style={{color: "#053466"}}name="chevron-left" size={28}/>
-          <Text style={{color: "#053466", fontSize: 18,}}>Back to Sleep</Text>
+          <Icon style={{color: "#053466"}}name="chevron-left" size={25}/>
+          <Text style={{fontSize: 16, marginLeft: -3}}>Back to All</Text>
         </Pressable>
 
-        {/* Render non-chosen Card */}
+        <View style={{flexDirection: "row", marginLeft: 6, marginTop: 3.6}}>
+          <Text style={{marginLeft: 18, fontSize: 24, fontWeight: "bold", color: "#053466",}}>Discover</Text>
+          <View style={styles.rectangle}></View>
+          <Text style={{paddingLeft: 10, fontSize: 24, color: "#053466",}}>#EAT</Text>
+        </View>
+
+        {/* Render Top-Select Card */}
         <Restaurant_card restaurant_info={Restaurant_data[1]} />
 
         {/* Render filter options */}
@@ -167,30 +172,21 @@ const styles = StyleSheet.create({
   container: {
       flex: 1,
       backgroundColor: '#FFFFFF',
+      marginTop: -8,
   },
   sectionSubText: {
-      paddingLeft: 14,
+      marginLeft: 18,
       fontSize: 12.5,
       fontWeight: "500",
       paddingTop: 4,
       paddingBottom: 10,
       color: "#053466",
   },
-  specialWrapper: {
-      paddingTop: 45,
-      paddingHorizontal: 10,
-  },
-  sectionTitle: {
-      paddingLeft: 14,
-      fontSize: 36,
-      fontWeight: 'bold',
-      color: "#053466",
-  },
   rectangle: {
-      width: 70,
-      height: 2,
+      width: 2,
+      height: 25,
       backgroundColor: "#053466",
-      marginLeft: 14,
+      marginLeft: 8,
       borderRadius: 2,
   },
   iconLeft: {
@@ -217,7 +213,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
   card: {
-    height: 250,
+    height: 220,
     elevation: 10,
     width: width - 40,
     padding: 15,
@@ -227,12 +223,13 @@ const styles = StyleSheet.create({
     marginBottom: 18,
   },
   card2: {
-    height: 100,
+    height: 84,
     width: width - 40,
     marginRight: 20,
-    padding: 15,
+    paddingHorizontal: 16,
+    paddingVertical: 10,
     borderRadius: 20,
-    marginVertical: 6,
+    marginBottom: 10,
   },
   cardImage: {
     width: '100%',
@@ -250,7 +247,6 @@ const styles = StyleSheet.create({
   filterListContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginTop: 5,
     paddingHorizontal: 20,
   },
   Ranking: {
