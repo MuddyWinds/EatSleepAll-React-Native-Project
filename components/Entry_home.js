@@ -145,7 +145,6 @@ const Entry_home = ({navigation}) => {
       </View>
 
 
-      <ScrollView showsVerticalScrollIndicator={false}>
         {/* Input and sort button container */}
         <View
           style={{
@@ -165,8 +164,9 @@ const Entry_home = ({navigation}) => {
           </LinearGradient>
         </View>
 
+        <ScrollView showsVerticalScrollIndicator={false}>
         {/* Render list options */}
-        <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} style={style.discoverScroller}>
+        <ScrollView horizontal showsHorizontalScrollIndicator={false} style={style.discoverScroller}>
             <DiscoverOptions />
         </ScrollView>
 
@@ -176,9 +176,9 @@ const Entry_home = ({navigation}) => {
         {/* Render Card */} 
         <FlatList
           snapToInterval={width - 20}
-          showsHorizontalScrollIndicator={false}
-          contentContainerStyle={{paddingLeft: 20, paddingVertical: 20}}
-          horizontal
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={{paddingHorizontal: 20, paddingTop: 10}}
+          vertical
           data={Restaurant_data}
           renderItem={({item}) => <Card restau={item} />}
         />
@@ -265,7 +265,7 @@ const style = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginTop: 10,
-    paddingHorizontal: 12,
+    paddingHorizontal: 13,
     marginBottom: 8,
   },
   categoryListText: {
@@ -294,6 +294,7 @@ const style = StyleSheet.create({
     marginRight: 20,
     padding: 15,
     borderRadius: 20,
+    marginBottom: 14,
   },
   cardImage: {
     width: '100%',

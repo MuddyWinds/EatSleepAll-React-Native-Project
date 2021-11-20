@@ -1,5 +1,5 @@
 import React, {StatusBar} from 'react';
-import { StyleSheet, Image, Text, View, SafeAreaView, Dimensions, ScrollView, Pressable, Button, FlatList } from 'react-native';
+import { StyleSheet, Image, Text, View, SafeAreaView, Dimensions, ScrollView, Pressable, Button, FlatList, TextInput } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import Restaurant_data from '../assets/data/Restaurant_data';
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -133,16 +133,37 @@ const Discover_restaurant = ({navigation}) => {
 
     return (
       <SafeAreaView style={styles.container}>
+        {/** Return Button to previous page */}
         <Pressable style={{marginLeft: 8, flexDirection: 'row', alignItems: 'center',}}
            onPress={() => navigation.navigate("Entry", {screen: "Entry_home"})}>
           <Icon style={{color: "#053466"}}name="chevron-left" size={25}/>
           <Text style={{fontSize: 16, marginLeft: -3}}>Back to All</Text>
         </Pressable>
 
-        <View style={{flexDirection: "row", marginLeft: 6, marginTop: 3.6}}>
+        {/** Title header */}
+        <View style={{flexDirection: "row", marginLeft: 4.5, marginTop: 3.6}}>
           <Text style={{marginLeft: 18, fontSize: 24, fontWeight: "bold", color: "#053466",}}>Discover</Text>
           <View style={styles.rectangle}></View>
           <Text style={{paddingLeft: 10, fontSize: 24, color: "#053466",}}>#EAT</Text>
+        </View>
+
+        {/* Input and sort button container */}
+        <View
+          style={{
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            paddingRight: 5,
+          }}>
+          <LinearGradient colors={["#AFE6FE", "#C9E2FA"]} style={styles.searchInputContainer}>
+            <View style={styles.searchRow}>
+                <Icon name="search" color="grey" size={25} style={styles.searchIcon}/>
+                <TextInput style={styles.barText} placeholder="Search address, city, location" />
+            </View>
+
+            <View style={styles.sortBtn}>
+                <Icon name="tune" color="white" size={20} />
+            </View>
+          </LinearGradient>
         </View>
 
         {/* Render Top-Select Card */}
@@ -156,7 +177,7 @@ const Discover_restaurant = ({navigation}) => {
           <FlatList
             snapToInterval={width - 20}
             showsVerticalScrollIndicator={false}
-            contentContainerStyle={{paddingLeft: 20, paddingTop: 6}}
+            contentContainerStyle={{paddingLeft: 20, paddingVertical: 6}}
             vertical
             data={Restaurant_data}
             renderItem={({item}) => <Awaiting_restaurant_card restaurant_info={item} />}
@@ -201,6 +222,37 @@ const styles = StyleSheet.create({
       opacity: 0.4, 
       borderRadius: 5,
       marginRight: 15,
+  },
+  searchInputContainer: {
+    height: 35,
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginLeft: 20,
+    marginRight: 16,
+    borderRadius: 12,
+    marginBottom: 5,
+    marginTop: 8.5,
+  },
+  searchIcon: {
+    paddingLeft: 10,
+    paddingTop: 2,
+  },
+  searchRow: {
+    flexDirection: 'row',
+  },
+  barText: {
+    paddingLeft: 8,
+  },
+  sortBtn: {
+    backgroundColor: "#053466",
+    height: 30,
+    width: 30,
+    borderRadius: 12,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginRight: 5,
   },
   itemText: {
     maxWidth: '80%',
