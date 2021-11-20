@@ -1,24 +1,94 @@
-import React, {StatusBar} from 'react';
-import { StyleSheet, Image, Text, View, SafeAreaView, Dimensions, ScrollView, Pressable, Button, FlatList, TextInput } from 'react-native';
-import { LinearGradient } from 'expo-linear-gradient';
+import React, {useState} from 'react';
+import { StyleSheet, Text, View, SafeAreaView, Pressable, Button, ScrollView, FlatList, Dimensions } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import { Feather } from '@expo/vector-icons';
+import Notifs from './Notifications';
+import Notification_data from '../assets/data/Notification_data'
 
-const User_notification = ({navigation}) => {
+const {width, height} = Dimensions.get('screen');
+// const addNotification = (text,type) => {
+//     console.log("addNotification");
+//     notificationItems = [[text,type],...notificationItems]
+
+// }
+
+// const deleteNotification = (index) => {
+//     console.log("deleteNotification");
+//     return;
+// }
+
+// const notificationItems = [
+//     ["Notification 1 (restaurant) 1 2 3 4 5 6 7 8 9 10 abcdef  abcasdaa basd", "restaurant"],
+//     ["Notification 2 (hotel)", "hotel"],
+//     ["Notification 3 (washroom) 1 2 3 4 5 6 7 8", "washroom"],
+// ]
+
+const User_notification = () => {
+
+    // const [notification, setNotification] = useState('hi');
+    // const [notificationType, setNotificationType] = useState('');
+    // const [notificationItems, setNotificationItems] = useState([]);
+
+    // const handleAddNotification = (text,type) => {
+    //     // setNotification(text);
+    //     // setNotificationType(type);
+    //     setNotificationItems([...notificationItems, [text,type]]);
+    //     console.log('handled add notification');
+    // }
+
+    // const handleDeleteNotification = (index) => {
+    //     let itemsCopy = [...notificationItems];
+    //     itemsCopy.splice(index,1);
+    //     setNotificationItems(itemsCopy);
+    // }
+
+    // setNotification("testing");
+    // handleAddNotification('notif1 (restaurant)');
+    // handleAddNotification('notif1 (restaurant)','restaurant');
+    // handleAddNotification('notif2 (hotel)', 'hotel');
+    // handleAddNotification('notif3 (washroom)', 'washroom');
+
+
     return (
-        <SafeAreaView>
-            
-        {/** Return Button to previous page */}
-        <Pressable style={{marginLeft: 8, flexDirection: 'row', alignItems: 'center',}}
-            onPress={() => navigation.navigate("Entry", {screen: "Entry_home"})}>
-            <Icon style={{color: "#053466"}}name="chevron-left" size={25}/>
-            <Text style={{fontSize: 16, marginLeft: -3}}>Back</Text>
-        </Pressable>
+        <SafeAreaView style={styles.container}>
 
-        {/** Title header */}
-        <View style={styles.header}>
-            <Text style={styles.noti}>Notifications</Text>
-        </View>
+            {/** Return Button to previous page */}
+            <Pressable style={{marginLeft: 8, flexDirection: 'row', alignItems: 'center',}}
+                onPress={() => navigation.navigate("Entry", {screen: "Entry_home"})}>
+                <Icon style={{color: "#053466"}}name="chevron-left" size={25}/>
+                <Text style={{fontSize: 16, marginLeft: -3}}>Back</Text>
+            </Pressable>
+
+            <View style={{flexDirection: "row", marginLeft: 6, marginTop: 4.5}}>
+                <Text style={{marginLeft: 18, fontSize: 24, fontWeight: "bold", color: "#053466",}}>Notifications</Text>
+            </View>
+            {/* <Button title={'button'} onPress={() => addNotification('notif 1','restaurant')}></Button> */}
+
+            {/* <ScrollView style={styles.wrapper} showsVerticalScrollIndicator={false}> */}
+                {/* <View style={styles.items}>
+                    {
+                        // notificationItems.map((item,index) => {
+                        //     return <Notifs key={index} text={item[0]} type={item[1]}/>
+                        //     // return <Notifs key={index} text={item} type={'restaurant'}/>
+                        // })
+                        for (let i = 1 ; i < Object.keys(notification_data).length ; i++) {
+                            // console.log(notification_data[i.toString()].text);
+                            return <Notifs key={i} text={notification_data[i.toString()].text}></Notifs>
+                        }
+                    }
+                    
+
+                </View> */}
+                <FlatList
+                    snapToInterval={width - 20}
+                    showsVerticalScrollIndicator={false}
+                    style={styles.wrapper}
+                    // contentContainerStyle={{paddingLeft: 20, paddingTop: 6}}
+                    vertical
+                    data={Notification_data}
+                    renderItem={({item}) => <Notifs title={item.title} text={item.description} type={item.type} show={item.show} id={item.id}/>}
+                />
+                
+            {/* </ScrollView> */}
 
         </SafeAreaView>
     );
@@ -28,41 +98,18 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#FFFFFF',
-        marginTop: -8,
+        marginTop: 0,
     },
-    sectionSubText: {
-        marginLeft: 18,
-        fontSize: 12.5,
-        fontWeight: "500",
-        paddingTop: 4,
-        paddingBottom: 10,
-        color: "#053466",
+    wrapper: {
+        paddingTop: 10,
+        paddingHorizontal: 20,
+        marginBottom:50,
+        // backgroundColor: 'green',
     },
-    rectangle: {
-        width: 2,
-        height: 25,
-        backgroundColor: "#053466",
-        marginLeft: 8,
-        borderRadius: 2,
+    items: {
+        marginTop: 30,
     },
-    noti: {
-        marginLeft: 18, 
-        fontSize: 24, 
-        fontWeight: "bold", 
-        color: "#053466",
-    },
-    header: {
-        flexDirection: "row", 
-        marginLeft: 4.5, 
-        marginTop: 3.6
-    },
-    boxWithShadow: {
-        shadowColor: '#000',
-        shadowOffset: { width: 0, height: 1 },
-        shadowOpacity: 0.8,
-        shadowRadius: 1,  
-        elevation: 5
-    }
-})
-
+    
+});
+// export {User_notification, deleteNotification};
 export default User_notification;
