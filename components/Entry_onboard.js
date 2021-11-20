@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { StatusBar, View, Text, StyleSheet, SafeAreaView, Image, Pressable, ScrollView } from 'react-native';
+import { StatusBar, View, ImageBackground, Text, StyleSheet, SafeAreaView, Image, Pressable, ScrollView } from 'react-native';
 
 // First page when user enters 
 

@@ -137,7 +137,7 @@ const Discover_restaurant = ({navigation}) => {
         <Pressable style={{marginLeft: 8, flexDirection: 'row', alignItems: 'center',}}
            onPress={() => navigation.navigate("Entry", {screen: "Entry_home"})}>
           <Icon style={{color: "#053466"}}name="chevron-left" size={25}/>
-          <Text style={{fontSize: 16, marginLeft: -3}}>Back to All</Text>
+          <Text style={{fontSize: 16, marginLeft: -3}}>Back</Text>
         </Pressable>
 
         {/** Title header */}
@@ -212,14 +212,6 @@ const styles = StyleSheet.create({
       flexDirection: "row",
       alignItems: "center",
       flexWrap: 'wrap',
-  },
-  square: {
-    width: 30,
-      height: 30,
-      backgroundColor: "#FF4500",
-      opacity: 0.4, 
-      borderRadius: 5,
-      marginRight: 15,
   },
   searchInputContainer: {
     height: 35,

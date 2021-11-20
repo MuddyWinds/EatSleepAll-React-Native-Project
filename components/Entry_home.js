@@ -56,7 +56,7 @@ const Entry_home = ({navigation}) => {
             <Image source={option.img} style={style.optionsCardImage}/>
 
             {/* Option title */}
-            <Text style={{marginLeft: 5, marginTop: 12, fontSize: 12, fontWeight: 'bold', color: "#053466"}}>
+            <Text style={{marginLeft: 5, marginTop: 12, fontSize: 12, fontWeight: '600', color: "#053466"}}>
               {option.title}
             </Text>
           </LinearGradient>
@@ -70,7 +70,7 @@ const Entry_home = ({navigation}) => {
     return (
       <Pressable
         activeOpacity={0.8}
-        onPress={() => navigation.push("Discover", {screen: "Discover_restaurant"} )}>
+        onPress={() => navigation.push("Discover_restaurant")}>
         <LinearGradient colors={["#e8f4f8", "#f3f3f3"]} style={style.card}>
 
           {/* Restaurant image */}
@@ -168,12 +168,12 @@ const Entry_home = ({navigation}) => {
         <FlatList
           snapToInterval={width - 20}
           showsVerticalScrollIndicator={false}
-          contentContainerStyle={{paddingHorizontal: 20, paddingTop: 10}}
+          contentContainerStyle={{paddingHorizontal: 20, marginTop: -5}}
           vertical
           ListHeaderComponent={
             <>
             {/** Display Eat, sleep, all cards */}
-            <ScrollView horizontal showsHorizontalScrollIndicator={false} style={style.discoverScroller}>
+            <ScrollView horizontal showsHorizontalScrollIndicator={false}>
               <DiscoverOptions/>
             </ScrollView>
 
@@ -222,7 +222,7 @@ const style = StyleSheet.create({
     marginLeft: 20,
     marginRight: 16,
     borderRadius: 12,
-    marginBottom: 5,
+    marginBottom: 10,
   },
   searchIcon: {
     paddingLeft: 10,
@@ -252,7 +252,7 @@ const style = StyleSheet.create({
     borderRadius: 20,
     paddingTop: 12,
     paddingHorizontal: 12,
-    marginRight: 6,
+    marginRight: 10,
   },
   optionsCardImage: {
     height: 140,

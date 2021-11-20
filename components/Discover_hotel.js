@@ -135,7 +135,7 @@ const Discover_hotel = ({navigation}) => {
     <Pressable style={{marginLeft: 8, flexDirection: 'row', alignItems: 'center',}}
        onPress={() => navigation.navigate("Entry", {screen: "Entry_home"})}>
       <Icon style={{color: "#053466"}}name="chevron-left" size={25}/>
-      <Text style={{fontSize: 16, marginLeft: -3}}>Back to All</Text>
+      <Text style={{fontSize: 16, marginLeft: -3}}>Back</Text>
     </Pressable>
 
     <View style={{flexDirection: "row", marginLeft: 6, marginTop: 3.6}}>
