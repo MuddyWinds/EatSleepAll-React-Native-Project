@@ -1,20 +1,18 @@
 import React from 'react';
-import { DiscoverStackNavigator } from './Routes/DiscoverStack';
-import { EntranceStackNavigator } from './Routes/EntranceStack';
-import { UserInfoStackNavigator } from './Routes/UserInfoStack';
+import Entry_onboard from './components/Entry_onboard';
 import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
+import { BottomTabNavigator } from './Routes/BottomTabStack';
 
-const RootStack = createStackNavigator();
+const Stack = createStackNavigator();
 
 export default function App() {
   return (
     <NavigationContainer>
-      <RootStack.Navigator screenOptions={{headerShown: false}}>
-        <RootStack.Screen name="Entry" component={EntranceStackNavigator}/>
-        <RootStack.Screen name="Discover" component={DiscoverStackNavigator}/>
-        <RootStack.Screen name="UserInfo" component={UserInfoStackNavigator}/>
-      </RootStack.Navigator>
+      <Stack.Navigator screenOptions={{headerShown: false}}>
+        <Stack.Screen name="Entry_onboard " component={Entry_onboard}/>
+        <Stack.Screen name="main_info" component={BottomTabNavigator}/>
+      </Stack.Navigator>
     </NavigationContainer>
   );
 };

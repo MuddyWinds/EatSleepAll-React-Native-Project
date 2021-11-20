@@ -1,10 +1,9 @@
-import { FontAwesome } from '@expo/vector-icons';
 import React from 'react';
 import { TouchableOpacity,SafeAreaView, View, StatusBar, Text, TextInput, FlatList, Dimensions, StyleSheet,Image,Pressable, ScrollView, } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import Restaurant_data from '../assets/data/Restaurant_data';
+import { FontAwesome } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
-import BottomBar from './Bottom_bar';
+import Restaurant_data from '../assets/data/Restaurant_data';
 const {width} = Dimensions.get('screen');
 
 
@@ -51,7 +50,7 @@ const Entry_home = ({navigation}) => {
     return (
       <View style={style.optionListsContainer}>
         {optionsList.map((option, index) => (
-          <TouchableOpacity key={index} onPress={() => navigation.push("Discover", {screen: `${Discover_linkage[index]}`})}>
+          <TouchableOpacity key={index} onPress={() => navigation.push(`${Discover_linkage[index]}`)}>
           <LinearGradient colors={["#e8f4f8", "#f3f3f3"]} style={style.optionsCard}>
             {/* Option image */}
             <Image source={option.img} style={style.optionsCardImage}/>
@@ -185,9 +184,6 @@ const Entry_home = ({navigation}) => {
         />
 
       </ScrollView>
-
-      {/* Render Bottom_bar */}
-      <BottomBar />
 
     </SafeAreaView>
   );

@@ -25,7 +25,7 @@ const Entry_onboard = ({navigation}) => {
 
     return (
         <SafeAreaView style={{flex: 1, backgroundColor: 'white'}}>
-            <StatusBar translucent backgroundColor={'rgba(52, 52, 52, 0.8)'} />
+             <StatusBar translucent backgroundColor={'rgba(52, 52, 52, 0.8)'} />
             
             {/* Onboarding Image */}
             <Image source={images[value]} style={style.image}/> 
@@ -50,7 +50,7 @@ const Entry_onboard = ({navigation}) => {
             <View style={{flex: 1, justifyContent: 'flex-end', paddingBottom: 25,}}>
 
                 {/* button */}
-                <Pressable onPress={() => navigation.navigate('Entry_home')}>
+                <Pressable onPress={() => navigation.push("main_info", {screen: 'Entry'})}>
                     <View style={style.btn}>
                         <Text style={{color: 'white'}}>Discover Your Day</Text>
                     </View>
