@@ -151,16 +151,14 @@ const Discover_hotel = ({navigation}) => {
     <FilterCategories/>
 
     {/* Render chosen card */}
-    <ScrollView>
-      <FlatList
+    <FlatList
         snapToInterval={width - 20}
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{paddingLeft: 20, paddingTop: 6}}
         vertical
         data={Hotel_data}
         renderItem={({item}) => <Awaiting_hotel_card hotel_info={item} />}
-      />
-    </ScrollView>
+    />
   </SafeAreaView>
   );
 };

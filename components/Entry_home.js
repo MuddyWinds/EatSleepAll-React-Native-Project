@@ -145,7 +145,6 @@ const Entry_home = ({navigation}) => {
       </View>
 
 
-      <ScrollView showsVerticalScrollIndicator={false}>
         {/* Input and sort button container */}
         <View
           style={{
@@ -165,25 +164,26 @@ const Entry_home = ({navigation}) => {
           </LinearGradient>
         </View>
 
-        {/* Render list options */}
-        <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} style={style.discoverScroller}>
-            <DiscoverOptions />
-        </ScrollView>
-
-        {/* Render categories */}
-        <ListCategories />
-
         {/* Render Card */} 
         <FlatList
           snapToInterval={width - 20}
-          showsHorizontalScrollIndicator={false}
-          contentContainerStyle={{paddingLeft: 20, paddingVertical: 20}}
-          horizontal
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={{paddingHorizontal: 20, paddingTop: 10}}
+          vertical
+          ListHeaderComponent={
+            <>
+            {/** Display Eat, sleep, all cards */}
+            <ScrollView horizontal showsHorizontalScrollIndicator={false} style={style.discoverScroller}>
+              <DiscoverOptions/>
+            </ScrollView>
+
+            {/** Display filter options */}
+            <ListCategories/>
+            </>
+          }
           data={Restaurant_data}
           renderItem={({item}) => <Card restau={item} />}
         />
-
-      </ScrollView>
 
     </SafeAreaView>
   );
@@ -243,8 +243,6 @@ const style = StyleSheet.create({
     alignItems: 'center',
     marginRight: 5,
   },
-  discoverScroller: {
-  },
   optionsCard: {
     height: 210,
     width: width / 2 - 30,
@@ -254,7 +252,7 @@ const style = StyleSheet.create({
     borderRadius: 20,
     paddingTop: 12,
     paddingHorizontal: 12,
-    marginHorizontal: 6,
+    marginRight: 6,
   },
   optionsCardImage: {
     height: 140,
@@ -265,7 +263,6 @@ const style = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginTop: 10,
-    paddingHorizontal: 12,
     marginBottom: 8,
   },
   categoryListText: {
@@ -283,8 +280,9 @@ const style = StyleSheet.create({
   categoryListContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginTop: 15,
-    paddingHorizontal: 10,
+    marginTop: 10.5,
+    marginHorizontal: -7.5,
+    marginBottom: 3.5
   },
   card: {
     height: 250,
@@ -294,6 +292,7 @@ const style = StyleSheet.create({
     marginRight: 20,
     padding: 15,
     borderRadius: 20,
+    marginBottom: 14,
   },
   cardImage: {
     width: '100%',
