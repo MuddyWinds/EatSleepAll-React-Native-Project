@@ -38,13 +38,6 @@ const styles = StyleSheet.create({
         paddingBottom: 10,
         color: "#053466",
     },
-    rectangle: {
-        width: 2,
-        height: 25,
-        backgroundColor: "#053466",
-        marginLeft: 8,
-        borderRadius: 2,
-    },
     noti: {
         marginLeft: 18, 
         fontSize: 24, 
