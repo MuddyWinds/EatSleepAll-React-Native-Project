@@ -173,16 +173,14 @@ const Discover_restaurant = ({navigation}) => {
         <FilterCategories/>
 
         {/* Render chosen card */}
-        <ScrollView>
-          <FlatList
+        <FlatList
             snapToInterval={width - 20}
             showsVerticalScrollIndicator={false}
             contentContainerStyle={{paddingLeft: 20, paddingVertical: 6}}
             vertical
             data={Restaurant_data}
             renderItem={({item}) => <Awaiting_restaurant_card restaurant_info={item} />}
-          />
-        </ScrollView>
+        />
       </SafeAreaView>
     );
 };
