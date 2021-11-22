@@ -30,12 +30,9 @@ const User_bookmark = ({navigation}) => {
 
 
     const Awaiting_hotel_card = ({hotel_info}) => {
-        // console.log("Hotel info:");
-        // console.log(hotel_info);
         return (
           <Pressable 
             activeOpacity={0.8}
-            // onPress={() => navigation.push("Discover", {screen: "Discover_hotel"})}
             >
             <LinearGradient colors={["#EFF5F6", "#f3f3f3"]} style={styles.card2}>
               
@@ -263,9 +260,14 @@ const User_bookmark = ({navigation}) => {
         <FlatList
             snapToInterval={width - 20}
             showsVerticalScrollIndicator={false}
-            contentContainerStyle={{paddingLeft: 20, paddingTop: 6, backgroundColor: 'blue'}}
+            contentContainerStyle={{paddingLeft: 20, paddingTop: 6}}
             vertical
             data = {bookmarkedHotelItems}
+            ListHeaderComponent = {(data) => {
+              if (data.length != 0) {
+                return (<Text style={styles.subtitle}>Hotels</Text>);
+              }
+            }}
             renderItem={({item}) => <Awaiting_hotel_card hotel_info={item} />}
          />
 
@@ -273,9 +275,14 @@ const User_bookmark = ({navigation}) => {
         <FlatList
             snapToInterval={width - 20}
             showsVerticalScrollIndicator={false}
-            contentContainerStyle={{paddingLeft: 20, paddingVertical: 6, backgroundColor: 'green'}}
+            contentContainerStyle={{paddingLeft: 20, paddingVertical: 6}}
             vertical
             data = {bookmarkedRestaurantItems}
+            ListHeaderComponent = {(data) => {
+              if (data.length != 0) {
+                return (<Text style={styles.subtitle}>Restaurants</Text>);
+              }
+            }}
             renderItem={({item}) => <Awaiting_restaurant_card restaurant_info={item} />}
         />
 
@@ -287,7 +294,6 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#FFFFFF',
-        marginTop: -8,
     },
     sectionSubText: {
         marginLeft: 18,
@@ -296,6 +302,10 @@ const styles = StyleSheet.create({
         paddingTop: 4,
         paddingBottom: 10,
         color: "#053466",
+    },
+    subtitle: {
+      alignContent: "center",
+      justifyContent: "center"
     },
     noti: {
         marginLeft: 18, 
