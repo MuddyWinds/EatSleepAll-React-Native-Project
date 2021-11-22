@@ -1,14 +1,24 @@
-import React, {StatusBar} from 'react';
+import React, {StatusBar, useEffect, useState} from 'react';
 import { StyleSheet, Image, Text, View, SafeAreaView, Dimensions, ScrollView, Pressable, Button, FlatList, TextInput } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import Restaurant_data from '../assets/data/Restaurant_data';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import AsyncStorage from '@react-native-async-storage/async-storage'
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const {width, height} = Dimensions.get('screen');
 const filterList = ['Rating', 'Popularity', 'Location', 'Price'];
 
 
 const Discover_restaurant = ({navigation}) => {
+
+  const [bookmarkedIds, setbookmarkedIds] = useState([]);
+
+  useEffect(() => {
+    // clearBookmark();
+    // showBookmark();
+    renderBookmark();
+  },[]);
 
     const FilterCategories = () => {
       const [selectedFilter, setSelectedFilterIndex] = React.useState(0);
@@ -34,7 +44,8 @@ const Discover_restaurant = ({navigation}) => {
       return (
         <Pressable 
           activeOpacity={0.8}
-          onPress={() => navigation.push("Discover", {screen: "Discover_restaurant"})}>
+          // onPress={() => navigation.push("Discover", {screen: "Discover_restaurant"})}
+          >
           <LinearGradient colors={["#EFF5F6", "#f3f3f3"]} style={styles.card2}>
             
             <View>
@@ -72,6 +83,7 @@ const Discover_restaurant = ({navigation}) => {
                   <Icon name="aspect-ratio" size={18} />
                   <Text style={styles.facilityText}>100m</Text>
                 </View>
+                <BookMark_Icon restaurant_info={restaurant_info}/>
               </View>
             </View>
           </LinearGradient>
@@ -83,7 +95,8 @@ const Discover_restaurant = ({navigation}) => {
       return (
         <Pressable 
           activeOpacity={0.8}
-          onPress={() => navigation.push("Discover", {screen: "Discover_restaurant"})}>
+          // onPress={() => navigation.push("Discover", {screen: "Discover_restaurant"})}
+          >
           <LinearGradient colors={["#8BDCEC", "#D0E9EE"]} style={styles.card}>
 
             {/* Restauarant image */}
@@ -124,12 +137,99 @@ const Discover_restaurant = ({navigation}) => {
                   <Icon name="aspect-ratio" size={18} />
                   <Text style={styles.facilityText}>100m</Text>
                 </View>
+                <BookMark_Icon restaurant_info={restaurant_info}/>
               </View>
             </View>
           </LinearGradient>
         </Pressable>
       );
     };
+
+    const BookMark_Icon = ({restaurant_info}) => {
+      if (bookmarkedIds.includes(restaurant_info.id)) {
+        return (
+          <TouchableOpacity onPress={() => removeBookMark(restaurant_info)} style={styles.facility}>
+            <Icon name="star" size={18}/>
+            <Text style={styles.facilityText}>Bookmark</Text>
+          </TouchableOpacity>
+        );
+      } else {
+        return (
+          <TouchableOpacity onPress={() => saveBookMark(restaurant_info)} style={styles.facility}>
+            <Icon name="star-outline" size={18}/>
+            <Text style={styles.facilityText}>Bookmark</Text>
+          </TouchableOpacity>
+        );
+      }
+    }
+  
+    const saveBookMark = async restaurant_info => {
+      // console.log("Saving Bookmark " + restaurant_info.id);
+      await AsyncStorage.getItem('bookmarkedRestaurant_Items').then(token => {
+        const res = JSON.parse(token);
+        if (res !== null && res !== []) {
+          // console.log("res !== null");
+          let data = res.find(value => value === restaurant_info);
+          if (data == null){
+            res.push(restaurant_info);
+            AsyncStorage.setItem('bookmarkedRestaurant_Items', JSON.stringify(res));
+            setbookmarkedIds([...bookmarkedIds,restaurant_info.id]);
+          }
+        } else {
+            AsyncStorage.setItem('bookmarkedRestaurant_Items', JSON.stringify([restaurant_info]));
+            setbookmarkedIds([restaurant_info.id]);
+        }
+      }) 
+
+    }
+  
+    const removeBookMark = async restaurant_info => {
+      const items = await AsyncStorage.getItem('bookmarkedRestaurant_Items').then(token => {
+        const res = JSON.parse(token);
+        res.forEach(function (item, index) {
+          if (item.id == restaurant_info.id){
+            return res.splice(index,1);
+          }
+        });
+        return res;
+      });
+      await AsyncStorage.setItem('bookmarkedRestaurant_Items', JSON.stringify(items));
+      var ids = [...bookmarkedIds];
+      const idx = ids.indexOf(restaurant_info.id);
+      if (idx >=0) {
+        ids.splice(idx,1);
+      }
+      setbookmarkedIds(ids);
+    }
+
+    const renderBookmark = async () => {
+      await AsyncStorage.getItem('bookmarkedRestaurant_Items').then(token => {
+        const res = JSON.parse(token);
+        if (res !== null && res!== []) {
+          var temp = [];
+          res.forEach(function (item, index) {
+            temp.push(item.id);
+          });
+          setbookmarkedIds(temp);
+        }        
+        else 
+          setbookmarkedIds([]);
+      })
+    }
+
+    // for debugging only
+  const clearBookmark = async () => {
+    await AsyncStorage.setItem('bookmarkedRestaurant_Items', JSON.stringify([]));
+    setbookmarkedIds([]);
+  }
+  const showBookmark = async () => {
+    await AsyncStorage.getItem('bookmarkedRestaurant_Items').then(token => {
+      const res = JSON.parse(token);
+      console.log(res);
+    });
+    console.log(bookmarkedIds);
+  }
+
 
     return (
       <SafeAreaView style={styles.container}>

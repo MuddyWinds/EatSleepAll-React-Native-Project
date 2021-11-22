@@ -1,13 +1,23 @@
-import React, {StatusBar} from 'react';
+import React, {StatusBar, useEffect, useState} from 'react';
 import { StyleSheet, Image, Text, View, SafeAreaView, Dimensions, ScrollView, Pressable, Button, FlatList } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import Hotel_data from '../assets/data/Hotel_data';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import AsyncStorage from '@react-native-async-storage/async-storage'
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const {width, height} = Dimensions.get('screen');
 const filterList = ['Rating', 'Popularity', 'Location', 'Price'];
 
 const Discover_hotel = ({navigation}) => {
+
+  const [bookmarkedIds, setbookmarkedIds] = useState([]);
+
+  useEffect(() => {
+    // clearBookmark();
+    // showBookmark();
+    renderBookmark();
+  },[]);
 
   const FilterCategories = () => {
     const [selectedFilter, setSelectedFilterIndex] = React.useState(0);
@@ -33,7 +43,8 @@ const Discover_hotel = ({navigation}) => {
     return (
       <Pressable 
         activeOpacity={0.8}
-        onPress={() => navigation.push("Discover", {screen: "Discover_hotel"})}>
+        // onPress={() => navigation.push("Discover", {screen: "Discover_hotel"})}
+        >
         <LinearGradient colors={["#EFF5F6", "#f3f3f3"]} style={styles.card2}>
           
           <View>
@@ -71,6 +82,7 @@ const Discover_hotel = ({navigation}) => {
                 <Icon name="aspect-ratio" size={18} />
                 <Text style={styles.facilityText}>100m</Text>
               </View>
+              <BookMark_Icon hotel_info={hotel_info}/>
             </View>
           </View>
         </LinearGradient>
@@ -82,7 +94,8 @@ const Discover_hotel = ({navigation}) => {
     return (
       <Pressable 
         activeOpacity={0.8}
-        onPress={() => navigation.push("Discover", {screen: "Discover_hotel"})}>
+        // onPress={() => navigation.push("Discover", {screen: "Discover_hotel"})}
+        >
         <LinearGradient colors={["#8BDCEC", "#D0E9EE"]} style={styles.card}>
 
           {/* Restauarant image */}
@@ -123,12 +136,98 @@ const Discover_hotel = ({navigation}) => {
                 <Icon name="aspect-ratio" size={18} />
                 <Text style={styles.facilityText}>100m</Text>
               </View>
+              <BookMark_Icon hotel_info={hotel_info}/>
             </View>
           </View>
         </LinearGradient>
       </Pressable>
     );
   };
+
+  const BookMark_Icon = ({hotel_info}) => {
+    if (bookmarkedIds.includes(hotel_info.id)) {
+      return (
+        <TouchableOpacity onPress={() => removeBookMark(hotel_info)} style={styles.facility}>
+          <Icon name="star" size={18}/>
+          <Text style={styles.facilityText}>Bookmark</Text>
+        </TouchableOpacity>
+      );
+    } else {
+      return (
+        <TouchableOpacity onPress={() => saveBookMark(hotel_info)} style={styles.facility}>
+          <Icon name="star-outline" size={18}/>
+          <Text style={styles.facilityText}>Bookmark</Text>
+        </TouchableOpacity>
+      );
+    }
+  }
+
+  const saveBookMark = async hotel_info => {
+    await AsyncStorage.getItem('bookmarkedHotel_Items').then(token => {
+      const res = JSON.parse(token);
+      if (res !== null && res !== []) {
+        let data = res.find(value => value === hotel_info);
+        if (data == null){
+          res.push(hotel_info);
+          AsyncStorage.setItem('bookmarkedHotel_Items', JSON.stringify(res));
+          setbookmarkedIds([...bookmarkedIds,hotel_info.id]);
+        }
+      } else {
+          AsyncStorage.setItem('bookmarkedHotel_Items', JSON.stringify([hotel_info]));
+          setbookmarkedIds([hotel_info.id]);
+      }
+    })   
+    
+  }
+
+  const removeBookMark = async hotel_info => {
+    const items = await AsyncStorage.getItem('bookmarkedHotel_Items').then(token => {
+      const res = JSON.parse(token);
+      res.forEach(function (item, index) {
+        if (item.id == hotel_info.id){
+          return res.splice(index,1);
+        }
+      });
+      return res;
+    });
+    await AsyncStorage.setItem('bookmarkedHotel_Items', JSON.stringify(items));
+    var ids = [...bookmarkedIds];
+    const idx = ids.indexOf(hotel_info.id);
+    if (idx >=0) {
+      ids.splice(idx,1);
+    }
+    setbookmarkedIds(ids);
+    
+  }
+
+  const renderBookmark = async () => {
+    await AsyncStorage.getItem('bookmarkedHotel_Items').then(token => {
+      const res = JSON.parse(token);
+      if (res !== null && res!== []) {
+        var temp = [];
+        res.forEach(function (item, index) {
+          temp.push(item.id);
+        });
+        setbookmarkedIds(temp);
+      }        
+      else 
+        setbookmarkedIds([]);
+    })
+  }
+
+  // for debugging only
+  const clearBookmark = async () => {
+    await AsyncStorage.setItem('bookmarkedHotel_Items', JSON.stringify([]));
+    setbookmarkedIds([]);
+  }
+  const showBookmark = async () => {
+    await AsyncStorage.getItem('bookmarkedHotel_Items').then(token => {
+      const res = JSON.parse(token);
+      console.log(res);
+      console.log(bookmarkedIds);
+    });
+  }
+
 
   return (
     <SafeAreaView style={styles.container}>

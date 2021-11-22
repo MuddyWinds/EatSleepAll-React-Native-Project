@@ -3,7 +3,7 @@ import React from 'react';
 const Restaurant_data = [
     {
       id: '1',
-      title: 'Entire guest suite',
+      title: '(1) Entire guest suite',
       location: 'East Side Cedar Cottage Toronto',
       image: require('../sushi.jpg'),
       details: `This building is located in the Oliver area, withing walking distance of shops...`,
@@ -12,7 +12,7 @@ const Restaurant_data = [
     },
     {
       id: '2',
-      title: 'Entire guest suite',
+      title: '(2) Entire guest suite',
       location: 'East Side Cedar Cottage Toronto',
       image: require('../sushi.jpg'),
       details: `This building is located in the Oliver area, withing walking distance of shops...`,
@@ -21,7 +21,7 @@ const Restaurant_data = [
     },
     {
       id: '3',
-      title: 'Entire guest suite',
+      title: '(3)Entire guest suite',
       location: 'East Side Cedar Cottage Toronto',
       image: require('../sushi.jpg'),
       details: `This building is located in the Oliver area, withing walking distance of shops...`,
@@ -30,7 +30,7 @@ const Restaurant_data = [
     },
     {
       id: '4',
-      title: 'Entire guest suite',
+      title: '(4) Entire guest suite',
       location: 'East Side Cedar Cottage Toronto',
       image: require('../sushi.jpg'),
       details: `This building is located in the Oliver area, withing walking distance of shops...`,
@@ -39,7 +39,7 @@ const Restaurant_data = [
     },
     {
       id: '5',
-      title: 'Entire guest suite',
+      title: '(5) Entire guest suite',
       location: 'East Side Cedar Cottage Toronto',
       image: require('../sushi.jpg'),
       details: `This building is located in the Oliver area, withing walking distance of shops...`,

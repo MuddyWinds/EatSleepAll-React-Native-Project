@@ -25,15 +25,15 @@ const Entry_home = ({navigation}) => {
     // Write function to display different values when filter options are chosen
 
     return (
-      <View style={style.categoryListContainer}>
+      <View style={styles.categoryListContainer}>
         {discoverList.map((category, index) => (
           <Pressable
             key={index}
             onPress={() => setSelectedDiscoverIndex(index)}>
             <Text
               style={[
-                style.categoryListText,
-                index == selectedDiscoverIndex && style.activeCategoryListText,
+                styles.categoryListText,
+                index == selectedDiscoverIndex && styles.activeCategoryListText,
               ]}>
               {category}
             </Text>
@@ -48,12 +48,12 @@ const Entry_home = ({navigation}) => {
     const Discover_linkage = ["Discover_hotel", "Discover_restaurant", "Discover_washroom"]
 
     return (
-      <View style={style.optionListsContainer}>
+      <View style={styles.optionListsContainer}>
         {optionsList.map((option, index) => (
           <TouchableOpacity key={index} onPress={() => navigation.push(`${Discover_linkage[index]}`)}>
-          <LinearGradient colors={["#e8f4f8", "#f3f3f3"]} style={style.optionsCard}>
+          <LinearGradient colors={["#e8f4f8", "#f3f3f3"]} style={styles.optionsCard}>
             {/* Option image */}
-            <Image source={option.img} style={style.optionsCardImage}/>
+            <Image source={option.img} style={styles.optionsCardImage}/>
 
             {/* Option title */}
             <Text style={{marginLeft: 5, marginTop: 12, fontSize: 12, fontWeight: '600', color: "#053466"}}>
@@ -71,10 +71,10 @@ const Entry_home = ({navigation}) => {
       <Pressable
         activeOpacity={0.8}
         onPress={() => navigation.push("Discover_restaurant")}>
-        <LinearGradient colors={["#e8f4f8", "#f3f3f3"]} style={style.card}>
+        <LinearGradient colors={["#e8f4f8", "#f3f3f3"]} style={styles.card}>
 
           {/* Restaurant image */}
-          <Image source={restau.image} style={style.cardImage} /> 
+          <Image source={restau.image} style={styles.cardImage} /> 
 
           <View style={{marginTop: 10}}>
             {/* Title and price container */}
@@ -100,17 +100,17 @@ const Entry_home = ({navigation}) => {
 
             {/* Facilities container */}
             <View style={{marginTop: 10, flexDirection: 'row'}}>
-              <View style={style.facility}>
+              <View style={styles.facility}>
                 <Icon name="hotel" size={18} />
-                <Text style={style.facilityText}>2</Text>
+                <Text style={styles.facilityText}>2</Text>
               </View>
-              <View style={style.facility}>
+              <View style={styles.facility}>
                 <Icon name="bathtub" size={18} />
-                <Text style={style.facilityText}>2</Text>
+                <Text style={styles.facilityText}>2</Text>
               </View>
-              <View style={style.facility}>
+              <View style={styles.facility}>
                 <Icon name="aspect-ratio" size={18} />
-                <Text style={style.facilityText}>100m</Text>
+                <Text style={styles.facilityText}>100m</Text>
               </View>
             </View>
           </View>
@@ -132,14 +132,14 @@ const Entry_home = ({navigation}) => {
 
 
       {/* Header container */}
-      <View style={style.header}>
+      <View style={styles.header}>
         <View>
           <Text style={{color: "grey"}}>Location</Text>
           <Text style={{color: "#053466", fontSize: 20, fontWeight: 'bold'}}>
             Sai Wan
           </Text>
         </View>
-        <TouchableOpacity style={style.profileImage}>
+        <TouchableOpacity style={styles.profileImage}>
             <FontAwesome name="user" color="#194466"size={25}/>
         </TouchableOpacity>
       </View>
@@ -152,13 +152,13 @@ const Entry_home = ({navigation}) => {
             justifyContent: 'space-between',
             paddingRight: 5,
           }}>
-          <LinearGradient colors={["#AFE6FE", "#C9E2FA"]} style={style.searchInputContainer}>
-            <View style={style.searchRow}>
-                <Icon name="search" color="grey" size={25} style={style.searchIcon}/>
-                <TextInput style={style.barText} placeholder="Search address, city, location" />
+          <LinearGradient colors={["#AFE6FE", "#C9E2FA"]} style={styles.searchInputContainer}>
+            <View style={styles.searchRow}>
+                <Icon name="search" color="grey" size={25} style={styles.searchIcon}/>
+                <TextInput style={styles.barText} placeholder="Search address, city, location" />
             </View>
 
-            <View style={style.sortBtn}>
+            <View style={styles.sortBtn}>
                 <Icon name="tune" color="white" size={20} />
             </View>
           </LinearGradient>
@@ -189,7 +189,7 @@ const Entry_home = ({navigation}) => {
   );
 };
 
-const style = StyleSheet.create({
+const styles = StyleSheet.create({
   header: {
     paddingTop: 10,
     paddingBottom: 12,
