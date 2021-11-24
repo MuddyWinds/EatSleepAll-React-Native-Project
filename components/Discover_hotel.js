@@ -59,7 +59,7 @@ const Discover_hotel = ({navigation}) => {
               </Text>
               <Text
                 style={{fontWeight: 'bold', color: "#053466", fontSize: 15}}>
-                $1,500
+                {hotel_info.price}
               </Text>
             </View>
 
@@ -80,7 +80,7 @@ const Discover_hotel = ({navigation}) => {
               </View>
               <View style={styles.facility}>
                 <Icon name="aspect-ratio" size={18} />
-                <Text style={styles.facilityText}>100m</Text>
+                <Text style={styles.facilityText}>{hotel_info.website}</Text>
               </View>
               <BookMark_Icon hotel_info={hotel_info}/>
             </View>
@@ -99,7 +99,7 @@ const Discover_hotel = ({navigation}) => {
         <LinearGradient colors={["#8BDCEC", "#D0E9EE"]} style={styles.card}>
 
           {/* Restauarant image */}
-          <Image source={hotel_info.image} style={styles.cardImage} />
+          <Image source={{uri: hotel_info.image}} style={styles.cardImage} />
           
           <View style={{marginTop: 8, marginHorizontal: 1}}>
             {/* Title and price container */}
@@ -113,7 +113,7 @@ const Discover_hotel = ({navigation}) => {
               </Text>
               <Text
                 style={{fontWeight: 'bold', color: "#053466", fontSize: 15}}>
-                $1,500
+                {hotel_info.price}
               </Text>
             </View>
 
@@ -134,7 +134,7 @@ const Discover_hotel = ({navigation}) => {
               </View>
               <View style={styles.facility}>
                 <Icon name="aspect-ratio" size={18} />
-                <Text style={styles.facilityText}>100m</Text>
+                <Text style={styles.facilityText}>{hotel_info.website}</Text>
               </View>
               <BookMark_Icon hotel_info={hotel_info}/>
             </View>

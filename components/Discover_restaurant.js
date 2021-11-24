@@ -100,7 +100,7 @@ const Discover_restaurant = ({navigation}) => {
           <LinearGradient colors={["#8BDCEC", "#D0E9EE"]} style={styles.card}>
 
             {/* Restauarant image */}
-            <Image source={restaurant_info.image} style={styles.cardImage} />
+            <Image source={{uri: restaurant_info.image_src}} style={styles.cardImage} />
             
             <View style={{marginTop: 8, marginHorizontal: 1}}>
               {/* Title and price container */}

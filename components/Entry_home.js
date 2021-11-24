@@ -74,7 +74,7 @@ const Entry_home = ({navigation}) => {
         <LinearGradient colors={["#e8f4f8", "#f3f3f3"]} style={styles.card}>
 
           {/* Restaurant image */}
-          <Image source={restau.image} style={styles.cardImage} /> 
+          <Image source={{uri: restau.image_src}} style={styles.cardImage} /> 
 
           <View style={{marginTop: 10}}>
             {/* Title and price container */}
@@ -110,7 +110,7 @@ const Entry_home = ({navigation}) => {
               </View>
               <View style={styles.facility}>
                 <Icon name="aspect-ratio" size={18} />
-                <Text style={style.facilityText}>{restau.website}</Text>
+                <Text style={styles.facilityText}>{restau.website}</Text>
               </View>
             </View>
           </View>
