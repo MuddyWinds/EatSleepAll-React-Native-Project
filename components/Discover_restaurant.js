@@ -1,14 +1,24 @@
-import React, {StatusBar} from 'react';
-import { StyleSheet, Image, Text, View, SafeAreaView, Dimensions, ScrollView, Pressable, Button, FlatList } from 'react-native';
+import React, {StatusBar, useEffect, useState} from 'react';
+import { StyleSheet, Image, Text, View, SafeAreaView, Dimensions, ScrollView, Pressable, Button, FlatList, TextInput } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import Restaurant_data from '../assets/data/Restaurant_data';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import AsyncStorage from '@react-native-async-storage/async-storage'
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const {width, height} = Dimensions.get('screen');
 const filterList = ['Rating', 'Popularity', 'Location', 'Price'];
 
 
 const Discover_restaurant = ({navigation}) => {
+
+  const [bookmarkedIds, setbookmarkedIds] = useState([]);
+
+  useEffect(() => {
+    // clearBookmark();
+    // showBookmark();
+    renderBookmark();
+  },[]);
 
     const FilterCategories = () => {
       const [selectedFilter, setSelectedFilterIndex] = React.useState(0);
@@ -34,7 +44,8 @@ const Discover_restaurant = ({navigation}) => {
       return (
         <Pressable 
           activeOpacity={0.8}
-          onPress={() => navigation.push("Discover", {screen: "Discover_restaurant"})}>
+          // onPress={() => navigation.push("Discover", {screen: "Discover_restaurant"})}
+          >
           <LinearGradient colors={["#EFF5F6", "#f3f3f3"]} style={styles.card2}>
             
             <View>
@@ -72,6 +83,7 @@ const Discover_restaurant = ({navigation}) => {
                   <Icon name="aspect-ratio" size={18} />
                   <Text style={styles.facilityText}>{restaurant_info.website}</Text>
                 </View>
+                <BookMark_Icon restaurant_info={restaurant_info}/>
               </View>
             </View>
           </LinearGradient>
@@ -83,7 +95,8 @@ const Discover_restaurant = ({navigation}) => {
       return (
         <Pressable 
           activeOpacity={0.8}
-          onPress={() => navigation.push("Discover", {screen: "Discover_restaurant"})}>
+          // onPress={() => navigation.push("Discover", {screen: "Discover_restaurant"})}
+          >
           <LinearGradient colors={["#8BDCEC", "#D0E9EE"]} style={styles.card}>
 
             {/* Restauarant image */}
@@ -124,6 +137,7 @@ const Discover_restaurant = ({navigation}) => {
                   <Icon name="aspect-ratio" size={18} />
                   <Text style={styles.facilityText}>{restaurant_info.website}</Text>
                 </View>
+                <BookMark_Icon restaurant_info={restaurant_info}/>
               </View>
             </View>
           </LinearGradient>
@@ -131,18 +145,125 @@ const Discover_restaurant = ({navigation}) => {
       );
     };
 
+    const BookMark_Icon = ({restaurant_info}) => {
+      if (bookmarkedIds.includes(restaurant_info.id)) {
+        return (
+          <TouchableOpacity onPress={() => removeBookMark(restaurant_info)} style={styles.facility}>
+            <Icon name="star" size={18}/>
+            <Text style={styles.facilityText}>Bookmark</Text>
+          </TouchableOpacity>
+        );
+      } else {
+        return (
+          <TouchableOpacity onPress={() => saveBookMark(restaurant_info)} style={styles.facility}>
+            <Icon name="star-outline" size={18}/>
+            <Text style={styles.facilityText}>Bookmark</Text>
+          </TouchableOpacity>
+        );
+      }
+    }
+  
+    const saveBookMark = async restaurant_info => {
+      // console.log("Saving Bookmark " + restaurant_info.id);
+      await AsyncStorage.getItem('bookmarkedRestaurant_Items').then(token => {
+        const res = JSON.parse(token);
+        if (res !== null && res !== []) {
+          // console.log("res !== null");
+          let data = res.find(value => value === restaurant_info);
+          if (data == null){
+            res.push(restaurant_info);
+            AsyncStorage.setItem('bookmarkedRestaurant_Items', JSON.stringify(res));
+            setbookmarkedIds([...bookmarkedIds,restaurant_info.id]);
+          }
+        } else {
+            AsyncStorage.setItem('bookmarkedRestaurant_Items', JSON.stringify([restaurant_info]));
+            setbookmarkedIds([restaurant_info.id]);
+        }
+      }) 
+
+    }
+  
+    const removeBookMark = async restaurant_info => {
+      const items = await AsyncStorage.getItem('bookmarkedRestaurant_Items').then(token => {
+        const res = JSON.parse(token);
+        res.forEach(function (item, index) {
+          if (item.id == restaurant_info.id){
+            return res.splice(index,1);
+          }
+        });
+        return res;
+      });
+      await AsyncStorage.setItem('bookmarkedRestaurant_Items', JSON.stringify(items));
+      var ids = [...bookmarkedIds];
+      const idx = ids.indexOf(restaurant_info.id);
+      if (idx >=0) {
+        ids.splice(idx,1);
+      }
+      setbookmarkedIds(ids);
+    }
+
+    const renderBookmark = async () => {
+      await AsyncStorage.getItem('bookmarkedRestaurant_Items').then(token => {
+        const res = JSON.parse(token);
+        if (res !== null && res!== []) {
+          var temp = [];
+          res.forEach(function (item, index) {
+            temp.push(item.id);
+          });
+          setbookmarkedIds(temp);
+        }        
+        else 
+          setbookmarkedIds([]);
+      })
+    }
+
+    // for debugging only
+  const clearBookmark = async () => {
+    await AsyncStorage.setItem('bookmarkedRestaurant_Items', JSON.stringify([]));
+    setbookmarkedIds([]);
+  }
+  const showBookmark = async () => {
+    await AsyncStorage.getItem('bookmarkedRestaurant_Items').then(token => {
+      const res = JSON.parse(token);
+      console.log(res);
+    });
+    console.log(bookmarkedIds);
+  }
+
+
     return (
       <SafeAreaView style={styles.container}>
+        {/** Return Button to previous page */}
         <Pressable style={{marginLeft: 8, flexDirection: 'row', alignItems: 'center',}}
            onPress={() => navigation.navigate("Entry", {screen: "Entry_home"})}>
           <Icon style={{color: "#053466"}}name="chevron-left" size={25}/>
-          <Text style={{fontSize: 16, marginLeft: -3}}>Back to All</Text>
+          <Text style={{fontSize: 16, marginLeft: -3}}>Back</Text>
         </Pressable>
 
-        <View style={{flexDirection: "row", marginLeft: 6, marginTop: 3.6}}>
+        {/** Title header */}
+        <View style={{flexDirection: "row", marginLeft: 4.5, marginTop: 3.6}}>
           <Text style={{marginLeft: 18, fontSize: 24, fontWeight: "bold", color: "#053466",}}>Discover</Text>
           <View style={styles.rectangle}></View>
           <Text style={{paddingLeft: 10, fontSize: 24, color: "#053466",}}>#EAT</Text>
+        </View>
+
+        {/* Input and sort button container */}
+        <View
+          style={{
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            paddingRight: 5,
+          }}>
+          <LinearGradient colors={["#AFE6FE", "#C9E2FA"]} style={styles.searchInputContainer}>
+            <View style={styles.searchRow}>
+                <Icon name="search" color="grey" size={25} style={styles.searchIcon}/>
+                <TextInput style={styles.barText} placeholder="Search address, city, location" />
+            </View>
+
+            <View style={styles.sortBtn}>
+                <Icon name="tune" color="white" size={20} />
+            </View>
+          </LinearGradient>
         </View>
 
         {/* Render Top-Select Card */}
@@ -152,16 +273,14 @@ const Discover_restaurant = ({navigation}) => {
         <FilterCategories/>
 
         {/* Render chosen card */}
-        <ScrollView>
-          <FlatList
+        <FlatList
             snapToInterval={width - 20}
             showsVerticalScrollIndicator={false}
-            contentContainerStyle={{paddingLeft: 20, paddingTop: 6}}
+            contentContainerStyle={{paddingLeft: 20, paddingVertical: 6}}
             vertical
             data={Restaurant_data}
             renderItem={({item}) => <Awaiting_restaurant_card restaurant_info={item} />}
-          />
-        </ScrollView>
+        />
       </SafeAreaView>
     );
 };
@@ -194,13 +313,36 @@ const styles = StyleSheet.create({
       alignItems: "center",
       flexWrap: 'wrap',
   },
-  square: {
+  searchInputContainer: {
+    height: 35,
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginLeft: 20,
+    marginRight: 16,
+    borderRadius: 12,
+    marginBottom: 5,
+    marginTop: 8.5,
+  },
+  searchIcon: {
+    paddingLeft: 10,
+    paddingTop: 2,
+  },
+  searchRow: {
+    flexDirection: 'row',
+  },
+  barText: {
+    paddingLeft: 8,
+  },
+  sortBtn: {
+    backgroundColor: "#053466",
+    height: 30,
     width: 30,
-      height: 30,
-      backgroundColor: "#FF4500",
-      opacity: 0.4, 
-      borderRadius: 5,
-      marginRight: 15,
+    borderRadius: 12,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginRight: 5,
   },
   itemText: {
     maxWidth: '80%',

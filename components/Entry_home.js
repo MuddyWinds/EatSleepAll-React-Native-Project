@@ -1,10 +1,9 @@
-import { FontAwesome } from '@expo/vector-icons';
 import React from 'react';
 import { TouchableOpacity,SafeAreaView, View, StatusBar, Text, TextInput, FlatList, Dimensions, StyleSheet,Image,Pressable, ScrollView, } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import Restaurant_data from '../assets/data/Restaurant_data';
+import { FontAwesome } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
-import BottomBar from './Bottom_bar';
+import Restaurant_data from '../assets/data/Restaurant_data';
 const {width} = Dimensions.get('screen');
 
 
@@ -26,15 +25,15 @@ const Entry_home = ({navigation}) => {
     // Write function to display different values when filter options are chosen
 
     return (
-      <View style={style.categoryListContainer}>
+      <View style={styles.categoryListContainer}>
         {discoverList.map((category, index) => (
           <Pressable
             key={index}
             onPress={() => setSelectedDiscoverIndex(index)}>
             <Text
               style={[
-                style.categoryListText,
-                index == selectedDiscoverIndex && style.activeCategoryListText,
+                styles.categoryListText,
+                index == selectedDiscoverIndex && styles.activeCategoryListText,
               ]}>
               {category}
             </Text>
@@ -49,15 +48,15 @@ const Entry_home = ({navigation}) => {
     const Discover_linkage = ["Discover_hotel", "Discover_restaurant", "Discover_washroom"]
 
     return (
-      <View style={style.optionListsContainer}>
+      <View style={styles.optionListsContainer}>
         {optionsList.map((option, index) => (
-          <TouchableOpacity key={index} onPress={() => navigation.push("Discover", {screen: `${Discover_linkage[index]}`})}>
-          <LinearGradient colors={["#e8f4f8", "#f3f3f3"]} style={style.optionsCard}>
+          <TouchableOpacity key={index} onPress={() => navigation.push(`${Discover_linkage[index]}`)}>
+          <LinearGradient colors={["#e8f4f8", "#f3f3f3"]} style={styles.optionsCard}>
             {/* Option image */}
-            <Image source={option.img} style={style.optionsCardImage}/>
+            <Image source={option.img} style={styles.optionsCardImage}/>
 
             {/* Option title */}
-            <Text style={{marginLeft: 5, marginTop: 12, fontSize: 12, fontWeight: 'bold', color: "#053466"}}>
+            <Text style={{marginLeft: 5, marginTop: 12, fontSize: 12, fontWeight: '600', color: "#053466"}}>
               {option.title}
             </Text>
           </LinearGradient>
@@ -71,11 +70,11 @@ const Entry_home = ({navigation}) => {
     return (
       <Pressable
         activeOpacity={0.8}
-        onPress={() => navigation.push("Discover", {screen: "Discover_restaurant"} )}>
-        <LinearGradient colors={["#e8f4f8", "#f3f3f3"]} style={style.card}>
+        onPress={() => navigation.push("Discover_restaurant")}>
+        <LinearGradient colors={["#e8f4f8", "#f3f3f3"]} style={styles.card}>
 
           {/* Restaurant image */}
-          <Image source={restau.image} style={style.cardImage} /> 
+          <Image source={restau.image} style={styles.cardImage} /> 
 
           <View style={{marginTop: 10}}>
             {/* Title and price container */}
@@ -101,15 +100,15 @@ const Entry_home = ({navigation}) => {
 
             {/* Facilities container */}
             <View style={{marginTop: 10, flexDirection: 'row'}}>
-              <View style={style.facility}>
+              <View style={styles.facility}>
                 <Icon name="hotel" size={18} />
-                <Text style={style.facilityText}>2</Text>
+                <Text style={styles.facilityText}>2</Text>
               </View>
-              <View style={style.facility}>
+              <View style={styles.facility}>
                 <Icon name="bathtub" size={18} />
-                <Text style={style.facilityText}>2</Text>
+                <Text style={styles.facilityText}>2</Text>
               </View>
-              <View style={style.facility}>
+              <View style={styles.facility}>
                 <Icon name="aspect-ratio" size={18} />
                 <Text style={style.facilityText}>{restau.website}</Text>
               </View>
@@ -133,20 +132,19 @@ const Entry_home = ({navigation}) => {
 
 
       {/* Header container */}
-      <View style={style.header}>
+      <View style={styles.header}>
         <View>
           <Text style={{color: "grey"}}>Location</Text>
           <Text style={{color: "#053466", fontSize: 20, fontWeight: 'bold'}}>
             Sai Wan
           </Text>
         </View>
-        <TouchableOpacity style={style.profileImage}>
+        <TouchableOpacity style={styles.profileImage}>
             <FontAwesome name="user" color="#194466"size={25}/>
         </TouchableOpacity>
       </View>
 
 
-      <ScrollView showsVerticalScrollIndicator={false}>
         {/* Input and sort button container */}
         <View
           style={{
@@ -154,46 +152,44 @@ const Entry_home = ({navigation}) => {
             justifyContent: 'space-between',
             paddingRight: 5,
           }}>
-          <LinearGradient colors={["#AFE6FE", "#C9E2FA"]} style={style.searchInputContainer}>
-            <View style={style.searchRow}>
-                <Icon name="search" color="grey" size={25} style={style.searchIcon}/>
-                <TextInput style={style.barText} placeholder="Search address, city, location" />
+          <LinearGradient colors={["#AFE6FE", "#C9E2FA"]} style={styles.searchInputContainer}>
+            <View style={styles.searchRow}>
+                <Icon name="search" color="grey" size={25} style={styles.searchIcon}/>
+                <TextInput style={styles.barText} placeholder="Search address, city, location" />
             </View>
 
-            <View style={style.sortBtn}>
+            <View style={styles.sortBtn}>
                 <Icon name="tune" color="white" size={20} />
             </View>
           </LinearGradient>
         </View>
 
-        {/* Render list options */}
-        <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} style={style.discoverScroller}>
-            <DiscoverOptions />
-        </ScrollView>
-
-        {/* Render categories */}
-        <ListCategories />
-
         {/* Render Card */} 
         <FlatList
           snapToInterval={width - 20}
-          showsHorizontalScrollIndicator={false}
-          contentContainerStyle={{paddingLeft: 20, paddingVertical: 20}}
-          horizontal
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={{paddingHorizontal: 20, marginTop: -5}}
+          vertical
+          ListHeaderComponent={
+            <>
+            {/** Display Eat, sleep, all cards */}
+            <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+              <DiscoverOptions/>
+            </ScrollView>
+
+            {/** Display filter options */}
+            <ListCategories/>
+            </>
+          }
           data={Restaurant_data}
           renderItem={({item}) => <Card restau={item} />}
         />
-
-      </ScrollView>
-
-      {/* Render Bottom_bar */}
-      <BottomBar />
 
     </SafeAreaView>
   );
 };
 
-const style = StyleSheet.create({
+const styles = StyleSheet.create({
   header: {
     paddingTop: 10,
     paddingBottom: 12,
@@ -226,7 +222,7 @@ const style = StyleSheet.create({
     marginLeft: 20,
     marginRight: 16,
     borderRadius: 12,
-    marginBottom: 5,
+    marginBottom: 10,
   },
   searchIcon: {
     paddingLeft: 10,
@@ -247,8 +243,6 @@ const style = StyleSheet.create({
     alignItems: 'center',
     marginRight: 5,
   },
-  discoverScroller: {
-  },
   optionsCard: {
     height: 210,
     width: width / 2 - 30,
@@ -258,7 +252,7 @@ const style = StyleSheet.create({
     borderRadius: 20,
     paddingTop: 12,
     paddingHorizontal: 12,
-    marginHorizontal: 6,
+    marginRight: 10,
   },
   optionsCardImage: {
     height: 140,
@@ -269,7 +263,6 @@ const style = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginTop: 10,
-    paddingHorizontal: 12,
     marginBottom: 8,
   },
   categoryListText: {
@@ -287,8 +280,9 @@ const style = StyleSheet.create({
   categoryListContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginTop: 15,
-    paddingHorizontal: 10,
+    marginTop: 10.5,
+    marginHorizontal: -7.5,
+    marginBottom: 3.5
   },
   card: {
     height: 250,
@@ -298,6 +292,7 @@ const style = StyleSheet.create({
     marginRight: 20,
     padding: 15,
     borderRadius: 20,
+    marginBottom: 14,
   },
   cardImage: {
     width: '100%',
