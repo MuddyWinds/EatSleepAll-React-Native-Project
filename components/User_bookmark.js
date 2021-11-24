@@ -198,28 +198,28 @@ const User_bookmark = ({navigation}) => {
       }  
 
      // for debugging only
-  const clearBookmark = async () => {
-    await AsyncStorage.setItem('bookmarkedHotel_Items', JSON.stringify([]));
-    await AsyncStorage.setItem('bookmarkedRestaurant_Items', JSON.stringify([]));
-    setbookmarkedHotelItems([]);
-    setbookmarkedRestaurantItems([]);
-  }
-  const showBookmark = async () => {
-    await AsyncStorage.getItem('bookmarkedHotel_Items').then(async (token) => {
-      const res = JSON.parse(token);
-      console.log("Hotel Items: ");
-      console.log(res);
-    });
-    await AsyncStorage.getItem('bookmarkedRestaurant_Items').then(async (token) => {
-        const res = JSON.parse(token);
-        console.log("Restaurant Items: ");
-        console.log(res);
-    })
-    console.log("Hotel Array: ");
-    console.log(bookmarkedHotelItems);
-    console.log("Restaurant Array: ");
-    console.log(bookmarkedRestaurantItems);
-  }
+  // const clearBookmark = async () => {
+  //   await AsyncStorage.setItem('bookmarkedHotel_Items', JSON.stringify([]));
+  //   await AsyncStorage.setItem('bookmarkedRestaurant_Items', JSON.stringify([]));
+  //   setbookmarkedHotelItems([]);
+  //   setbookmarkedRestaurantItems([]);
+  // }
+  // const showBookmark = async () => {
+  //   await AsyncStorage.getItem('bookmarkedHotel_Items').then(async (token) => {
+  //     const res = JSON.parse(token);
+  //     console.log("Hotel Items: ");
+  //     console.log(res);
+  //   });
+  //   await AsyncStorage.getItem('bookmarkedRestaurant_Items').then(async (token) => {
+  //       const res = JSON.parse(token);
+  //       console.log("Restaurant Items: ");
+  //       console.log(res);
+  //   })
+  //   console.log("Hotel Array: ");
+  //   console.log(bookmarkedHotelItems);
+  //   console.log("Restaurant Array: ");
+  //   console.log(bookmarkedRestaurantItems);
+  // }
     
 
     return (
@@ -256,16 +256,20 @@ const User_bookmark = ({navigation}) => {
           </LinearGradient>
         </View>
 
+        <ScrollView>
         {/* Render hotel cards */}
         <FlatList
             snapToInterval={width - 20}
             showsVerticalScrollIndicator={false}
-            contentContainerStyle={{paddingLeft: 20, paddingTop: 6}}
+            scrollEnabled = {false}
+            contentContainerStyle={{paddingLeft: 20, paddingTop: 0}}
             vertical
             data = {bookmarkedHotelItems}
-            ListHeaderComponent = {(data) => {
-              if (data.length != 0) {
+            ListHeaderComponent = {() => {
+              if (bookmarkedHotelItems.length != 0) {
                 return (<Text style={styles.subtitle}>Hotels</Text>);
+              } else {
+                return null;
               }
             }}
             renderItem={({item}) => <Awaiting_hotel_card hotel_info={item} />}
@@ -275,16 +279,20 @@ const User_bookmark = ({navigation}) => {
         <FlatList
             snapToInterval={width - 20}
             showsVerticalScrollIndicator={false}
-            contentContainerStyle={{paddingLeft: 20, paddingVertical: 6}}
+            scrollEnabled = {false}
+            contentContainerStyle={{paddingLeft: 20, paddingVertical: 0}}
             vertical
             data = {bookmarkedRestaurantItems}
-            ListHeaderComponent = {(data) => {
-              if (data.length != 0) {
+            ListHeaderComponent = {() => {
+              if (bookmarkedRestaurantItems.length != 0) {
                 return (<Text style={styles.subtitle}>Restaurants</Text>);
+              } else {
+                return null;
               }
             }}
             renderItem={({item}) => <Awaiting_restaurant_card restaurant_info={item} />}
         />
+        </ScrollView>
 
         </SafeAreaView>
     );
