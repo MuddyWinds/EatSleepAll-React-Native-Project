@@ -1,57 +1,56 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import { StyleSheet, Text, View, SafeAreaView, Pressable, Button, ScrollView, FlatList, Dimensions } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Notifs from './Notifications';
-import Notification_data from '../assets/data/Notification_data'
+import Notification_data from '../assets/data/Notification_data';
+import Constants from 'expo-constants';
+import * as Permissions from 'expo-permissions';
+import * as Notifications from 'expo-notifications';
+
+
 
 const {width, height} = Dimensions.get('screen');
-// const addNotification = (text,type) => {
-//     console.log("addNotification");
-//     notificationItems = [[text,type],...notificationItems]
 
-// }
-
-// const deleteNotification = (index) => {
-//     console.log("deleteNotification");
-//     return;
-// }
-
-// const notificationItems = [
-//     ["Notification 1 (restaurant) 1 2 3 4 5 6 7 8 9 10 abcdef  abcasdaa basd", "restaurant"],
-//     ["Notification 2 (hotel)", "hotel"],
-//     ["Notification 3 (washroom) 1 2 3 4 5 6 7 8", "washroom"],
-// ]
+Notifications.setNotificationHandler({
+    handleNotification: async () => ({
+      shouldShowAlert: true,
+      shouldPlaySound: false,
+      shouldSetBadge: false,
+    }),
+  });
 
 const User_notification = () => {
 
-    // const [notification, setNotification] = useState('hi');
-    // const [notificationType, setNotificationType] = useState('');
-    // const [notificationItems, setNotificationItems] = useState([]);
 
-    // const handleAddNotification = (text,type) => {
-    //     // setNotification(text);
-    //     // setNotificationType(type);
-    //     setNotificationItems([...notificationItems, [text,type]]);
-    //     console.log('handled add notification');
-    // }
+    const [expoPushToken, setExpoPushToken] = useState('');
+    const [notification, setNotification] = useState(false);
+    const notificationListener = useRef();
+    const responseListener = useRef();
 
-    // const handleDeleteNotification = (index) => {
-    //     let itemsCopy = [...notificationItems];
-    //     itemsCopy.splice(index,1);
-    //     setNotificationItems(itemsCopy);
-    // }
+    useEffect(() => {
+        registerForPushNotificationsAsync().then(token => setExpoPushToken(token));
 
-    // setNotification("testing");
-    // handleAddNotification('notif1 (restaurant)');
-    // handleAddNotification('notif1 (restaurant)','restaurant');
-    // handleAddNotification('notif2 (hotel)', 'hotel');
-    // handleAddNotification('notif3 (washroom)', 'washroom');
+        // This listener is fired whenever a notification is received while the app is foregrounded
+        notificationListener.current = Notifications.addNotificationReceivedListener(notification => {
+        setNotification(notification);
+        });
+
+        // This listener is fired whenever a user taps on or interacts with a notification (works when app is foregrounded, backgrounded, or killed)
+        responseListener.current = Notifications.addNotificationResponseReceivedListener(response => {
+        console.log(response);
+        });
+
+        return () => {
+        Notifications.removeNotificationSubscription(notificationListener.current);
+        Notifications.removeNotificationSubscription(responseListener.current);
+        };
+    }, []);
 
 
     return (
         <SafeAreaView style={styles.container}>
 
-            {/** Return Button to previous page */}
+            {/* * Return Button to previous page */}
             <Pressable style={{marginLeft: 8, flexDirection: 'row', alignItems: 'center',}}
                 onPress={() => navigation.navigate("Entry", {screen: "Entry_home"})}>
                 <Icon style={{color: "#053466"}}name="chevron-left" size={25}/>
@@ -61,24 +60,8 @@ const User_notification = () => {
             <View style={{flexDirection: "row", marginLeft: 6, marginTop: 4.5}}>
                 <Text style={{marginLeft: 18, fontSize: 24, fontWeight: "bold", color: "#053466",}}>Notifications</Text>
             </View>
-            {/* <Button title={'button'} onPress={() => addNotification('notif 1','restaurant')}></Button> */}
-
-            {/* <ScrollView style={styles.wrapper} showsVerticalScrollIndicator={false}> */}
-                {/* <View style={styles.items}>
-                    {
-                        // notificationItems.map((item,index) => {
-                        //     return <Notifs key={index} text={item[0]} type={item[1]}/>
-                        //     // return <Notifs key={index} text={item} type={'restaurant'}/>
-                        // })
-                        for (let i = 1 ; i < Object.keys(notification_data).length ; i++) {
-                            // console.log(notification_data[i.toString()].text);
-                            return <Notifs key={i} text={notification_data[i.toString()].text}></Notifs>
-                        }
-                    }
-                    
-
-                </View> */}
-                <FlatList
+            
+                {/* <FlatList
                     snapToInterval={width - 20}
                     showsVerticalScrollIndicator={false}
                     style={styles.wrapper}
@@ -87,12 +70,87 @@ const User_notification = () => {
                     data={Notification_data}
                     renderItem={({item}) => <Notifs title={item.title} text={item.description} type={item.type} show={item.show} id={item.id}/>}
                 />
-                
-            {/* </ScrollView> */}
+                 */}
+             <View
+                style={{
+                    flex: 1,
+                    alignItems: 'center',
+                    justifyContent: 'space-around',
+                }}>
+                <Text>Your expo push token: {expoPushToken}</Text>
+                <View style={{ alignItems: 'center', justifyContent: 'center' }}>
+                    <Text>Title: {notification && notification.request.content.title} </Text>
+                    <Text>Body: {notification && notification.request.content.body}</Text>
+                    <Text>Data: {notification && JSON.stringify(notification.request.content.data)}</Text>
+                </View>
+                <Button
+                    title="Press to Send Notification"
+                    onPress={async () => {
+                    await sendPushNotification(expoPushToken);
+                    }}
+                />
+            </View>
+
 
         </SafeAreaView>
     );
 }
+
+// Can use this function below, OR use Expo's Push Notification Tool-> https://expo.dev/notifications
+async function sendPushNotification(expoPushToken) {
+    const message = {
+      to: expoPushToken,
+      sound: 'default',
+      title: 'Original Title',
+      body: 'And here is the body!',
+      data: { someData: 'goes here' },
+    };
+  
+    await fetch('https://exp.host/--/api/v2/push/send', {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Accept-encoding': 'gzip, deflate',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(message),
+    });
+  }
+  
+  async function registerForPushNotificationsAsync() {
+    console.log("Registering push notification");
+    let token;
+    if (Constants.isDevice) {
+        console.log("Constants isDevice");
+      const { status: existingStatus } = await Notifications.getPermissionsAsync();
+      let finalStatus = existingStatus;
+      if (existingStatus !== 'granted') {
+        const { status } = await Notifications.requestPermissionsAsync();
+        finalStatus = status;
+      }
+      if (finalStatus !== 'granted') {
+        console.log('Failed to get push token for push notification!');
+        alert('Failed to get push token for push notification!');
+        return;
+      }
+      console.log(existingStatus, finalStatus);
+      token = (await Notifications.getExpoPushTokenAsync()).data;
+      console.log(token);
+    } else {
+      alert('Must use physical device for Push Notifications');
+    }
+  
+    if (Platform.OS === 'android') {
+      Notifications.setNotificationChannelAsync('default', {
+        name: 'default',
+        importance: Notifications.AndroidImportance.MAX,
+        vibrationPattern: [0, 250, 250, 250],
+        lightColor: '#FF231F7C',
+      });
+    }
+  
+    return token;
+  }
 
 const styles = StyleSheet.create({
     container: {
