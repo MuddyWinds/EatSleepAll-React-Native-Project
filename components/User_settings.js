@@ -4,8 +4,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 const User_settings = ({navigation}) => {
-
-
+    
     const lightTheme = () => {
         // Code to turn to light theme
     }
