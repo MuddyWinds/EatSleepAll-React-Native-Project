@@ -11,7 +11,7 @@ const Notification_data = [
         id: '2',
         title: 'Hotel Notification Title',
         subtitle: 'hotel',
-        description: 'Most relaxing hotel!',
+        description: 'Most relaxing hotel! Not sure whether will come agian but a very nice experience. I need to check whether the card is flexible. Good it is flexible.',
       },
       {
         id: '3',

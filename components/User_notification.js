@@ -118,7 +118,7 @@ const styles = StyleSheet.create({
         marginTop: 30,
     },
     card2: {
-      height: 84,
+      // height: 84,
       width: width - 40,
       marginRight: 20,
       paddingHorizontal: 16,
