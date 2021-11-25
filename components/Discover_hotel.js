@@ -238,9 +238,7 @@ const Discover_hotel = ({navigation}) => {
     </Pressable>
 
     <View style={{flexDirection: "row", marginLeft: 6, marginTop: 3.6}}>
-      <Text style={{marginLeft: 18, fontSize: 24, fontWeight: "bold", color: "#053466",}}>Discover</Text>
-      <View style={styles.rectangle}></View>
-      <Text style={{paddingLeft: 10, fontSize: 24, color: "#053466",}}>#SLEEP</Text>
+      <Text style={{marginLeft: 18, fontSize: 24, fontWeight: "bold", color: "#053466",}}>Discover: SLEEP</Text>
     </View>
 
     {/* Render Top-Select Card */}
