@@ -16,6 +16,7 @@ const User_bookmark = ({navigation}) => {
     const [bookmarkedHotelItems, setbookmarkedHotelItems] = useState([]);
     const [bookmarkedRestaurantItems, setbookmarkedRestaurantItems] = useState([]);
     const isFocused = useIsFocused();
+    const [searchWord, setSearchWord] = useState("");
 
     useEffect(() => {
         // console.log("--");
@@ -130,72 +131,85 @@ const User_bookmark = ({navigation}) => {
         );
     }
 
-      const BookMark_Icon = (props) => {
-     
-          return (
-            <TouchableOpacity onPress={() => removeBookMark(props.info,props.type)} style={styles.facility}>
-              <Icon name="star" size={18}/>
-              <Text style={styles.facilityText}>Bookmark</Text>
-            </TouchableOpacity>
-          );
-        
-      }
+    const BookMark_Icon = (props) => {
     
-    
-      const removeBookMark = async (info,type) => {
+        return (
+          <TouchableOpacity onPress={() => removeBookMark(props.info,props.type)} style={styles.facility}>
+            <Icon name="star" size={18}/>
+            <Text style={styles.facilityText}>Bookmark</Text>
+          </TouchableOpacity>
+        );
+      
+    }
+  
+  
+    const removeBookMark = async (info,type) => {
 
-        switch(type) {
-            case 'hotel':
-                const items_hotel = await AsyncStorage.getItem('bookmarkedHotel_Items').then(token => {
-                    const res = JSON.parse(token);
-                    res.forEach(function (item, index) {
-                      if (item.id == info.id){
-                        return res.splice(index,1);
-                      }
-                    });
-                    return res;
+      switch(type) {
+          case 'hotel':
+              const items_hotel = await AsyncStorage.getItem('bookmarkedHotel_Items').then(token => {
+                  const res = JSON.parse(token);
+                  res.forEach(function (item, index) {
+                    if (item.id == info.id){
+                      return res.splice(index,1);
+                    }
                   });
-                await AsyncStorage.setItem('bookmarkedHotel_Items', JSON.stringify(items_hotel));
-                setbookmarkedHotelItems(items_hotel);
-                break;
-            case 'restaurant':
-                const items_restaurant = await AsyncStorage.getItem('bookmarkedRestaurant_Items').then(token => {
-                    const res = JSON.parse(token);
-                    res.forEach(function (item, index) {
-                      if (item.id == info.id){
-                        return res.splice(index,1);
-                      }
-                    });
-                    return res;
+                  return res;
+                });
+              await AsyncStorage.setItem('bookmarkedHotel_Items', JSON.stringify(items_hotel));
+              setbookmarkedHotelItems(items_hotel);
+              break;
+          case 'restaurant':
+              const items_restaurant = await AsyncStorage.getItem('bookmarkedRestaurant_Items').then(token => {
+                  const res = JSON.parse(token);
+                  res.forEach(function (item, index) {
+                    if (item.id == info.id){
+                      return res.splice(index,1);
+                    }
                   });
-                await AsyncStorage.setItem('bookmarkedRestaurant_Items', JSON.stringify(items_restaurant));
-                setbookmarkedRestaurantItems(items_restaurant);
-                break;
-            default:
-                console.log("Type: " + type + " does not exist");
-                break;
-        }
-        
+                  return res;
+                });
+              await AsyncStorage.setItem('bookmarkedRestaurant_Items', JSON.stringify(items_restaurant));
+              setbookmarkedRestaurantItems(items_restaurant);
+              break;
+          default:
+              console.log("Type: " + type + " does not exist");
+              break;
       }
-    
-      const renderBookmark = async () => {
-        await AsyncStorage.getItem('bookmarkedHotel_Items').then(token => {
-            const res = JSON.parse(token);
-            if (res !== null && res!== []) {
-              setbookmarkedHotelItems(res);
-            }        
-            else 
-              setbookmarkedHotelItems([]);
-          })
-          await AsyncStorage.getItem('bookmarkedRestaurant_Items').then(token => {
-            const res = JSON.parse(token);
-            if (res !== null && res!== []) {
-              setbookmarkedRestaurantItems(res);
-            }        
-            else 
-              setbookmarkedRestaurantItems([]);
-          })
-      }  
+      
+    }
+  
+    const renderBookmark = async () => {
+      await AsyncStorage.getItem('bookmarkedHotel_Items').then(token => {
+          const res = JSON.parse(token);
+          var filteredItems = [];
+          if (res !== null && res!== []) {            
+            res.forEach(element => {
+              if (element.title.toUpperCase().includes(searchWord.toUpperCase()) || element.location.toUpperCase().includes(searchWord.toUpperCase())) {
+                filteredItems.push(element);
+              }
+          });
+          setbookmarkedHotelItems(filteredItems);
+        }        
+          else 
+            setbookmarkedHotelItems([]);
+      })
+      await AsyncStorage.getItem('bookmarkedRestaurant_Items').then(token => {
+          const res = JSON.parse(token);
+          var filteredItems = [];
+          if (res !== null && res!== []) {            
+            res.forEach(element => {
+               if (element.title.toUpperCase().includes(searchWord.toUpperCase()) || element.location.toUpperCase().includes(searchWord.toUpperCase())) {
+                filteredItems.push(element);
+              }
+            });
+            setbookmarkedRestaurantItems(filteredItems);     
+          }
+          else 
+            setbookmarkedRestaurantItems([]);
+      })
+    }  
+
 
      // for debugging only
   // const clearBookmark = async () => {
@@ -247,12 +261,16 @@ const User_bookmark = ({navigation}) => {
           <LinearGradient colors={["#AFE6FE", "#C9E2FA"]} style={styles.searchInputContainer}>
             <View style={styles.searchRow}>
                 <Icon name="search" color="grey" size={25} style={styles.searchIcon}/>
-                <TextInput style={styles.barText} placeholder="Search address, city, location" />
+                <TextInput style={styles.barText} placeholder={"Search address, city, location"} value={searchWord} onChangeText={(text) => { setSearchWord(text)}}/>
             </View>
 
-            <View style={styles.sortBtn}>
-                <Icon name="tune" color="white" size={20} />
-            </View>
+            <TouchableOpacity onPress={() => {
+              renderBookmark();
+            }}>
+              <View style={styles.sortBtn}>
+                  <Icon name="tune" color="white" size={20} />
+              </View>
+            </TouchableOpacity>
           </LinearGradient>
         </View>
 
