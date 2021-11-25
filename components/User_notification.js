@@ -46,7 +46,7 @@ const User_notification = ({navigation}) => {
       <Pressable 
         activeOpacity={0.8}
         >
-        <LinearGradient colors={["#EFF5F6", "#f3f3f3"]} style={styles.card2}>
+        <LinearGradient colors={["#F5FCFF", "#f3f3f3", ]} style={styles.card2}>
           <View>
             {/* Title and subtitle */}
             <Text style={{fontSize: 15, fontWeight: 'bold', color: "#053466"}}>
@@ -79,7 +79,7 @@ const User_notification = ({navigation}) => {
         </Pressable>
 
         <View style={{flexDirection: "row", marginLeft: 6, marginTop: 4.5}}>
-          <Text style={{marginLeft: 18, fontSize: 24, fontWeight: "bold", color: "#053466",}}>Notifications</Text>
+          <Text style={{marginLeft: 18, fontSize: 24, fontWeight: "bold", color: "#053466", marginBottom: 3.5}}>Notifications</Text>
         </View>
 
         {/** Show all notifications here */}
@@ -90,6 +90,7 @@ const User_notification = ({navigation}) => {
             contentContainerStyle={{paddingHorizontal: 20, marginTop: -5}}
             vertical
             data={Notification_data}
+            style={styles.NotiList}
             renderItem={({item}) => <Card Notification={item} />}
           />
         {/**</Swipeout>**/}
@@ -125,6 +126,10 @@ const styles = StyleSheet.create({
       borderRadius: 20,
       marginBottom: 10,
     },
+    NotiList: {
+      paddingTop: 8,
+
+    }
 });
 
 export default User_notification;
