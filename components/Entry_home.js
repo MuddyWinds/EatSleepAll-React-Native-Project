@@ -1,14 +1,27 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import { TouchableOpacity,SafeAreaView, View, StatusBar, Text, TextInput, FlatList, Dimensions, StyleSheet,Image,Pressable, ScrollView, } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { FontAwesome } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
 import Restaurant_data from '../assets/data/Restaurant_data';
+import { useIsFocused } from '@react-navigation/native';
 const {width} = Dimensions.get('screen');
 
 
 
 const Entry_home = ({navigation}) => {
+
+  const [cardItems, setCardItems] = useState([])
+  const [searchWord, setSearchWord] = useState("");
+  const isFocused = useIsFocused();
+  
+  useEffect(() => {
+    filterCardItems();
+  },[]);
+
+  useEffect(() => {
+    filterCardItems();
+  },[isFocused]);
 
   const optionsList = [
     {title: 'Book a hotel for staycation', img: require('../assets/nice_hotel.jpg')},
@@ -21,8 +34,6 @@ const Entry_home = ({navigation}) => {
 
   const ListCategories = () => {
     const [selectedDiscoverIndex, setSelectedDiscoverIndex] = React.useState(0);
-
-    // Write function to display different values when filter options are chosen
 
     return (
       <View style={styles.categoryListContainer}>
@@ -119,6 +130,21 @@ const Entry_home = ({navigation}) => {
     );
   };
 
+  const filterCardItems = () => {
+    const items = Restaurant_data;
+    var filteredItems = [];
+    if (items !== null && items !== []) {
+      items.forEach(element => {
+        if (element.name.toUpperCase().includes(searchWord.toUpperCase()) || element.address.toUpperCase().includes(searchWord.toUpperCase())) {
+          filteredItems.push(element);
+        }
+      });
+      setCardItems(filteredItems);
+    } else {
+      setCardItems([]);
+    }
+  }
+
   return (
     <SafeAreaView style={{backgroundColor: "white", flex: 1 }}>
 
@@ -155,12 +181,16 @@ const Entry_home = ({navigation}) => {
           <LinearGradient colors={["#AFE6FE", "#C9E2FA"]} style={styles.searchInputContainer}>
             <View style={styles.searchRow}>
                 <Icon name="search" color="grey" size={25} style={styles.searchIcon}/>
-                <TextInput style={styles.barText} placeholder="Search address, city, location" />
+                <TextInput style={styles.barText} placeholder="Search address, city, location" value={searchWord} onChangeText={(text) => { setSearchWord(text)}}/>
             </View>
 
-            <View style={styles.sortBtn}>
-                <Icon name="tune" color="white" size={20} />
-            </View>
+            <TouchableOpacity onPress={() => {
+              filterCardItems();
+            }}>
+              <View style={styles.sortBtn}>
+                  <Icon name="tune" color="white" size={20} />
+              </View>
+            </TouchableOpacity>
           </LinearGradient>
         </View>
 
@@ -181,7 +211,7 @@ const Entry_home = ({navigation}) => {
             <ListCategories/>
             </>
           }
-          data={Restaurant_data}
+          data={cardItems}
           renderItem={({item}) => <Card restau={item} />}
         />
 

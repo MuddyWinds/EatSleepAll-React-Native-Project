@@ -1,17 +1,29 @@
 import React, {StatusBar, useEffect, useState} from 'react';
-import { StyleSheet, Image, Text, View, SafeAreaView, Dimensions, ScrollView, Pressable, Button, FlatList } from 'react-native';
+import { StyleSheet, Image, Text, View, SafeAreaView, Dimensions, ScrollView, Pressable, Button, FlatList, TextInput } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import Hotel_data from '../assets/data/Hotel_data';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import { useIsFocused } from '@react-navigation/native';
 
 const {width, height} = Dimensions.get('screen');
-const filterList = ['Rating', 'Popularity', 'Location', 'Price'];
+const sortList = ['Rating', 'Popularity', 'Location', 'Price'];
 
 const Discover_hotel = ({navigation}) => {
 
   const [bookmarkedIds, setbookmarkedIds] = useState([]);
+  const [cardItems, setCardItems] = useState([])
+  const [searchWord, setSearchWord] = useState("");
+  const isFocused = useIsFocused();
+  
+  useEffect(() => {
+    filterCardItems();
+  },[]);
+
+  useEffect(() => {
+    filterCardItems();
+  },[isFocused]);
 
   useEffect(() => {
     // clearBookmark();
@@ -19,19 +31,19 @@ const Discover_hotel = ({navigation}) => {
     renderBookmark();
   },[]);
 
-  const FilterCategories = () => {
-    const [selectedFilter, setSelectedFilterIndex] = React.useState(0);
+  const SortCategories = () => {
+    const [selectedSort, setSelectedSortIndex] = useState(0);
     // Write filter function
 
     return  (
-      <View style={styles.filterListContainer}>
-        <Text style={styles.Ranking}>Filter:</Text>
-        {filterList.map((filterOption, index) => (
-          <Pressable key={index} onPress={() => setSelectedFilterIndex(index)}>
+      <View style={styles.sortListContainer}>
+        <Text style={styles.Ranking}>Sort :</Text>
+        {sortList.map((sortOption, index) => (
+          <Pressable key={index} onPress={() => setSelectedSortIndex(index)}>
             <Text style={[
-              styles.filterListText, 
-              index == selectedFilter && styles.activeFilterListText,]}>
-              {filterOption}
+              styles.sortListText, 
+              index == selectedSort && styles.activeSortListText,]}>
+              {sortOption}
             </Text>
           </Pressable>
         ))}
@@ -216,16 +228,31 @@ const Discover_hotel = ({navigation}) => {
   }
 
   // for debugging only
-  const clearBookmark = async () => {
-    await AsyncStorage.setItem('bookmarkedHotel_Items', JSON.stringify([]));
-    setbookmarkedIds([]);
-  }
-  const showBookmark = async () => {
-    await AsyncStorage.getItem('bookmarkedHotel_Items').then(token => {
-      const res = JSON.parse(token);
-      console.log(res);
-      console.log(bookmarkedIds);
-    });
+  // const clearBookmark = async () => {
+  //   await AsyncStorage.setItem('bookmarkedHotel_Items', JSON.stringify([]));
+  //   setbookmarkedIds([]);
+  // }
+  // const showBookmark = async () => {
+  //   await AsyncStorage.getItem('bookmarkedHotel_Items').then(token => {
+  //     const res = JSON.parse(token);
+  //     console.log(res);
+  //     console.log(bookmarkedIds);
+  //   });
+  // }
+
+  const filterCardItems = () => {
+    const items = Hotel_data;
+    var filteredItems = [];
+    if (items !== null && items !== []) {
+      items.forEach(element => {
+        if (element.title.toUpperCase().includes(searchWord.toUpperCase()) || element.location.toUpperCase().includes(searchWord.toUpperCase())) {
+          filteredItems.push(element);
+        }
+      });
+      setCardItems(filteredItems);
+    } else {
+      setCardItems([]);
+    }
   }
 
 
@@ -243,11 +270,34 @@ const Discover_hotel = ({navigation}) => {
       <Text style={{paddingLeft: 10, fontSize: 24, color: "#053466",}}>#SLEEP</Text>
     </View>
 
+    {/* Input and sort button container */}
+    <View
+          style={{
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            paddingRight: 5,
+          }}>
+          <LinearGradient colors={["#AFE6FE", "#C9E2FA"]} style={styles.searchInputContainer}>
+            <View style={styles.searchRow}>
+                <Icon name="search" color="grey" size={25} style={styles.searchIcon}/>
+                <TextInput style={styles.barText} placeholder="Search address, city, location" value={searchWord} onChangeText={(text) => { setSearchWord(text)}}/>
+            </View>
+
+            <TouchableOpacity onPress={() => {
+              filterCardItems();
+            }}>
+              <View style={styles.sortBtn}>
+                  <Icon name="tune" color="white" size={20} />
+              </View>
+            </TouchableOpacity>
+          </LinearGradient>
+        </View>
+
     {/* Render Top-Select Card */}
     <Hotel_card hotel_info={Hotel_data[1]} />
 
     {/* Render filter options */}
-    <FilterCategories/>
+    <SortCategories/>
 
     {/* Render chosen card */}
     <FlatList
@@ -255,7 +305,7 @@ const Discover_hotel = ({navigation}) => {
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{paddingLeft: 20, paddingTop: 6}}
         vertical
-        data={Hotel_data}
+        data={cardItems}
         renderItem={({item}) => <Awaiting_hotel_card hotel_info={item} />}
     />
   </SafeAreaView>
@@ -295,6 +345,37 @@ const styles = StyleSheet.create({
       opacity: 0.4, 
       borderRadius: 5,
       marginRight: 15,
+  },
+  searchInputContainer: {
+    height: 35,
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginLeft: 20,
+    marginRight: 16,
+    borderRadius: 12,
+    marginBottom: 5,
+    marginTop: 8.5,
+  },
+  searchIcon: {
+    paddingLeft: 10,
+    paddingTop: 2,
+  },
+  searchRow: {
+    flexDirection: 'row',
+  },
+  barText: {
+    paddingLeft: 8,
+  },
+  sortBtn: {
+    backgroundColor: "#053466",
+    height: 30,
+    width: 30,
+    borderRadius: 12,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginRight: 5,
   },
   itemText: {
     maxWidth: '80%',
@@ -338,7 +419,7 @@ const styles = StyleSheet.create({
     marginLeft: 5, 
     color: "grey"
   },
-  filterListContainer: {
+  sortListContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     paddingHorizontal: 20,
@@ -348,14 +429,14 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginLeft: 4.5,
   },
-  filterListText: {
+  sortListText: {
     fontSize: 14,
     fontWeight: 'bold',
     paddingBottom: 5,
     color: "grey",
     marginHorizontal: 4.5,
   },
-  activeFilterListText: {
+  activeSortListText: {
     color: "#000058",
     borderBottomWidth: 1,
     paddingBottom: 5,

@@ -1,14 +1,43 @@
-import React, {StatusBar} from 'react';
+import React, {StatusBar, useState, useEffect} from 'react';
 import { StyleSheet, Image, Text, View, SafeAreaView, Dimensions, ScrollView, Pressable, Button, FlatList, TextInput } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { Feather } from '@expo/vector-icons';
 import Integrated_data from "../assets/data/Integrated_data";
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import { useIsFocused } from '@react-navigation/native';
 
 const {width, height} = Dimensions.get('screen');
 
 
 const Discover_washroom = ({navigation}) => {
+
+const [cardItems, setCardItems] = useState([])
+  const [searchWord, setSearchWord] = useState("");
+  const isFocused = useIsFocused();
+  
+  useEffect(() => {
+    filterCardItems();
+  },[]);
+
+  useEffect(() => {
+    filterCardItems();
+  },[isFocused]);
+
+  const filterCardItems = () => {
+    const items = Integrated_data;
+    var filteredItems = [];
+    if (items !== null && items !== []) {
+      items.forEach(element => {
+        if (element.title.toUpperCase().includes(searchWord.toUpperCase()) || element.location.toUpperCase().includes(searchWord.toUpperCase())) {
+          filteredItems.push(element);
+        }
+      });
+      setCardItems(filteredItems);
+    } else {
+      setCardItems([]);
+    }
+  }
     
     return (
         <SafeAreaView>
@@ -35,14 +64,18 @@ const Discover_washroom = ({navigation}) => {
                 paddingRight: 5,
             }}>
             <LinearGradient colors={["#AFE6FE", "#C9E2FA"]} style={styles.searchInputContainer}>
-                <View style={styles.searchRow}>
-                    <Icon name="search" color="grey" size={25} style={styles.searchIcon}/>
-                    <TextInput style={styles.barText} placeholder="Search address, city, location" />
-                </View>
+            <View style={styles.searchRow}>
+                <Icon name="search" color="grey" size={25} style={styles.searchIcon}/>
+                <TextInput style={styles.barText} placeholder="Search address, city, location" value={searchWord} onChangeText={(text) => { setSearchWord(text)}}/>
+            </View>
 
-                <View style={styles.sortBtn}>
-                   <Icon name="tune" color="white" size={20} />
-                </View>
+            <TouchableOpacity onPress={() => {
+              filterCardItems();
+            }}>
+              <View style={styles.sortBtn}>
+                  <Icon name="tune" color="white" size={20} />
+              </View>
+            </TouchableOpacity>
             </LinearGradient>
         </View>
 

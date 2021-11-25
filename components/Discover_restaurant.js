@@ -5,14 +5,26 @@ import Restaurant_data from '../assets/data/Restaurant_data';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import { useIsFocused } from '@react-navigation/native';
 
 const {width, height} = Dimensions.get('screen');
-const filterList = ['Rating', 'Popularity', 'Location', 'Price'];
+const sortList = ['Rating', 'Popularity', 'Location', 'Price'];
 
 
 const Discover_restaurant = ({navigation}) => {
 
   const [bookmarkedIds, setbookmarkedIds] = useState([]);
+  const [cardItems, setCardItems] = useState([])
+  const [searchWord, setSearchWord] = useState("");
+  const isFocused = useIsFocused();
+  
+  useEffect(() => {
+    filterCardItems();
+  },[]);
+
+  useEffect(() => {
+    filterCardItems();
+  },[isFocused]);
 
   useEffect(() => {
     // clearBookmark();
@@ -20,19 +32,19 @@ const Discover_restaurant = ({navigation}) => {
     renderBookmark();
   },[]);
 
-    const FilterCategories = () => {
-      const [selectedFilter, setSelectedFilterIndex] = React.useState(0);
+    const SortCategories = () => {
+      const [selectedSort, setSelectedSortIndex] = useState(0);
       // Write filter function
 
       return  (
-        <View style={styles.filterListContainer}>
-          <Text style={styles.Ranking}>Filter:</Text>
-          {filterList.map((filterOption, index) => (
-            <Pressable key={index} onPress={() => setSelectedFilterIndex(index)}>
+        <View style={styles.sortListContainer}>
+          <Text style={styles.Ranking}>Sort :</Text>
+          {sortList.map((sortOption, index) => (
+            <Pressable key={index} onPress={() => setSelectedSortIndex(index)}>
               <Text style={[
-                styles.filterListText, 
-                index == selectedFilter && styles.activeFilterListText,]}>
-                {filterOption}
+                styles.sortListText, 
+                index == selectedSort && styles.activeSortListText,]}>
+                {sortOption}
               </Text>
             </Pressable>
           ))}
@@ -218,16 +230,31 @@ const Discover_restaurant = ({navigation}) => {
     }
 
     // for debugging only
-  const clearBookmark = async () => {
-    await AsyncStorage.setItem('bookmarkedRestaurant_Items', JSON.stringify([]));
-    setbookmarkedIds([]);
-  }
-  const showBookmark = async () => {
-    await AsyncStorage.getItem('bookmarkedRestaurant_Items').then(token => {
-      const res = JSON.parse(token);
-      console.log(res);
-    });
-    console.log(bookmarkedIds);
+  // const clearBookmark = async () => {
+  //   await AsyncStorage.setItem('bookmarkedRestaurant_Items', JSON.stringify([]));
+  //   setbookmarkedIds([]);
+  // }
+  // const showBookmark = async () => {
+  //   await AsyncStorage.getItem('bookmarkedRestaurant_Items').then(token => {
+  //     const res = JSON.parse(token);
+  //     console.log(res);
+  //   });
+  //   console.log(bookmarkedIds);
+  // }
+
+  const filterCardItems = () => {
+    const items = Restaurant_data;
+    var filteredItems = [];
+    if (items !== null && items !== []) {
+      items.forEach(element => {
+        if (element.name.toUpperCase().includes(searchWord.toUpperCase()) || element.address.toUpperCase().includes(searchWord.toUpperCase())) {
+          filteredItems.push(element);
+        }
+      });
+      setCardItems(filteredItems);
+    } else {
+      setCardItems([]);
+    }
   }
 
 
@@ -257,12 +284,16 @@ const Discover_restaurant = ({navigation}) => {
           <LinearGradient colors={["#AFE6FE", "#C9E2FA"]} style={styles.searchInputContainer}>
             <View style={styles.searchRow}>
                 <Icon name="search" color="grey" size={25} style={styles.searchIcon}/>
-                <TextInput style={styles.barText} placeholder="Search address, city, location" />
+                <TextInput style={styles.barText} placeholder="Search address, city, location" value={searchWord} onChangeText={(text) => { setSearchWord(text)}}/>
             </View>
 
-            <View style={styles.sortBtn}>
-                <Icon name="tune" color="white" size={20} />
-            </View>
+            <TouchableOpacity onPress={() => {
+              filterCardItems();
+            }}>
+              <View style={styles.sortBtn}>
+                  <Icon name="tune" color="white" size={20} />
+              </View>
+            </TouchableOpacity>
           </LinearGradient>
         </View>
 
@@ -270,7 +301,7 @@ const Discover_restaurant = ({navigation}) => {
         <Restaurant_card restaurant_info={Restaurant_data[1]} />
 
         {/* Render filter options */}
-        <FilterCategories/>
+        <SortCategories/>
 
         {/* Render chosen card */}
         <FlatList
@@ -278,7 +309,7 @@ const Discover_restaurant = ({navigation}) => {
             showsVerticalScrollIndicator={false}
             contentContainerStyle={{paddingLeft: 20, paddingVertical: 6}}
             vertical
-            data={Restaurant_data}
+            data={cardItems}
             renderItem={({item}) => <Awaiting_restaurant_card restaurant_info={item} />}
         />
       </SafeAreaView>
@@ -386,7 +417,7 @@ const styles = StyleSheet.create({
     marginLeft: 5, 
     color: "grey"
   },
-  filterListContainer: {
+  sortListContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     paddingHorizontal: 20,
@@ -396,14 +427,14 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginLeft: 4.5,
   },
-  filterListText: {
+  sortListText: {
     fontSize: 14,
     fontWeight: 'bold',
     paddingBottom: 5,
     color: "grey",
     marginHorizontal: 4.5,
   },
-  activeFilterListText: {
+  activeSortListText: {
     color: "#000058",
     borderBottomWidth: 1,
     paddingBottom: 5,
