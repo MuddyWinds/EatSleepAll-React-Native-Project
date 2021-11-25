@@ -4,8 +4,8 @@ const Hotel_data = [
     {
       id: '1',
       website: 'agoda',
-      title: '宜必思香港中上環 (Ibis Hong Kong Central & Sheung Wan Hotel)',
-      location: '德輔道西28號, 中環, 香港, 中國香港',
+      title: 'Ibis Hong Kong Central',
+      location: '德輔道西28號, 中環',
       image: 'https://pix8.agoda.net/hotelImages/7540349/0/aca80a93ed9357111a0229b33ae84f68.jpg',
       price: '492',
       details: `8.1 激讚 18,634 條評價`,
@@ -15,7 +15,7 @@ const Hotel_data = [
     {
       id: '2',
       website: 'agoda',
-      title: '頤庭酒店 (Eco Tree Hotel)',
+      title: 'Eco Tree Hotel',
       location: '德輔道西156-160號, 港島西區, 香港, 中國香港 ',
       image: 'https://pix8.agoda.net/hotelImages/1120100/-1/04c88c70fc19116af9ab7f29d023807e.jpg',
       price: '831',
@@ -26,8 +26,8 @@ const Hotel_data = [
     {
       id: '3',
       website: 'Trip.com',
-      title: '宜必思香港中上環酒店（ibis Hong Kong Central and Sheung Wan Hotel）',
-      location: '中國，香港，中西區，上環德輔道西28號',
+      title: 'Ibis Hong Kong Sheung Wan Hotel',
+      location: '上環德輔道西28號，中西區',
       image: 'https://ak-d.tripcdn.com/images/200k0h0000008s4ooB95F_Z_1080_808_R5_D.jpg',
       details: `性價比高、無敵海景 95%推薦度`,
       price: '364',
@@ -37,8 +37,8 @@ const Hotel_data = [
     {
       id: '4',
       website: 'Trip.com',
-      title: '香港99號寶恆酒店（99 Bonham)',
-      location: '中國，香港，中西區，上環文咸東街99號',
+      title: '99 Bonham',
+      location: '上環文咸東街99號，中西區',
       image: 'https://ak-d.tripcdn.com/images/hotel/709000/708750/e3de6c6dd00243c7886b660689492394_Z_1080_808_R5_D.jpg',
       details: `設施很好、房間很大 95%推薦度`,
       price: '691',

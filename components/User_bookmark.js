@@ -320,6 +320,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#FFFFFF',
+        marginTop: -8,
     },
     sectionSubText: {
         marginLeft: 18,
@@ -331,7 +332,11 @@ const styles = StyleSheet.create({
     },
     subtitle: {
       alignContent: "center",
-      justifyContent: "center"
+      justifyContent: "center",
+      marginLeft: 5,
+      marginTop: 10,
+      marginBottom: 6.5,
+      color: "#053466",
     },
     noti: {
         marginLeft: 18, 
@@ -360,7 +365,8 @@ const styles = StyleSheet.create({
         marginLeft: 20,
         marginRight: 16,
         borderRadius: 12,
-        marginBottom: 10,
+        marginBottom: 5,
+        marginTop: 8.5,
       },
       searchIcon: {
         paddingLeft: 10,
