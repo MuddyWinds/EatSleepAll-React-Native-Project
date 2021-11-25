@@ -157,7 +157,7 @@ const User_bookmark = ({navigation}) => {
                   return res;
                 });
               await AsyncStorage.setItem('bookmarkedHotel_Items', JSON.stringify(items_hotel));
-              setbookmarkedHotelItems(items_hotel);
+              renderBookmark();
               break;
           case 'restaurant':
               const items_restaurant = await AsyncStorage.getItem('bookmarkedRestaurant_Items').then(token => {
@@ -170,7 +170,7 @@ const User_bookmark = ({navigation}) => {
                   return res;
                 });
               await AsyncStorage.setItem('bookmarkedRestaurant_Items', JSON.stringify(items_restaurant));
-              setbookmarkedRestaurantItems(items_restaurant);
+              renderBookmark();
               break;
           default:
               console.log("Type: " + type + " does not exist");
@@ -199,7 +199,7 @@ const User_bookmark = ({navigation}) => {
           var filteredItems = [];
           if (res !== null && res!== []) {            
             res.forEach(element => {
-               if (element.title.toUpperCase().includes(searchWord.toUpperCase()) || element.location.toUpperCase().includes(searchWord.toUpperCase())) {
+               if (element.name.toUpperCase().includes(searchWord.toUpperCase()) || element.address.toUpperCase().includes(searchWord.toUpperCase())) {
                 filteredItems.push(element);
               }
             });
@@ -212,12 +212,12 @@ const User_bookmark = ({navigation}) => {
 
 
      // for debugging only
-  // const clearBookmark = async () => {
-  //   await AsyncStorage.setItem('bookmarkedHotel_Items', JSON.stringify([]));
-  //   await AsyncStorage.setItem('bookmarkedRestaurant_Items', JSON.stringify([]));
-  //   setbookmarkedHotelItems([]);
-  //   setbookmarkedRestaurantItems([]);
-  // }
+  const clearBookmark = async () => {
+    await AsyncStorage.setItem('bookmarkedHotel_Items', JSON.stringify([]));
+    await AsyncStorage.setItem('bookmarkedRestaurant_Items', JSON.stringify([]));
+    setbookmarkedHotelItems([]);
+    setbookmarkedRestaurantItems([]);
+  }
   // const showBookmark = async () => {
   //   await AsyncStorage.getItem('bookmarkedHotel_Items').then(async (token) => {
   //     const res = JSON.parse(token);
