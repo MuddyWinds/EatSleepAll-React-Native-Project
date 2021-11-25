@@ -74,7 +74,7 @@ const Entry_home = ({navigation}) => {
         <LinearGradient colors={["#e8f4f8", "#f3f3f3"]} style={styles.card}>
 
           {/* Restaurant image */}
-          <Image source={restau.image} style={styles.cardImage} /> 
+          <Image source={{uri: restau.image_src}} style={styles.cardImage} /> 
 
           <View style={{marginTop: 10}}>
             {/* Title and price container */}
@@ -85,17 +85,17 @@ const Entry_home = ({navigation}) => {
                 marginTop: 10,
               }}>
               <Text style={{fontSize: 16, fontWeight: 'bold', color: "#053466"}}>
-                {restau.title}
+                {restau.name}
               </Text>
               <Text
                 style={{fontWeight: 'bold', color: "#053466", fontSize: 16}}>
-                $1,500
+                {restau.price_range}
               </Text>
             </View>
 
             {/* Location text */}
             <Text style={{color: "grey", fontSize: 14, marginTop: 5}}>
-              {restau.location}
+              {restau.address}
             </Text>
 
             {/* Facilities container */}
@@ -110,7 +110,7 @@ const Entry_home = ({navigation}) => {
               </View>
               <View style={styles.facility}>
                 <Icon name="aspect-ratio" size={18} />
-                <Text style={styles.facilityText}>100m</Text>
+                <Text style={styles.facilityText}>{restau.website}</Text>
               </View>
             </View>
           </View>
