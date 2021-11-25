@@ -156,7 +156,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#FFFFFF',
-        marginTop: 0,
+        marginTop: -8,
     },
     wrapper: {
         paddingTop: 10,

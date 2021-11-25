@@ -1,7 +1,7 @@
 import React from 'react';
 import Entry_onboard from './components/Entry_onboard';
 import { createStackNavigator } from '@react-navigation/stack';
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, DarkTheme } from '@react-navigation/native';
 import { BottomTabNavigator } from './Routes/BottomTabStack';
 
 const Stack = createStackNavigator();

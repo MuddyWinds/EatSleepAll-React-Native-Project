@@ -51,9 +51,7 @@ const [cardItems, setCardItems] = useState([])
 
         {/** Title header */}
         <View style={{flexDirection: "row", marginLeft: 4.5, marginTop: 3.6}}>
-            <Text style={{marginLeft: 18, fontSize: 24, fontWeight: "bold", color: "#053466",}}>Discover</Text>
-            <View style={styles.rectangle}></View>
-            <Text style={{paddingLeft: 10, fontSize: 24, color: "#053466", }}>#ALL</Text>
+            <Text style={{marginLeft: 18, fontSize: 24, fontWeight: "bold", color: "#053466",}}>Discover: ALL</Text>
         </View>
 
         {/* Input and sort button container */}
