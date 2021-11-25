@@ -274,9 +274,13 @@ const User_bookmark = ({navigation}) => {
           </LinearGradient>
         </View>
 
-        <ScrollView>
-        {/* Render hotel cards */}
         <FlatList
+          vertical
+          scrollEnabled = {true}
+          style = {{paddingLeft: 20}}
+          // Render hotel cards 
+          ListHeaderComponent = {
+            <FlatList
             snapToInterval={width - 20}
             showsVerticalScrollIndicator={false}
             scrollEnabled = {false}
@@ -292,9 +296,10 @@ const User_bookmark = ({navigation}) => {
             }}
             renderItem={({item}) => <Awaiting_hotel_card hotel_info={item} />}
          />
-
-        {/* Render restaurant cards */}
-        <FlatList
+          }
+          // Render restaurant cards 
+          ListFooterComponent = {
+            <FlatList
             snapToInterval={width - 20}
             showsVerticalScrollIndicator={false}
             scrollEnabled = {false}
@@ -310,7 +315,9 @@ const User_bookmark = ({navigation}) => {
             }}
             renderItem={({item}) => <Awaiting_restaurant_card restaurant_info={item} />}
         />
-        </ScrollView>
+          }
+        
+        />
 
         </SafeAreaView>
     );
