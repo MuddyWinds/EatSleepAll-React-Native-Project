@@ -6,6 +6,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useIsFocused } from '@react-navigation/native';
+import { WebView } from 'react-native-webview';
 
 
 const {width, height} = Dimensions.get('screen');
@@ -71,12 +72,20 @@ const Discover_restaurant = ({navigation}) => {
           >
             <View style={styles.centeredView}>
               <View style={styles.modalView}>
-                <Text style={{fontWeight: "400", textAlign: "center"}}>Restaurant Preview</Text>
+
+                {/** Preview Header */}
+                <View style={styles.Modealheader}>
+                <Text style={styles.modelHeaderText}>Restaurant Preview</Text>
                 <Pressable 
                   style={[styles.previewButton, styles.previewButtonClose]}
                   onPress={() => setModalVisible(!modalVisible)}>
-                  <Text>Close</Text>
+                  <Text style={{color: "white"}}>Close</Text>
                 </Pressable>
+                </View>
+
+                {/** Show Preview Content */}
+                <WebView source={{uri: Restaurant_data[restaurant_num].url}} />
+
               </View>
             </View>
           </Modal>
@@ -359,8 +368,6 @@ const Discover_restaurant = ({navigation}) => {
 
 
 
-
-
 const styles = StyleSheet.create({
   container: {
       flex: 1,
@@ -481,13 +488,14 @@ const styles = StyleSheet.create({
     alignItems: 'center', 
   },
   modalView: {
-    height: 435,
+    height: 445,
     width: 335,
     margin: 10,
     backgroundColor: 'white',
     borderRadius: 20,
-    padding: 35,
-    alignItems: "center",
+    paddingTop: 12.5,
+    paddingBottom: 16,
+    paddingHorizontal: 24,
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
@@ -499,11 +507,22 @@ const styles = StyleSheet.create({
   },
   previewButton: {
     borderRadius: 20,
-    padding: 10,
+    padding: 8,
     elevation: 2,
   },
   previewButtonClose: {
     backgroundColor: "#2196F3"
+  },
+  modelHeaderText: {
+    fontWeight: "500",
+    textAlign: "justify",
+    fontSize: 16.5,
+  },
+  Modealheader: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    marginBottom: 10,
   }
 });
 
