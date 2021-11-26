@@ -1,5 +1,5 @@
 import React, {StatusBar, useEffect, useState} from 'react';
-import { StyleSheet, Image, Text, View, SafeAreaView, Dimensions, ScrollView, Pressable, Button, FlatList, TextInput } from 'react-native';
+import { StyleSheet, Image, Text, View, SafeAreaView, Dimensions, ScrollView, Pressable, Modal, FlatList, TextInput } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import Restaurant_data from '../assets/data/Restaurant_data';
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -7,12 +7,14 @@ import AsyncStorage from '@react-native-async-storage/async-storage'
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useIsFocused } from '@react-navigation/native';
 
+
 const {width, height} = Dimensions.get('screen');
 const sortList = ['Rating', 'Popularity', 'Location', 'Price'];
 
 
 const Discover_restaurant = ({navigation}) => {
 
+  const [modalVisible, setModalVisible] = useState(false);
   const [restaurant_num, setRestaurant_num] = useState(0);
   const [bookmarkedIds, setbookmarkedIds] = useState([]);
   const [cardItems, setCardItems] = useState([])
@@ -52,6 +54,35 @@ const Discover_restaurant = ({navigation}) => {
         </View>
       );
     };
+
+
+    const Restaurant_preview = () => {
+      console.log(Restaurant_data[restaurant_num].url);
+      
+      return (
+        <View style={styles.centeredView}>
+          <Modal
+            animationType="slide"
+            transparent={true}
+            visible={modalVisible}
+            onRequestClose={() => {
+              setModalVisible(!modalVisible);
+            }}
+          >
+            <View style={styles.centeredView}>
+              <View style={styles.modalView}>
+                <Text style={{fontWeight: "400", textAlign: "center"}}>Restaurant Preview</Text>
+                <Pressable 
+                  style={[styles.previewButton, styles.previewButtonClose]}
+                  onPress={() => setModalVisible(!modalVisible)}>
+                  <Text>Close</Text>
+                </Pressable>
+              </View>
+            </View>
+          </Modal>
+        </View>
+      )
+    }
     
     const Awaiting_restaurant_card = ({restaurant_info}) => {
       return (
@@ -105,12 +136,19 @@ const Discover_restaurant = ({navigation}) => {
     }
 
     const Restaurant_card = ({restaurant_info}) => {
+
       return (
         <Pressable 
           activeOpacity={0.8}
-          // onPress={() => navigation.push("Discover", {screen: "Discover_restaurant"})}
-          >
+          onPress={() => {
+            // Restaurant_preview()
+            setModalVisible(true);
+          }}>
+
           <LinearGradient colors={["#8BDCEC", "#D0E9EE"]} style={styles.card}>
+
+            {/** Restaurant Preview */}
+            <Restaurant_preview/>
 
             {/* Restauarant image */}
             <Image source={{uri: restaurant_info.image_src}} style={styles.cardImage} />
@@ -259,8 +297,10 @@ const Discover_restaurant = ({navigation}) => {
   }
 
 
+
     return (
       <SafeAreaView style={styles.container}>
+
         {/** Return Button to previous page */}
         <Pressable style={{marginLeft: 8, flexDirection: 'row', alignItems: 'center',}}
            onPress={() => navigation.navigate("Entry", {screen: "Entry_home"})}>
@@ -317,6 +357,10 @@ const Discover_restaurant = ({navigation}) => {
 
 
 
+
+
+
+
 const styles = StyleSheet.create({
   container: {
       flex: 1,
@@ -330,13 +374,6 @@ const styles = StyleSheet.create({
       paddingTop: 4,
       paddingBottom: 10,
       color: "#053466",
-  },
-  rectangle: {
-      width: 2,
-      height: 25,
-      backgroundColor: "#053466",
-      marginLeft: 8,
-      borderRadius: 2,
   },
   iconLeft: {
       flexDirection: "row",
@@ -438,6 +475,36 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     paddingBottom: 5,
   },
+  centeredView: {
+    flex: 1, 
+    justifyContent: 'center', 
+    alignItems: 'center', 
+  },
+  modalView: {
+    height: 435,
+    width: 335,
+    margin: 10,
+    backgroundColor: 'white',
+    borderRadius: 20,
+    padding: 35,
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 25,
+    elevation: 5,
+  },
+  previewButton: {
+    borderRadius: 20,
+    padding: 10,
+    elevation: 2,
+  },
+  previewButtonClose: {
+    backgroundColor: "#2196F3"
+  }
 });
 
 export default Discover_restaurant;

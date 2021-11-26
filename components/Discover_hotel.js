@@ -1,5 +1,5 @@
 import React, {StatusBar, useEffect, useState} from 'react';
-import { StyleSheet, Image, Text, View, SafeAreaView, Dimensions, ScrollView, Pressable, Button, FlatList, TextInput } from 'react-native';
+import { Modal, StyleSheet, Image, Text, View, SafeAreaView, Dimensions, ScrollView, Pressable, Button, FlatList, TextInput } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import Hotel_data from '../assets/data/Hotel_data';
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -12,6 +12,7 @@ const sortList = ['Rating', 'Popularity', 'Location', 'Price'];
 
 const Discover_hotel = ({navigation}) => {
  
+  const [modalVisible, setModalVisible] = useState(false);
   const [hotel_num, setHotel_num] = useState(0);
   const [bookmarkedIds, setbookmarkedIds] = useState([]);
   const [cardItems, setCardItems] = useState([])
@@ -51,6 +52,34 @@ const Discover_hotel = ({navigation}) => {
       </View>
     );
   };
+
+  const Hotel_preview = () => {
+    // console.log(Hotel_data[hotel_num].url);
+    
+    return (
+      <View style={styles.centeredView}>
+        <Modal
+          animationType="slide"
+          transparent={true}
+          visible={modalVisible}
+          onRequestClose={() => {
+            setModalVisible(!modalVisible);
+          }}
+        >
+          <View style={styles.centeredView}>
+            <View style={styles.modalView}>
+              <Text style={{fontWeight: "400", textAlign: "center"}}>Hotel Preview</Text>
+              <Pressable 
+                style={[styles.previewButton, styles.previewButtonClose]}
+                onPress={() => setModalVisible(!modalVisible)}>
+                <Text>Close</Text>
+              </Pressable>
+            </View>
+          </View>
+        </Modal>
+      </View>
+    )
+  }
 
   const Awaiting_hotel_card = ({hotel_info}) => {
     return (
@@ -107,11 +136,17 @@ const Discover_hotel = ({navigation}) => {
     return (
       <Pressable 
         activeOpacity={0.8}
-        // onPress={() => navigation.push("Discover", {screen: "Discover_hotel"})}
-        >
+        onPress={() => {
+          // Hotel_preview()
+          setModalVisible(true);
+        }}>
+
         <LinearGradient colors={["#8BDCEC", "#D0E9EE"]} style={styles.card}>
 
-          {/* Restauarant image */}
+          {/** Hotel Preview */}
+          <Hotel_preview/>
+
+          {/* Hotel image */}
           <Image source={{uri: hotel_info.image}} style={styles.cardImage} />
           
           <View style={{marginTop: 8, marginHorizontal: 1}}>
@@ -440,6 +475,36 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     paddingBottom: 5,
   },
+  centeredView: {
+    flex: 1, 
+    justifyContent: 'center', 
+    alignItems: 'center', 
+  },
+  modalView: {
+    height: 435,
+    width: 335,
+    margin: 10,
+    backgroundColor: 'white',
+    borderRadius: 20,
+    padding: 35,
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 25,
+    elevation: 5,
+  },
+  previewButton: {
+    borderRadius: 20,
+    padding: 10,
+    elevation: 2,
+  },
+  previewButtonClose: {
+    backgroundColor: "#2196F3"
+  }
 });
 
 export default Discover_hotel;
