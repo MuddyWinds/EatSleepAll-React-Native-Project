@@ -12,7 +12,7 @@ import { Feather } from '@expo/vector-icons';
 
 
 const {width, height} = Dimensions.get('screen');
-const sortList = ['Rating', 'Popularity', 'Location', 'Price'];
+const sortList = ['Name','Rating', 'Popularity', 'Price'];
 
 
 const Discover_restaurant = ({navigation}) => {
@@ -24,23 +24,22 @@ const Discover_restaurant = ({navigation}) => {
   const [cardItems, setCardItems] = useState([])
   const [searchWord, setSearchWord] = useState("");
   const isFocused = useIsFocused();
+  const [selectedSort, setSelectedSortIndex] = useState(0);
   
   useEffect(() => {
     filterCardItems();
-  },[]);
-
-  useEffect(() => {
-    filterCardItems();
-  },[isFocused]);
-
-  useEffect(() => {
     // clearBookmark();
     // showBookmark();
     renderBookmark();
   },[]);
 
+  useEffect(() => {
+    filterCardItems();
+  },[isFocused, selectedSort]);
+
+
     const SortCategories = () => {
-      const [selectedSort, setSelectedSortIndex] = useState(0);
+      
       // Write filter function
 
       return  (
@@ -361,6 +360,33 @@ const Discover_restaurant = ({navigation}) => {
       items.forEach(element => {
         if (element.name.toUpperCase().includes(searchWord.toUpperCase()) || element.address.toUpperCase().includes(searchWord.toUpperCase())) {
           filteredItems.push(element);
+        }
+      });
+      var sortWord;
+      switch(selectedSort) {
+        case 0:
+          sortWord = 'name';
+          break;
+        case 1:
+          sortWord = 'rating';
+          break;
+        case 2:
+          sortWord = 'popularity';
+          break;
+        case 3:
+          sortWord = 'price_min';
+          break;
+        default:
+          console.log("Invalid Sort Index");
+          break;
+      }
+      filteredItems.sort(function(a,b){
+        if (a[sortWord] < b[sortWord]) {
+          return -1;
+        } else if (a[sortWord] > b[sortWord]) {
+          return 1;
+        } else {
+          return 0;
         }
       });
       setCardItems(filteredItems);

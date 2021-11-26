@@ -6,11 +6,12 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useIsFocused } from '@react-navigation/native';
+import { WebView } from 'react-native-webview';
 import MapView from 'react-native-maps'
 
 
 const {width, height} = Dimensions.get('screen');
-const sortList = ['Rating', 'Popularity', 'Location', 'Price'];
+const sortList = ['Name','Rating', 'Popularity', 'Price'];
 
 const Discover_hotel = ({navigation}) => {
  
@@ -20,23 +21,21 @@ const Discover_hotel = ({navigation}) => {
   const [cardItems, setCardItems] = useState([])
   const [searchWord, setSearchWord] = useState("");
   const isFocused = useIsFocused();
+  const [selectedSort, setSelectedSortIndex] = useState(0);
   
   useEffect(() => {
     filterCardItems();
-  },[]);
-
-  useEffect(() => {
-    filterCardItems();
-  },[isFocused]);
-
-  useEffect(() => {
     // clearBookmark();
     // showBookmark();
     renderBookmark();
   },[]);
 
+  useEffect(() => {
+    filterCardItems();
+  },[isFocused, selectedSort]);
+
+
   const SortCategories = () => {
-    const [selectedSort, setSelectedSortIndex] = useState(0);
     // Write filter function
 
     return  (
@@ -110,7 +109,7 @@ const Discover_hotel = ({navigation}) => {
               </Text>
               <Text
                 style={{fontWeight: '400', color: "#053466", fontSize: 15}}>
-                {hotel_info.price}
+                ${hotel_info.price}
               </Text>
             </View>
 
@@ -169,7 +168,7 @@ const Discover_hotel = ({navigation}) => {
               </Text>
               <Text
                 style={{fontWeight: '400', color: "#053466", fontSize: 15}}>
-                {hotel_info.price}
+                ${hotel_info.price}
               </Text>
             </View>
 
@@ -291,6 +290,33 @@ const Discover_hotel = ({navigation}) => {
       items.forEach(element => {
         if (element.title.toUpperCase().includes(searchWord.toUpperCase()) || element.location.toUpperCase().includes(searchWord.toUpperCase())) {
           filteredItems.push(element);
+        }
+      });
+      var sortWord;
+      switch(selectedSort) {
+        case 0:
+          sortWord = 'title';
+          break;
+        case 1:
+          sortWord = 'rating';
+          break;
+        case 2:
+          sortWord = 'popularity';
+          break;
+        case 3:
+          sortWord = 'price';
+          break;
+        default:
+          console.log("Invalid Sort Index");
+          break;
+      }
+      filteredItems.sort(function(a,b){
+        if (a[sortWord] < b[sortWord]) {
+          return -1;
+        } else if (a[sortWord] > b[sortWord]) {
+          return 1;
+        } else {
+          return 0;
         }
       });
       setCardItems(filteredItems);
