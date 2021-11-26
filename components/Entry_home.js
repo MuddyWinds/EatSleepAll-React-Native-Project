@@ -99,7 +99,7 @@ const Entry_home = ({navigation}) => {
                 {restau.name}
               </Text>
               <Text
-                style={{fontWeight: 'bold', color: "#053466", fontSize: 16}}>
+                style={{fontWeight: '400', color: "#053466", fontSize: 16}}>
                 {restau.price_range}
               </Text>
             </View>
@@ -147,7 +147,6 @@ const Entry_home = ({navigation}) => {
 
   return (
     <SafeAreaView style={{backgroundColor: "white", flex: 1 }}>
-
 
       {/* Customise status bar */}
       <StatusBar

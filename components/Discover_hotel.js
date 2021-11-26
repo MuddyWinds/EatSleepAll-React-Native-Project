@@ -11,7 +11,8 @@ const {width, height} = Dimensions.get('screen');
 const sortList = ['Rating', 'Popularity', 'Location', 'Price'];
 
 const Discover_hotel = ({navigation}) => {
-
+ 
+  const [hotel_num, setHotel_num] = useState(0);
   const [bookmarkedIds, setbookmarkedIds] = useState([]);
   const [cardItems, setCardItems] = useState([])
   const [searchWord, setSearchWord] = useState("");
@@ -55,7 +56,7 @@ const Discover_hotel = ({navigation}) => {
     return (
       <Pressable 
         activeOpacity={0.8}
-        // onPress={() => navigation.push("Discover", {screen: "Discover_hotel"})}
+        onPress={() => {setHotel_num(hotel_info.id - 1)}}
         >
         <LinearGradient colors={["#EFF5F6", "#f3f3f3"]} style={styles.card2}>
           
@@ -70,7 +71,7 @@ const Discover_hotel = ({navigation}) => {
                 {hotel_info.title}
               </Text>
               <Text
-                style={{fontWeight: 'bold', color: "#053466", fontSize: 15}}>
+                style={{fontWeight: '400', color: "#053466", fontSize: 15}}>
                 {hotel_info.price}
               </Text>
             </View>
@@ -124,7 +125,7 @@ const Discover_hotel = ({navigation}) => {
                 {hotel_info.title}
               </Text>
               <Text
-                style={{fontWeight: 'bold', color: "#053466", fontSize: 15}}>
+                style={{fontWeight: '400', color: "#053466", fontSize: 15}}>
                 {hotel_info.price}
               </Text>
             </View>
@@ -292,7 +293,7 @@ const Discover_hotel = ({navigation}) => {
         </View>
 
     {/* Render Top-Select Card */}
-    <Hotel_card hotel_info={Hotel_data[1]} />
+    <Hotel_card hotel_info={Hotel_data[hotel_num]} />
 
     {/* Render filter options */}
     <SortCategories/>

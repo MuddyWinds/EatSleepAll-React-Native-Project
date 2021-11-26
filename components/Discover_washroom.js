@@ -14,7 +14,7 @@ const {width, height} = Dimensions.get('screen');
 
 const Discover_washroom = ({navigation}) => {
 
-const [cardItems, setCardItems] = useState([])
+  const [cardItems, setCardItems] = useState([])
   const [searchWord, setSearchWord] = useState("");
   const isFocused = useIsFocused();
   
@@ -64,7 +64,7 @@ const [cardItems, setCardItems] = useState([])
               {airline_info.name}
               </Text>
               <Text
-              style={{fontWeight: 'bold', color: "#053466", fontSize: 15}}>
+              style={{fontWeight: '400', color: "#053466", fontSize: 15}}>
               {airline_info.price_range}
               </Text>
           </View>
@@ -112,7 +112,7 @@ const [cardItems, setCardItems] = useState([])
               {shopping_info.name}
               </Text>
               <Text
-              style={{fontWeight: 'bold', color: "#053466", fontSize: 15}}>
+              style={{fontWeight: '400', color: "#053466", fontSize: 15}}>
               {shopping_info.price_range}
               </Text>
           </View>
@@ -160,7 +160,7 @@ const [cardItems, setCardItems] = useState([])
               {stock_info.name}
               </Text>
               <Text
-              style={{fontWeight: 'bold', color: "#053466", fontSize: 15}}>
+              style={{fontWeight: '400', color: "#053466", fontSize: 15}}>
               {stock_info.price_range}
               </Text>
           </View>

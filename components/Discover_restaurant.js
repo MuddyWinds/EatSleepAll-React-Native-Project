@@ -13,6 +13,7 @@ const sortList = ['Rating', 'Popularity', 'Location', 'Price'];
 
 const Discover_restaurant = ({navigation}) => {
 
+  const [restaurant_num, setRestaurant_num] = useState(0);
   const [bookmarkedIds, setbookmarkedIds] = useState([]);
   const [cardItems, setCardItems] = useState([])
   const [searchWord, setSearchWord] = useState("");
@@ -56,7 +57,7 @@ const Discover_restaurant = ({navigation}) => {
       return (
         <Pressable 
           activeOpacity={0.8}
-          // onPress={() => navigation.push("Discover", {screen: "Discover_restaurant"})}
+          onPress={() => {setRestaurant_num(restaurant_info.id - 1)}}
           >
           <LinearGradient colors={["#EFF5F6", "#f3f3f3"]} style={styles.card2}>
             
@@ -71,7 +72,7 @@ const Discover_restaurant = ({navigation}) => {
                   {restaurant_info.name}
                 </Text>
                 <Text
-                  style={{fontWeight: 'bold', color: "#053466", fontSize: 15}}>
+                  style={{fontWeight: '400', color: "#053466", fontSize: 15}}>
                   {restaurant_info.price_range}
                 </Text>
               </View>
@@ -125,7 +126,7 @@ const Discover_restaurant = ({navigation}) => {
                   {restaurant_info.name}
                 </Text>
                 <Text
-                  style={{fontWeight: 'bold', color: "#053466", fontSize: 15}}>
+                  style={{fontWeight: '400', color: "#053466", fontSize: 15}}>
                   {restaurant_info.price_range}
                 </Text>
               </View>
@@ -296,7 +297,7 @@ const Discover_restaurant = ({navigation}) => {
         </View>
 
         {/* Render Top-Select Card */}
-        <Restaurant_card restaurant_info={Restaurant_data[1]} />
+        <Restaurant_card restaurant_info={Restaurant_data[restaurant_num]} />
 
         {/* Render filter options */}
         <SortCategories/>
