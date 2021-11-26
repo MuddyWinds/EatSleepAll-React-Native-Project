@@ -1,19 +1,35 @@
-import React, {} from 'react';
+import React, {useState, useEffect} from 'react';
 import { StyleSheet, Text, View, SafeAreaView, Pressable, Dimensions, FlatList } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Send_notification from './User_send_notification';
 import Notification_data from '../assets/data/Notification_data';
+import Swipeout from 'react-native-swipeout';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useIsFocused } from '@react-navigation/native';
 
 const {width, height} = Dimensions.get('screen');
 
 const User_notification = ({navigation}) => {
 
+  const [notificationItems, setNotificationItems] = useState([]);
+  const isFocused = useIsFocused();
+
+  useEffect(() => {
+    // clearNotifications();
+    renderNotifications();
+    // logNotifications();
+  },[]);
+
+  useEffect(() => {
+    renderNotifications();
+  },[isFocused]);
+
   const rightButton = (item) => {
     return [
       {
         text: "Remove",
-        onPress: () => this.removeNoti(item),
+        onPress: () => removeNoti(item),
         backgroundColor: "#FF4500",
         color: "#FFF"
       },
@@ -24,7 +40,7 @@ const User_notification = ({navigation}) => {
     return [
       {
         text: "Uncheck",
-        onPress: () => this.unReadNoti(item),
+        onPress: () => unReadNoti(item),
         backgroundColor: "#FF7F50",
         color: "#FFF"
       }
@@ -32,8 +48,27 @@ const User_notification = ({navigation}) => {
   }
 
   // Remove notification in swipe-out
-  const removeNoti = () => {
-    // Code here
+  const removeNoti = async (item) => {
+    // console.log("Removing notif");
+    await AsyncStorage.getItem('notification_Items').then(token => {
+      const res = JSON.parse(token);
+      if (res !== null && res!== []) {            
+        res.forEach(function (element, index) {
+          if (element.id == item.id){
+            res.splice(index,1);
+            AsyncStorage.setItem('notification_Items', JSON.stringify(res));
+          }
+        });
+      }        
+      else {
+        AsyncStorage.setItem('notification_Items', JSON.stringify([]));
+      }
+      renderNotifications();
+      
+    })
+    
+
+    
   };
 
   const unReadNoti = () => {
@@ -43,29 +78,58 @@ const User_notification = ({navigation}) => {
 
   const Card = ({Notification}) => {
     return (
-      <Pressable 
-        activeOpacity={0.8}
-        >
-        <LinearGradient colors={["#F5FCFF", "#f3f3f3", ]} style={styles.card2}>
-          <View>
-            {/* Title and subtitle */}
-            <Text style={{fontSize: 15, fontWeight: 'bold', color: "#053466"}}>
-                {Notification.title}
-            </Text>
+      <Swipeout right={rightButton(Notification)} left={leftButton(Notification)} backgroundColor={"transparent"} close>
+        <Pressable 
+          activeOpacity={0.8}
+          >
+          <LinearGradient colors={["#F5FCFF", "#f3f3f3", ]} style={styles.card2}>
+            <View>
+              {/* Title and subtitle */}
+              <Text style={{fontSize: 15, fontWeight: 'bold', color: "#053466"}}>
+                  {Notification.title}
+              </Text>
 
-            {/* Location text */}
-            <Text style={{color: "grey", fontSize: 14, marginTop: 3.5}}>
-              {Notification.subtitle}
-            </Text>
+              {/* Location text */}
+              <Text style={{color: "grey", fontSize: 14, marginTop: 3.5}}>
+                {Notification.subtitle}
+              </Text>
 
-            {/* Facilities container */}
-            <View style={{marginTop: 8, flexDirection: 'row'}}>
-              <Text>{Notification. description}</Text>
+              {/* Facilities container */}
+              <View style={{marginTop: 8, flexDirection: 'row'}}>
+                <Text>{Notification.description}</Text>
+              </View>
             </View>
-          </View>
-        </LinearGradient>
-      </Pressable>
+          </LinearGradient>
+        </Pressable>
+      </Swipeout>
     );
+  }
+
+  const renderNotifications = async() => {
+    await AsyncStorage.getItem('notification_Items').then(token => {
+      const res = JSON.parse(token);
+      if (res !== null && res!== []) {            
+        setNotificationItems(res);
+      }        
+      else 
+        setNotificationItems([]);
+      // console.log("items in render");
+      // console.log(notificationItems);
+    })
+  }
+
+  const clearNotifications = async() => {
+    await AsyncStorage.setItem('notification_Items', JSON.stringify([]));
+  }
+
+  const logNotifications = async() => {
+    await AsyncStorage.getItem('notification_Items').then(token => {
+      const res = JSON.parse(token);
+      console.log("items in res");
+      console.log(res);
+      console.log("items in log notificationItems");
+      console.log(notificationItems);
+    });
   }
 
   return (
@@ -83,17 +147,17 @@ const User_notification = ({navigation}) => {
         </View>
 
         {/** Show all notifications here */}
-        {/** <Swipeout right={rightButton(item)} left={leftButton(item)} backgroundColor={"transparent"} close> */}
+        {/* <Swipeout right={rightButton(item)} left={leftButton(item)} backgroundColor={"transparent"} close> */}
           <FlatList
             snapToInterval={width - 20}
             showsVerticalScrollIndicator={false}
             contentContainerStyle={{paddingHorizontal: 20, marginTop: -5}}
             vertical
-            data={Notification_data}
+            data={notificationItems}
             style={styles.NotiList}
             renderItem={({item}) => <Card Notification={item} />}
           />
-        {/**</Swipeout>**/}
+        {/* </Swipeout> */}
 
           {/** Show Default notifications here */}
           <Send_notification/>   

@@ -2,6 +2,7 @@ import Constants from 'expo-constants';
 import * as Notifications from 'expo-notifications';
 import React, { useState, useEffect, useRef } from 'react';
 import { Text, View, Button, Platform } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
@@ -16,6 +17,11 @@ const Send_notification = () => {
   const [notification, setNotification] = useState(false);
   const notificationListener = useRef();
   const responseListener = useRef();
+
+  useEffect(() => {
+    // console.log("notification updated");
+    insertNotifications();
+  },[notification]),
 
   useEffect(() => {
     registerForPushNotificationsAsync().then(token => setExpoPushToken(token));
@@ -35,6 +41,18 @@ const Send_notification = () => {
       Notifications.removeNotificationSubscription(responseListener.current);
     };
   }, []);
+
+  const insertNotifications = async () => {
+    await AsyncStorage.getItem('notification_Items').then(token => {
+      const res = JSON.parse(token);
+      if (res !== null && res !== []) {
+          res.push(notification.request.content.data);
+          AsyncStorage.setItem('notification_Items', JSON.stringify(res));
+      } else {
+          AsyncStorage.setItem('notification_Items', JSON.stringify([notification.request.content.data]));
+      }
+    })   
+  }
 
   return (
     <View
@@ -61,12 +79,17 @@ const Send_notification = () => {
 
 // Can use this function below, OR use Expo's Push Notification Tool-> https://expo.dev/notifications
 async function sendPushNotification(expoPushToken) {
+  var randomId = Math.floor(Math.random()*10000);
   const message = {
     to: expoPushToken,
     sound: 'default',
     title: 'Original Title',
     body: 'And here is the body!',
-    data: { someData: 'goes here' },
+    data: { id: randomId,
+            title: "Title of in-app notification" + randomId,
+            subtitle: "restaurant",
+            description: "Body of in-app notification",
+          },
   };
 
   await fetch('https://exp.host/--/api/v2/push/send', {
