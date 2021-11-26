@@ -90,24 +90,7 @@ const Discover_restaurant = ({navigation}) => {
             }}
           >
             <View style={styles.centeredView}>
-              <View style={{
-                    height: PreviewLinkHeight[PreviewOption],
-                    width: PreviewLinkWidth[PreviewOption],
-                    margin: 10,
-                    backgroundColor: 'white',
-                    borderRadius: 20,
-                    paddingTop: 12.5,
-                    paddingBottom: 17,
-                    paddingHorizontal: 20,
-                    shadowColor: "#000",
-                    shadowOffset: {
-                      width: 0,
-                      height: 2
-                    },
-                    shadowOpacity: 0.25,
-                    shadowRadius: 25,
-                    elevation: 5,
-              }}>
+              <View style={styles.modalView}>
 
                 {/** Preview Header */}
                 <View style={styles.Modealheader}>
@@ -569,6 +552,24 @@ const styles = StyleSheet.create({
     flex: 1, 
     justifyContent: 'center', 
     alignItems: 'center', 
+  },
+  modalView: {
+    height: 445,
+    width: 335,
+    margin: 10,
+    backgroundColor: 'white',
+    borderRadius: 20,
+    paddingTop: 12.5,
+    paddingBottom: 17,
+    paddingHorizontal: 20,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 25,
+    elevation: 5,
   },
   previewButton: {
     borderRadius: 20,
