@@ -6,6 +6,8 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useIsFocused } from '@react-navigation/native';
+import MapView from 'react-native-maps'
+
 
 const {width, height} = Dimensions.get('screen');
 const sortList = ['Rating', 'Popularity', 'Location', 'Price'];
@@ -54,7 +56,7 @@ const Discover_hotel = ({navigation}) => {
   };
 
   const Hotel_preview = () => {
-        
+
     return (
       <View style={styles.centeredView}>
         <Modal
