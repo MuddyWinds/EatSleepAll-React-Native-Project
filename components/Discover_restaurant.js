@@ -6,6 +6,9 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useIsFocused } from '@react-navigation/native';
+import { WebView } from 'react-native-webview';
+import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
+import { Feather } from '@expo/vector-icons';
 
 
 const {width, height} = Dimensions.get('screen');
@@ -14,6 +17,7 @@ const sortList = ['Rating', 'Popularity', 'Location', 'Price'];
 
 const Discover_restaurant = ({navigation}) => {
 
+  const [mapModalView, setMapModalView] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
   const [restaurant_num, setRestaurant_num] = useState(0);
   const [bookmarkedIds, setbookmarkedIds] = useState([]);
@@ -55,10 +59,55 @@ const Discover_restaurant = ({navigation}) => {
       );
     };
 
+    const Map_preview = () => {      
+      return (
+        <View style={styles.centeredView}>
+          <Modal
+            animationType="slide"
+            transparent={true}
+            visible={mapModalView}
+            onRequestClose={() => {
+              setMapModalView(!mapModalView);
+            }}
+          >
+            <View style={styles.centeredView}>
+              <View style={styles.modalView}>
 
-    const Restaurant_preview = () => {
-      console.log(Restaurant_data[restaurant_num].url);
-      
+                {/** Preview Header */}
+                <View style={styles.Modealheader}>
+                <Text style={styles.modelHeaderText}>Location Preview</Text>
+
+                <View style={{flexDirection: "row", alignItems: "center"}}>
+                  <Pressable 
+                    onPress={() => {
+                      setModalVisible(!modalVisible);
+                      setMapModalView(!mapModalView);
+                    }}
+                    style={{paddingRight: 12}}>
+                    <Feather name="map" size={23.5} style={{color: "#1D7CC6"}}/>
+                  </Pressable>
+
+                  <Pressable 
+                    style={[styles.previewButton, styles.previewButtonClose]}
+                    onPress={() => {
+                      setMapModalView(!mapModalView);
+                    }}>
+                    <Text style={{color: "white"}}>Close</Text>
+                  </Pressable>
+                </View>
+
+                </View>
+
+                {/** Show Preview Content */}
+                <Text>Incomplete</Text>
+              </View>
+            </View>
+          </Modal>
+        </View>
+      )
+    }
+
+    const Restaurant_preview = () => {      
       return (
         <View style={styles.centeredView}>
           <Modal
@@ -71,12 +120,33 @@ const Discover_restaurant = ({navigation}) => {
           >
             <View style={styles.centeredView}>
               <View style={styles.modalView}>
-                <Text style={{fontWeight: "400", textAlign: "center"}}>Restaurant Preview</Text>
-                <Pressable 
-                  style={[styles.previewButton, styles.previewButtonClose]}
-                  onPress={() => setModalVisible(!modalVisible)}>
-                  <Text>Close</Text>
-                </Pressable>
+
+                {/** Preview Header */}
+                <View style={styles.Modealheader}>
+                <Text style={styles.modelHeaderText}>Restaurant Preview</Text>
+
+                <View style={{flexDirection: "row", alignItems: "center"}}>
+                  <Pressable 
+                    onPress={() => {
+                      setModalVisible(!modalVisible);
+                      // setMapModalView(!mapModalView);
+                    }}
+                    style={{paddingRight: 12}}>
+                    <Feather name="map" size={23.5} style={{color: "#1D7CC6"}}/>
+                  </Pressable>
+
+                  <Pressable 
+                    style={[styles.previewButton, styles.previewButtonClose]}
+                    onPress={() => setModalVisible(!modalVisible)}>
+                    <Text style={{color: "white"}}>Close</Text>
+                  </Pressable>
+                </View>
+
+                </View>
+
+                {/** Show Preview Content */}
+                <WebView source={{uri: Restaurant_data[restaurant_num].url}} />
+
               </View>
             </View>
           </Modal>
@@ -149,6 +219,9 @@ const Discover_restaurant = ({navigation}) => {
 
             {/** Restaurant Preview */}
             <Restaurant_preview/>
+
+            {/** Location Preview */}
+            {/** <Map_preview/> */}
 
             {/* Restauarant image */}
             <Image source={{uri: restaurant_info.image_src}} style={styles.cardImage} />
@@ -359,8 +432,6 @@ const Discover_restaurant = ({navigation}) => {
 
 
 
-
-
 const styles = StyleSheet.create({
   container: {
       flex: 1,
@@ -481,13 +552,14 @@ const styles = StyleSheet.create({
     alignItems: 'center', 
   },
   modalView: {
-    height: 435,
+    height: 445,
     width: 335,
     margin: 10,
     backgroundColor: 'white',
     borderRadius: 20,
-    padding: 35,
-    alignItems: "center",
+    paddingTop: 12.5,
+    paddingBottom: 16,
+    paddingHorizontal: 24,
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
@@ -499,11 +571,22 @@ const styles = StyleSheet.create({
   },
   previewButton: {
     borderRadius: 20,
-    padding: 10,
+    padding: 8,
     elevation: 2,
   },
   previewButtonClose: {
     backgroundColor: "#2196F3"
+  },
+  modelHeaderText: {
+    fontWeight: "500",
+    textAlign: "justify",
+    fontSize: 16.5,
+  },
+  Modealheader: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    marginBottom: 10,
   }
 });
 
