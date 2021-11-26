@@ -7,6 +7,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage'
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useIsFocused } from '@react-navigation/native';
 import { WebView } from 'react-native-webview';
+import { Feather } from '@expo/vector-icons';
 import MapView from 'react-native-maps'
 
 
@@ -121,11 +122,7 @@ const Discover_hotel = ({navigation}) => {
             {/* Facilities container */}
             <View style={{marginTop: 8, flexDirection: 'row'}}>
               <View style={styles.facility}>
-                <Icon name="hotel" size={18} />
-                <Text style={styles.facilityText}>2</Text>
-              </View>
-              <View style={styles.facility}>
-                <Icon name="bathtub" size={18} />
+                <Feather name="heart" size={18}/>
                 <Text style={styles.facilityText}>2</Text>
               </View>
               <View style={styles.facility}>
@@ -180,11 +177,7 @@ const Discover_hotel = ({navigation}) => {
             {/* Facilities container */}
             <View style={{marginTop: 8, flexDirection: 'row'}}>
               <View style={styles.facility}>
-                <Icon name="hotel" size={18} />
-                <Text style={styles.facilityText}>2</Text>
-              </View>
-              <View style={styles.facility}>
-                <Icon name="bathtub" size={18} />
+                <Feather name="heart" size={18}/>
                 <Text style={styles.facilityText}>2</Text>
               </View>
               <View style={styles.facility}>

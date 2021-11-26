@@ -10,7 +10,6 @@ import { WebView } from 'react-native-webview';
 import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
 import { Feather } from '@expo/vector-icons';
 
-
 const {width, height} = Dimensions.get('screen');
 const sortList = ['Name','Rating', 'Popularity', 'Price'];
 
@@ -161,11 +160,7 @@ const Discover_restaurant = ({navigation}) => {
               {/* Facilities container */}
               <View style={{marginTop: 8, flexDirection: 'row'}}>
                 <View style={styles.facility}>
-                  <Icon name="hotel" size={18} />
-                  <Text style={styles.facilityText}>2</Text>
-                </View>
-                <View style={styles.facility}>
-                  <Icon name="bathtub" size={18} />
+                  <Feather name="heart" size={18} />
                   <Text style={styles.facilityText}>2</Text>
                 </View>
                 <View style={styles.facility}>
@@ -225,11 +220,7 @@ const Discover_restaurant = ({navigation}) => {
               {/* Facilities container */}
               <View style={{marginTop: 8, flexDirection: 'row'}}>
                 <View style={styles.facility}>
-                  <Icon name="hotel" size={18} />
-                  <Text style={styles.facilityText}>2</Text>
-                </View>
-                <View style={styles.facility}>
-                  <Icon name="bathtub" size={18} />
+                <Feather name="heart" size={18} />
                   <Text style={styles.facilityText}>2</Text>
                 </View>
                 <View style={styles.facility}>

@@ -10,6 +10,7 @@
     "eject": "expo eject"
   },
   "dependencies": {
+    "@ant-design/icons-react-native": "^2.3.2",
     "@dhaiwat10/react-link-preview": "^1.12.2",
     "@expo-google-fonts/poppins": "^0.2.0",
     "@expo-google-fonts/raleway": "^0.2.0",
