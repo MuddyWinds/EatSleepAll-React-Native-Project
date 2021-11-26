@@ -1,18 +1,11 @@
+import Switch from 'expo-dark-mode-switch';
 import React, {useState} from 'react';
-import { StyleSheet, Text, View, SafeAreaView, Pressable, ViewPropTypes, Button } from 'react-native';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import { StyleSheet, Text, View, SafeAreaView, Pressable, useColorScheme } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 const User_settings = ({navigation}) => {
-    
-    const lightTheme = () => {
-        // Code to turn to light theme
-    }
 
-    const darkTheme = () => {
-        // Code to turn to dark theme
-    }
-    
+    const [darkMode, setDarkMode] = useState(false);
 
     return (
         <SafeAreaView style={styles.container}>
@@ -34,9 +27,7 @@ const User_settings = ({navigation}) => {
             {/** Swipe Button for the user to change the color scheme */}
             <View style={styles.changeThemeBar}>
                 <Text style={styles.settingSubHeading}>Theme Color</Text>
-                <TouchableOpacity style={styles.lightButton} onPress={lightTheme}>
-                    <Text style={styles.lightText}>Light</Text>
-                </TouchableOpacity>
+                <Switch value={darkMode} onChange={darkMode => setDarkMode(darkMode)} /> 
             </View>
         </View>
 
