@@ -57,9 +57,7 @@ const Discover_restaurant = ({navigation}) => {
     };
 
 
-    const Restaurant_preview = () => {
-      console.log(Restaurant_data[restaurant_num].url);
-      
+    const Restaurant_preview = () => {      
       return (
         <View style={styles.centeredView}>
           <Modal

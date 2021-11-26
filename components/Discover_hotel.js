@@ -54,8 +54,7 @@ const Discover_hotel = ({navigation}) => {
   };
 
   const Hotel_preview = () => {
-    // console.log(Hotel_data[hotel_num].url);
-    
+        
     return (
       <View style={styles.centeredView}>
         <Modal
@@ -68,12 +67,20 @@ const Discover_hotel = ({navigation}) => {
         >
           <View style={styles.centeredView}>
             <View style={styles.modalView}>
-              <Text style={{fontWeight: "400", textAlign: "center"}}>Hotel Preview</Text>
-              <Pressable 
-                style={[styles.previewButton, styles.previewButtonClose]}
-                onPress={() => setModalVisible(!modalVisible)}>
-                <Text>Close</Text>
-              </Pressable>
+
+                {/** Preview Header */}
+                <View style={styles.Modealheader}>
+                <Text style={styles.modelHeaderText}>Hotel Preview</Text>
+                <Pressable 
+                  style={[styles.previewButton, styles.previewButtonClose]}
+                  onPress={() => setModalVisible(!modalVisible)}>
+                  <Text style={{color: "white"}}>Close</Text>
+                </Pressable>
+                </View>
+
+                {/** Show Preview Content */}
+                <WebView source={{uri: Hotel_data[hotel_num].url}} />
+
             </View>
           </View>
         </Modal>
@@ -137,7 +144,6 @@ const Discover_hotel = ({navigation}) => {
       <Pressable 
         activeOpacity={0.8}
         onPress={() => {
-          // Hotel_preview()
           setModalVisible(true);
         }}>
 
@@ -481,13 +487,14 @@ const styles = StyleSheet.create({
     alignItems: 'center', 
   },
   modalView: {
-    height: 435,
+    height: 445,
     width: 335,
     margin: 10,
     backgroundColor: 'white',
     borderRadius: 20,
-    padding: 35,
-    alignItems: "center",
+    paddingTop: 12.5,
+    paddingBottom: 16,
+    paddingHorizontal: 24,
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
@@ -499,11 +506,22 @@ const styles = StyleSheet.create({
   },
   previewButton: {
     borderRadius: 20,
-    padding: 10,
+    padding: 8,
     elevation: 2,
   },
   previewButtonClose: {
     backgroundColor: "#2196F3"
+  },
+  modelHeaderText: {
+    fontWeight: "500",
+    textAlign: "justify",
+    fontSize: 16.5,
+  },
+  Modealheader: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    marginBottom: 10,
   }
 });
 
