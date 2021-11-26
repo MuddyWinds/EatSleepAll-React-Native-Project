@@ -4,6 +4,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import { FontAwesome } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
 import Restaurant_data from '../assets/data/Restaurant_data';
+import getIntegrated_data from '../assets/data/Integrated_data';
 import { useIsFocused } from '@react-navigation/native';
 const {width} = Dimensions.get('screen');
 
@@ -77,7 +78,7 @@ const Entry_home = ({navigation}) => {
     );
   };
 
-  const Card = ({restau}) => {
+  const Card = ({item}) => {
     return (
       <Pressable
         activeOpacity={0.8}
@@ -85,7 +86,7 @@ const Entry_home = ({navigation}) => {
         <LinearGradient colors={["#e8f4f8", "#f3f3f3"]} style={styles.card}>
 
           {/* Restaurant image */}
-          <Image source={{uri: restau.image_src}} style={styles.cardImage} /> 
+          <Image source={{uri: item.image_src}} style={styles.cardImage} /> 
 
           <View style={{marginTop: 10}}>
             {/* Title and price container */}
@@ -96,17 +97,17 @@ const Entry_home = ({navigation}) => {
                 marginTop: 10,
               }}>
               <Text style={{fontSize: 16, fontWeight: 'bold', color: "#053466"}}>
-                {restau.name}
+                {item.name}
               </Text>
               <Text
                 style={{fontWeight: '400', color: "#053466", fontSize: 16}}>
-                {restau.price_range}
+                {item.price_range}
               </Text>
             </View>
 
             {/* Location text */}
             <Text style={{color: "grey", fontSize: 14, marginTop: 5}}>
-              {restau.address}
+              {item.address}
             </Text>
 
             {/* Facilities container */}
@@ -121,7 +122,7 @@ const Entry_home = ({navigation}) => {
               </View>
               <View style={styles.facility}>
                 <Icon name="aspect-ratio" size={18} />
-                <Text style={styles.facilityText}>{restau.website}</Text>
+                <Text style={styles.facilityText}>{item.website}</Text>
               </View>
             </View>
           </View>
@@ -131,7 +132,7 @@ const Entry_home = ({navigation}) => {
   };
 
   const filterCardItems = () => {
-    const items = Restaurant_data;
+    const items = getIntegrated_data();
     var filteredItems = [];
     if (items !== null && items !== []) {
       items.forEach(element => {
@@ -211,7 +212,7 @@ const Entry_home = ({navigation}) => {
             </>
           }
           data={cardItems}
-          renderItem={({item}) => <Card restau={item} />}
+          renderItem={({item}) => <Card item={item} />}
         />
 
     </SafeAreaView>

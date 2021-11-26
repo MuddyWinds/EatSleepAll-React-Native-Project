@@ -19,6 +19,8 @@ const Entry_onboard = ({navigation}) => {
         const interval = setInterval(() => {
             setvalue((v) => (v === 2 ? 0 : v + 1));
         }, 5000);
+
+        return clearInterval(interval);
     }, []);
 
     // INCOMPLETE UNTIL HERE

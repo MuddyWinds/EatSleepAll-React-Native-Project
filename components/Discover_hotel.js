@@ -105,7 +105,7 @@ const Discover_hotel = ({navigation}) => {
                 justifyContent: 'space-between',
               }}>
               <Text style={{fontSize: 15, fontWeight: 'bold', color: "#053466"}}>
-                {hotel_info.title}
+                {hotel_info.name}
               </Text>
               <Text
                 style={{fontWeight: '400', color: "#053466", fontSize: 15}}>
@@ -115,7 +115,7 @@ const Discover_hotel = ({navigation}) => {
 
             {/* Location text */}
             <Text style={{color: "grey", fontSize: 14, marginTop: 3.5}}>
-              {hotel_info.location}
+              {hotel_info.address}
             </Text>
 
             {/* Facilities container */}
@@ -154,7 +154,7 @@ const Discover_hotel = ({navigation}) => {
           <Hotel_preview/>
 
           {/* Hotel image */}
-          <Image source={{uri: hotel_info.image}} style={styles.cardImage} />
+          <Image source={hotel_info.image_src} style={styles.cardImage} />
           
           <View style={{marginTop: 8, marginHorizontal: 1}}>
             {/* Title and price container */}
@@ -164,7 +164,7 @@ const Discover_hotel = ({navigation}) => {
                 justifyContent: 'space-between',
               }}>
               <Text style={{fontSize: 15, fontWeight: 'bold', color: "#053466"}}>
-                {hotel_info.title}
+                {hotel_info.name}
               </Text>
               <Text
                 style={{fontWeight: '400', color: "#053466", fontSize: 15}}>
@@ -174,7 +174,7 @@ const Discover_hotel = ({navigation}) => {
 
             {/* Location text */}
             <Text style={{color: "grey", fontSize: 14, marginTop: 3.5}}>
-              {hotel_info.location}
+              {hotel_info.address}
             </Text>
 
             {/* Facilities container */}
@@ -288,14 +288,14 @@ const Discover_hotel = ({navigation}) => {
     var filteredItems = [];
     if (items !== null && items !== []) {
       items.forEach(element => {
-        if (element.title.toUpperCase().includes(searchWord.toUpperCase()) || element.location.toUpperCase().includes(searchWord.toUpperCase())) {
+        if (element.name.toUpperCase().includes(searchWord.toUpperCase()) || element.address.toUpperCase().includes(searchWord.toUpperCase())) {
           filteredItems.push(element);
         }
       });
       var sortWord;
       switch(selectedSort) {
         case 0:
-          sortWord = 'title';
+          sortWord = 'name';
           break;
         case 1:
           sortWord = 'rating';
@@ -304,7 +304,7 @@ const Discover_hotel = ({navigation}) => {
           sortWord = 'popularity';
           break;
         case 3:
-          sortWord = 'price';
+          sortWord = 'price_min';
           break;
         default:
           console.log("Invalid Sort Index");

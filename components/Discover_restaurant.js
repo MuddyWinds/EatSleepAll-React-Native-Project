@@ -173,7 +173,7 @@ const Discover_restaurant = ({navigation}) => {
                 </Text>
                 <Text
                   style={{fontWeight: '400', color: "#053466", fontSize: 15}}>
-                  {restaurant_info.price_range}
+                  ${restaurant_info.price}
                 </Text>
               </View>
 
@@ -237,7 +237,7 @@ const Discover_restaurant = ({navigation}) => {
                 </Text>
                 <Text
                   style={{fontWeight: '400', color: "#053466", fontSize: 15}}>
-                  {restaurant_info.price_range}
+                  ${restaurant_info.price}
                 </Text>
               </View>
 

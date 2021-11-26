@@ -45,17 +45,17 @@ const User_bookmark = ({navigation}) => {
                     justifyContent: 'space-between',
                   }}>
                   <Text style={{fontSize: 15, fontWeight: 'bold', color: "#053466"}}>
-                    {hotel_info.title}
+                    {hotel_info.name}
                   </Text>
                   <Text
                     style={{fontWeight: 'bold', color: "#053466", fontSize: 15}}>
-                    {hotel_info.price}
+                    ${hotel_info.price}
                   </Text>
                 </View>
     
                 {/* Location text */}
                 <Text style={{color: "grey", fontSize: 14, marginTop: 3.5}}>
-                  {hotel_info.location}
+                  {hotel_info.address}
                 </Text>
     
                 {/* Facilities container */}
@@ -100,7 +100,7 @@ const User_bookmark = ({navigation}) => {
                     </Text>
                     <Text
                     style={{fontWeight: 'bold', color: "#053466", fontSize: 15}}>
-                    {restaurant_info.price_range}
+                    ${restaurant_info.price}
                     </Text>
                 </View>
 
