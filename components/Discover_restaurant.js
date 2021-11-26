@@ -16,6 +16,9 @@ const sortList = ['Name','Rating', 'Popularity', 'Price'];
 
 
 const Discover_restaurant = ({navigation}) => {
+  const PreviewLinkHeight = [445, 610];
+  const PreviewLinkWidth = [335, 350];
+  const [PreviewOption, setPreview] = useState(0); 
 
   const [mapModalView, setMapModalView] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
@@ -58,52 +61,21 @@ const Discover_restaurant = ({navigation}) => {
       );
     };
 
-    const Map_preview = () => {      
-      return (
-        <View style={styles.centeredView}>
-          <Modal
-            animationType="slide"
-            transparent={true}
-            visible={mapModalView}
-            onRequestClose={() => {
-              setMapModalView(!mapModalView);
-            }}
-          >
-            <View style={styles.centeredView}>
-              <View style={styles.modalView}>
-
-                {/** Preview Header */}
-                <View style={styles.Modealheader}>
-                <Text style={styles.modelHeaderText}>Location Preview</Text>
-
-                <View style={{flexDirection: "row", alignItems: "center"}}>
-                  <Pressable 
-                    onPress={() => {
-                      setModalVisible(!modalVisible);
-                      setMapModalView(!mapModalView);
-                    }}
-                    style={{paddingRight: 12}}>
-                    <Feather name="map" size={23.5} style={{color: "#1D7CC6"}}/>
-                  </Pressable>
-
-                  <Pressable 
-                    style={[styles.previewButton, styles.previewButtonClose]}
-                    onPress={() => {
-                      setMapModalView(!mapModalView);
-                    }}>
-                    <Text style={{color: "white"}}>Close</Text>
-                  </Pressable>
-                </View>
-
-                </View>
-
-                {/** Show Preview Content */}
-                <Text>Incomplete</Text>
-              </View>
-            </View>
-          </Modal>
-        </View>
-      )
+    const Restaurant_or_map = () => {
+      {/** Show Preview Content */}
+        if (!mapModalView) {
+          setPreview(0);
+          return (
+            <WebView source={{uri: Restaurant_data[restaurant_num].url}} />
+          )
+        } else {
+          setPreview(1);
+          console.log("map chosen")
+          return (
+            /** <MapView provider={null}></MapView> */
+            <Text>Hello World</Text>
+          )
+        }
     }
 
     const Restaurant_preview = () => {      
@@ -118,33 +90,54 @@ const Discover_restaurant = ({navigation}) => {
             }}
           >
             <View style={styles.centeredView}>
-              <View style={styles.modalView}>
+              <View style={{
+                    height: PreviewLinkHeight[PreviewOption],
+                    width: PreviewLinkWidth[PreviewOption],
+                    margin: 10,
+                    backgroundColor: 'white',
+                    borderRadius: 20,
+                    paddingTop: 12.5,
+                    paddingBottom: 17,
+                    paddingHorizontal: 20,
+                    shadowColor: "#000",
+                    shadowOffset: {
+                      width: 0,
+                      height: 2
+                    },
+                    shadowOpacity: 0.25,
+                    shadowRadius: 25,
+                    elevation: 5,
+              }}>
 
                 {/** Preview Header */}
                 <View style={styles.Modealheader}>
                 <Text style={styles.modelHeaderText}>Restaurant Preview</Text>
 
+                {/** If user clcik on map icon */}
                 <View style={{flexDirection: "row", alignItems: "center"}}>
                   <Pressable 
                     onPress={() => {
-                      setModalVisible(!modalVisible);
-                      // setMapModalView(!mapModalView);
+                      // setModalVisible(!modalVisible);
+                      setMapModalView(true);
                     }}
                     style={{paddingRight: 12}}>
                     <Feather name="map" size={23.5} style={{color: "#1D7CC6"}}/>
                   </Pressable>
 
+                  {/** User click on close icon */}
                   <Pressable 
                     style={[styles.previewButton, styles.previewButtonClose]}
-                    onPress={() => setModalVisible(!modalVisible)}>
+                    onPress={() => {
+                    setModalVisible(false);
+                    setMapModalView(false);
+                    }}>
                     <Text style={{color: "white"}}>Close</Text>
                   </Pressable>
                 </View>
-
                 </View>
 
                 {/** Show Preview Content */}
-                <WebView source={{uri: Restaurant_data[restaurant_num].url}} />
+                <Restaurant_or_map/>
 
               </View>
             </View>
@@ -576,24 +569,6 @@ const styles = StyleSheet.create({
     flex: 1, 
     justifyContent: 'center', 
     alignItems: 'center', 
-  },
-  modalView: {
-    height: 445,
-    width: 335,
-    margin: 10,
-    backgroundColor: 'white',
-    borderRadius: 20,
-    paddingTop: 12.5,
-    paddingBottom: 16,
-    paddingHorizontal: 24,
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 25,
-    elevation: 5,
   },
   previewButton: {
     borderRadius: 20,

@@ -6,8 +6,9 @@ import { LinearGradient } from 'expo-linear-gradient';
 import Restaurant_data from '../assets/data/Restaurant_data';
 import getIntegrated_data from '../assets/data/Integrated_data';
 import { useIsFocused } from '@react-navigation/native';
-const {width} = Dimensions.get('screen');
 
+
+const {width} = Dimensions.get('screen');
 
 
 const Entry_home = ({navigation}) => {

@@ -31,7 +31,7 @@ const User_notification = ({navigation}) => {
         text: "Remove",
         onPress: () => removeNoti(item),
         backgroundColor: "#FF4500",
-        color: "#FFF"
+        color: "#FFF",
       },
     ];
   }
@@ -42,7 +42,7 @@ const User_notification = ({navigation}) => {
         text: "Uncheck",
         onPress: () => unReadNoti(item),
         backgroundColor: "#FF7F50",
-        color: "#FFF"
+        color: "#FFF",
       }
     ];
   }
@@ -78,7 +78,12 @@ const User_notification = ({navigation}) => {
 
   const Card = ({Notification}) => {
     return (
-      <Swipeout right={rightButton(Notification)} left={leftButton(Notification)} backgroundColor={"transparent"} close>
+      <View style={{marginBottom: 10,}}>
+      <Swipeout 
+        right={rightButton(Notification)} 
+        left={leftButton(Notification)} 
+        backgroundColor={"transparent"} 
+        close>
         <Pressable 
           activeOpacity={0.8}
           >
@@ -102,6 +107,7 @@ const User_notification = ({navigation}) => {
           </LinearGradient>
         </Pressable>
       </Swipeout>
+      </View>
     );
   }
 
@@ -188,7 +194,7 @@ const styles = StyleSheet.create({
       paddingHorizontal: 16,
       paddingVertical: 10,
       borderRadius: 20,
-      marginBottom: 10,
+      // marginBottom: 10,
     },
     NotiList: {
       paddingTop: 8,
