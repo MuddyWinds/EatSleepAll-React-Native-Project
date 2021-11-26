@@ -33,7 +33,6 @@ const Send_notification = () => {
 
     // This listener is fired whenever a user taps on or interacts with a notification (works when app is foregrounded, backgrounded, or killed)
     responseListener.current = Notifications.addNotificationResponseReceivedListener(response => {
-      console.log(response);
     });
 
     return () => {
@@ -54,30 +53,12 @@ const Send_notification = () => {
     })   
   }
 
-  return (
-    <View
-      style={{
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'space-around',
-      }}>
-      <Text>Your expo push token: {expoPushToken}</Text>
-      <View style={{ alignItems: 'center', justifyContent: 'center' }}>
-        <Text>Title: {notification && notification.request.content.title} </Text>
-        <Text>Body: {notification && notification.request.content.body}</Text>
-        <Text>Data: {notification && JSON.stringify(notification.request.content.data)}</Text>
-      </View>
-      <Button
-        title="Press to Send Notification"
-        onPress={async () => {
-          await sendPushNotification(expoPushToken);
-        }}
-      />
-    </View>
-  );
+  return (null);
 }
 
+// onPress={async() => { await sendPushNotification(expoPushToken)}}
 // Can use this function below, OR use Expo's Push Notification Tool-> https://expo.dev/notifications
+/** 
 async function sendPushNotification(expoPushToken) {
   var randomId = Math.floor(Math.random()*10000);
   const message = {
@@ -102,6 +83,7 @@ async function sendPushNotification(expoPushToken) {
     body: JSON.stringify(message),
   });
 }
+*/
 
 async function registerForPushNotificationsAsync() {
   let token;
