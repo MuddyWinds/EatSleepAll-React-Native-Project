@@ -11,12 +11,12 @@ const Tab = createBottomTabNavigator();
 const BottomTabNavigator = () => {
 
     return (
-        <Tab.Navigator tabBarOptions={{
+        <Tab.Navigator screenOptions={{
             activeTintColor: "#053466", 
-            showLabel: false,
-            tabStyle: {paddingTop: 11,}
-            }} 
-            screenOptions={{headerShown: false}}>
+            tabStyle: {paddingTop: 11,},
+            headerShown: false,
+            tabBarShowLabel: false,
+            }}>
 
             <Tab.Screen name="Entry" component={EntranceStackNavigator} options={{
                 tabBarIcon: (props) => <Feather name="home" color={props.color} size={25.5}/> }}/>

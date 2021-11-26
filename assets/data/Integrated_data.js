@@ -1,51 +1,15 @@
 import React from 'react';
+import Restaurant_data from './Restaurant_data';
+import Hotel_data from './Hotel_data';
+import Washroom_data from './Shopping_data';
 
-const Integrated_data = [
-    {
-      id: '1',
-      title: 'Entire guest suite',
-      location: 'East Side Cedar Cottage Toronto',
-      image: require('../sushi.jpg'),
-      details: `This building is located in the Oliver area, withing walking distance of shops...`,
-      interiors: [
-      ],
-    },
-    {
-      id: '2',
-      title: 'Entire guest suite',
-      location: 'East Side Cedar Cottage Toronto',
-      image: require('../sushi.jpg'),
-      details: `This building is located in the Oliver area, withing walking distance of shops...`,
-      interiors: [
-      ],
-    },
-    {
-      id: '3',
-      title: 'Entire guest suite',
-      location: 'East Side Cedar Cottage Toronto',
-      image: require('../sushi.jpg'),
-      details: `This building is located in the Oliver area, withing walking distance of shops...`,
-      interiors: [
-      ],
-    },
-    {
-      id: '4',
-      title: 'Entire guest suite',
-      location: 'East Side Cedar Cottage Toronto',
-      image: require('../sushi.jpg'),
-      details: `This building is located in the Oliver area, withing walking distance of shops...`,
-      interiors: [
-      ],
-    },
-    {
-      id: '5',
-      title: 'Entire guest suite',
-      location: 'East Side Cedar Cottage Toronto',
-      image: require('../sushi.jpg'),
-      details: `This building is located in the Oliver area, withing walking distance of shops...`,
-      interiors: [
-      ],
-    },
-]
+var num_of_items = 5;
+const Integrated_data = [];
+
+// Should show top {num_of_items} columns of each data type in home page
+// {num_of_columns} would be chosen by user in settings
+// If columns of data < {num_of_items}, then show all columns of data
+// {num_of_columns} range: 1 - 5
+
 
 export default Integrated_data;
