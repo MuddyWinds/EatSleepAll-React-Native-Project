@@ -108,11 +108,11 @@ const Discover_hotel = ({navigation, route}) => {
                 flexDirection: 'row',
                 justifyContent: 'space-between',
               }}>
-              <Text style={{fontSize: 15, fontWeight: 'bold', color: "#053466"}}>
+              <Text style={{fontSize: 15, fontWeight: 'bold', color: "#650649"}}>
                 {hotel_info.name}
               </Text>
               <Text
-                style={{fontWeight: '400', color: "#053466", fontSize: 15}}>
+                style={{fontWeight: '400', color: "#650649", fontSize: 15}}>
                 ${hotel_info.price}
               </Text>
             </View>
@@ -149,7 +149,7 @@ const Discover_hotel = ({navigation, route}) => {
           setModalVisible(true);
         }}>
 
-        <LinearGradient colors={["#8BDCEC", "#D0E9EE"]} style={styles.card}>
+        <LinearGradient colors={["#FFDFEA","#FCEEF2"]} style={styles.card}>
 
           {/** Hotel Preview */}
           <Hotel_preview/>
@@ -164,11 +164,11 @@ const Discover_hotel = ({navigation, route}) => {
                 flexDirection: 'row',
                 justifyContent: 'space-between',
               }}>
-              <Text style={{fontSize: 15, fontWeight: 'bold', color: "#053466"}}>
+              <Text style={{fontSize: 15, fontWeight: 'bold', color: "#650649"}}>
                 {hotel_info.name}
               </Text>
               <Text
-                style={{fontWeight: '400', color: "#053466", fontSize: 15}}>
+                style={{fontWeight: '400', color: "#650649", fontSize: 15}}>
                 ${hotel_info.price}
               </Text>
             </View>
@@ -327,12 +327,12 @@ const Discover_hotel = ({navigation, route}) => {
     <SafeAreaView style={styles.container}>
     <Pressable style={{marginLeft: 8, flexDirection: 'row', alignItems: 'center',}}
        onPress={() => navigation.navigate("Entry", {screen: "Entry_home"})}>
-      <Icon style={{color: "#053466"}}name="chevron-left" size={25}/>
+      <Icon style={{color: "#650649"}}name="chevron-left" size={25}/>
       <Text style={{fontSize: 16, marginLeft: -3}}>Back</Text>
     </Pressable>
 
     <View style={{flexDirection: "row", marginLeft: 6, marginTop: 3.6}}>
-      <Text style={{marginLeft: 18, fontSize: 24, fontWeight: "bold", color: "#053466",}}>Discover: SLEEP</Text>
+      <Text style={{marginLeft: 18, fontSize: 24, fontWeight: "bold", color: "#650649",}}>Discover: SLEEP</Text>
     </View>
 
     {/* Input and sort button container */}
@@ -342,7 +342,7 @@ const Discover_hotel = ({navigation, route}) => {
             justifyContent: 'space-between',
             paddingRight: 5,
           }}>
-          <LinearGradient colors={["#AFE6FE", "#C9E2FA"]} style={styles.searchInputContainer}>
+          <LinearGradient colors={["#F9CEDC", "#FCDEE8"]} style={styles.searchInputContainer}>
             <View style={styles.searchRow}>
                 <Icon name="search" color="grey" size={25} style={styles.searchIcon}/>
                 <TextInput style={styles.barText} placeholder="Search address, city, location" value={searchWord} onChangeText={(text) => { setSearchWord(text)}}/>
@@ -389,12 +389,12 @@ const styles = StyleSheet.create({
       fontWeight: "500",
       paddingTop: 4,
       paddingBottom: 10,
-      color: "#053466",
+      color: "#650649",
   },
   rectangle: {
       width: 2,
       height: 25,
-      backgroundColor: "#053466",
+      backgroundColor: "#650649",
       marginLeft: 8,
       borderRadius: 2,
   },
@@ -435,7 +435,7 @@ const styles = StyleSheet.create({
     fontWeight: "300"
   },
   sortBtn: {
-    backgroundColor: "#053466",
+    backgroundColor: "#650649",
     height: 30,
     width: 30,
     borderRadius: 12,
