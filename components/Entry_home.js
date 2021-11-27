@@ -121,7 +121,11 @@ const Entry_home = ({navigation}) => {
         <LinearGradient colors={["#e8f4f8", "#f3f3f3"]} style={styles.card}>
 
           {/* Restaurant image */}
-          <Image source={{uri: item.image_src}} style={styles.cardImage} /> 
+          <Image 
+            source={{uri: item.image_src}} 
+            style={styles.cardImage} 
+            // defaultSource={require('../assets/nice_toilet.jpg')}
+            />
 
           <View style={{marginTop: 10}}>
             {/* Title and price container */}
@@ -271,7 +275,8 @@ const Entry_home = ({navigation}) => {
             </>
           }
           data={cardItems}
-          renderItem={({item}) => <Card item={item} />}
+          renderItem={({item}) => <Card item={item} /> }
+          keyExtractor={(item, index) => index.toString()}
         />
 
     </SafeAreaView>
