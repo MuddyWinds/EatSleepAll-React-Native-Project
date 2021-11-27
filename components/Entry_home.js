@@ -118,7 +118,8 @@ const Entry_home = ({navigation}) => {
             navigation.push("Discover_washroom");
           }
         }}>
-        <LinearGradient colors={["#e8f4f8", "#f3f3f3"]} style={styles.card}>
+        {/** <LinearGradient colors={["#e8f4f8", "#f3f3f3"]} style={styles.card}> */ }
+        <View style={[styles.card, styles.shadowProp]}>
 
           {/* Restaurant image */}
           <Image 
@@ -161,7 +162,7 @@ const Entry_home = ({navigation}) => {
               </View>
             </View>
           </View>
-        </LinearGradient>
+        </View>
       </Pressable>
     );
   };
@@ -293,7 +294,7 @@ const styles = StyleSheet.create({
   },
   shadowProp: {
     shadowColor: '#171717',
-    shadowOffset: {width: 0, height: 4},
+    shadowOffset: {width: 0, height: 1},
     shadowOpacity: 0.2,
     shadowRadius: 3,
   },
@@ -348,6 +349,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
     marginRight: 10,
     justifyContent: "center",
+    marginTop: 3,
+    marginBottom: 4
   },
   optionsCardImage: {
     height: 140,
@@ -387,7 +390,7 @@ const styles = StyleSheet.create({
     marginRight: 20,
     padding: 15,
     borderRadius: 20,
-    marginBottom: 14,
+    marginBottom: 16,
   },
   cardImage: {
     width: '100%',
@@ -400,7 +403,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     paddingHorizontal: 20,
-    marginBottom: 3
+    marginBottom: 4
   },
   Ranking: {
     fontSize: 14,
