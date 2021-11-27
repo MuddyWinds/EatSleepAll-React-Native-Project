@@ -10,7 +10,7 @@ const User_settings = ({navigation}) => {
 
     const [darkMode, setDarkMode] = useState(false);
     const [receiveNoti, setReceiveNoti] = useState(true);
-    const [integratedNum, setIntegratedData] = useState(3);
+    const [integratedNum, setIntegratedData] = useState(false);
 
     useEffect(() => {
         if (!receiveNoti) {
@@ -18,9 +18,23 @@ const User_settings = ({navigation}) => {
         }
     },[receiveNoti]);
 
+    useEffect(() => {
+        updateIntegratedNum();
+    },[,integratedNum]);
+
     const clearNotifications = async() => {
         await AsyncStorage.setItem('notification_Items', JSON.stringify([]));
-      }
+    }
+
+    const updateIntegratedNum = async () => {
+        console.log('integrated num updated');
+        if (integratedNum) {
+            await AsyncStorage.setItem('integratedItems_num', JSON.stringify({value:5}));
+        } else {
+            await AsyncStorage.setItem('integratedItems_num', JSON.stringify({value:2}));            
+        }
+    }
+    
 
     return (
         <SafeAreaView style={styles.container}>

@@ -13,7 +13,7 @@ const {width, height} = Dimensions.get('screen');
 const sortList = ['Name','Rating', 'Popularity', 'Price'];
 
 
-const Discover_restaurant = ({navigation}) => {
+const Discover_restaurant = ({navigation, route}) => {
   // const PreviewLinkHeight = [445, 610];
   // const PreviewLinkWidth = [335, 350];
   const [PreviewOption, setPreview] = useState(0); 
@@ -21,7 +21,13 @@ const Discover_restaurant = ({navigation}) => {
   let mapModalView = false;
   // const [mapModalView, setMapModalView] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
-  const [restaurant_num, setRestaurant_num] = useState(0);
+  const [restaurant_num, setRestaurant_num] = useState(() => {
+    if (route.params != null) {
+      return route.params%10-1;
+    } else {
+      return 0;
+    }
+  });
   const [bookmarkedIds, setbookmarkedIds] = useState([]);
   const [cardItems, setCardItems] = useState([])
   const [searchWord, setSearchWord] = useState("");
