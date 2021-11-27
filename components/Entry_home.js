@@ -9,6 +9,7 @@ import { useIsFocused } from '@react-navigation/native';
 
 
 const {width} = Dimensions.get('screen');
+const sortList = ['Name','Rating', 'Popularity', 'Price'];
 
 
 const Entry_home = ({navigation}) => {
@@ -16,6 +17,7 @@ const Entry_home = ({navigation}) => {
   const [cardItems, setCardItems] = useState([])
   const [searchWord, setSearchWord] = useState("");
   const isFocused = useIsFocused();
+  const [selectedSort, setSelectedSortIndex] = useState(0);
   
   useEffect(() => {
     filterCardItems();
@@ -23,7 +25,7 @@ const Entry_home = ({navigation}) => {
 
   useEffect(() => {
     filterCardItems();
-  },[isFocused]);
+  },[isFocused, selectedSort]);
 
   const optionsList = [
     {title: 'Book a hotel for staycation', img: require('../assets/nice_hotel.jpg')},
@@ -33,6 +35,24 @@ const Entry_home = ({navigation}) => {
 
   const discoverList = ['Top Rated', 'Trending', 'Nearest', 'Discounts'];
 
+
+  const SortCategories = () => {
+
+    return  (
+      <View style={styles.sortListContainer}>
+        <Text style={styles.Ranking}>Sort :</Text>
+        {sortList.map((sortOption, index) => (
+          <Pressable key={index} onPress={() => setSelectedSortIndex(index)}>
+            <Text style={[
+              styles.sortListText, 
+              index == selectedSort && styles.activeSortListText,]}>
+              {sortOption}
+            </Text>
+          </Pressable>
+        ))}
+      </View>
+    );
+  };
 
   const ListCategories = () => {
     const [selectedDiscoverIndex, setSelectedDiscoverIndex] = React.useState(0);
@@ -141,6 +161,33 @@ const Entry_home = ({navigation}) => {
           filteredItems.push(element);
         }
       });
+      var sortWord;
+      switch(selectedSort) {
+        case 0:
+          sortWord = 'name';
+          break;
+        case 1:
+          sortWord = 'rating';
+          break;
+        case 2:
+          sortWord = 'popularity';
+          break;
+        case 3:
+          sortWord = 'price_min';
+          break;
+        default:
+          console.log("Invalid Sort Index");
+          break;
+      }
+      filteredItems.sort(function(a,b){
+        if (a[sortWord] < b[sortWord]) {
+          return -1;
+        } else if (a[sortWord] > b[sortWord]) {
+          return 1;
+        } else {
+          return 0;
+        }
+      });
       setCardItems(filteredItems);
     } else {
       setCardItems([]);
@@ -209,7 +256,8 @@ const Entry_home = ({navigation}) => {
             </ScrollView>
 
             {/** Display filter options */}
-            <ListCategories/>
+            {/* <ListCategories/> */}
+            <SortCategories/>
             </>
           }
           data={cardItems}
@@ -332,6 +380,28 @@ const styles = StyleSheet.create({
   },
   facility: {flexDirection: 'row', marginRight: 15},
   facilityText: {marginLeft: 5, color: "grey"},
+  sortListContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingHorizontal: 20,
+  },
+  Ranking: {
+    fontSize: 14,
+    fontWeight: 'bold',
+    marginLeft: 4.5,
+  },
+  sortListText: {
+    fontSize: 14,
+    fontWeight: 'bold',
+    paddingBottom: 5,
+    color: "grey",
+    marginHorizontal: 4.5,
+  },
+  activeSortListText: {
+    color: "#000058",
+    borderBottomWidth: 1,
+    paddingBottom: 5,
+  },
 });
 
 export default Entry_home;
