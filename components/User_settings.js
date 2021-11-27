@@ -1,11 +1,15 @@
 import Switch from 'expo-dark-mode-switch';
 import React, {useState} from 'react';
-import { StyleSheet, Text, View, SafeAreaView, Pressable, useColorScheme } from 'react-native';
+import { StyleSheet, Text, View, SafeAreaView, Pressable, useColorScheme, } from 'react-native';
+import { Switch as Switch2 } from 'react-native-switch';
+
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 const User_settings = ({navigation}) => {
 
     const [darkMode, setDarkMode] = useState(false);
+    const [receiveNoti, setReceiveNoti] = useState(true);
+    const [integratedNum, setIntegratedData] = useState(3);
 
     return (
         <SafeAreaView style={styles.container}>
@@ -22,13 +26,61 @@ const User_settings = ({navigation}) => {
             <Text style={styles.noti}>Settings</Text>
         </View>
 
+        {/** All settings stored here */}
         <View style={styles.settingOptionList}>
 
             {/** Swipe Button for the user to change the color scheme */}
             <View style={styles.changeThemeBar}>
-                <Text style={styles.settingSubHeading}>Theme Color</Text>
+                <View style={{paddingRight: 60}}>
+                    <Text style={styles.settingSubHeading}>Theme Color</Text>
+                    <Text style={{fontSize: 11, color: "grey"}}>Shift between light and dark mode.</Text>
+                </View>
                 <Switch value={darkMode} onChange={darkMode => setDarkMode(darkMode)} /> 
             </View>
+
+            {/** Stock Notification */}
+            <View style={styles.changeThemeBar}>
+                <View style={{paddingRight: 102}}>
+                    <Text style={styles.settingSubHeading}>Hot Choice Today</Text>
+                    <Text style={{fontSize: 11, color: "grey"}}>Receive daily Notifications.</Text>
+                </View>
+                <Switch2 
+                    value={receiveNoti}
+                    circleBorderWidth={2}
+                    switchWidthMultiplier={2.2}
+                    activeText={''}
+                    inActiveText={''}
+                    circleSize={32}
+                    backgroundActive={"#81b0ff"}
+                    backgroundInactive={"#767577"}
+                    circleActiveColor={'#cce9fe'}
+                    circleInActiveColor={'#000000'}
+                    onValueChange={receiveNoti => setReceiveNoti(receiveNoti)}
+                    /> 
+            </View>
+
+            {/** Stock Notification */}
+            <View style={styles.changeThemeBar}>
+                <View style={{paddingRight: 35}}>
+                    <Text style={styles.settingSubHeading}>Integrate All</Text>
+                    <Text style={{fontSize: 11, color: "grey"}}>Show more data columns in home page.</Text>
+                </View>
+                <Switch2 
+                    value={integratedNum}
+                    circleBorderWidth={2}
+                    switchWidthMultiplier={2.2}
+                    activeText={''}
+                    inActiveText={''}
+                    circleSize={32}
+                    backgroundActive={"#81b0ff"}
+                    backgroundInactive={"#767577"}
+                    circleActiveColor={'#cce9fe'}
+                    circleInActiveColor={'#000000'}
+                    onValueChange={integratedNum => setIntegratedData(integratedNum)}
+                    /> 
+            </View>
+
+
         </View>
 
         </SafeAreaView>
@@ -62,17 +114,18 @@ const styles = StyleSheet.create({
     },
     settingOptionList: {
         marginLeft: 22.5, 
-        marginTop: 10,
+        marginTop: 15,
     },
     changeThemeBar: {
         flexDirection: "row",
-        alignItems: "center",        
+        alignItems: "center", 
+        paddingBottom: 20,  
     },
     settingSubHeading: {
         color: "#053466",
         fontSize: 16,
         fontWeight: "500",
-        paddingRight: 70
+        paddingBottom: 5
     },
     lightButton: {
         backgroundColor: "#FAFEFF",
