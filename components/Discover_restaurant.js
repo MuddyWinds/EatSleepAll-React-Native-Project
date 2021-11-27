@@ -132,7 +132,7 @@ const Discover_restaurant = ({navigation}) => {
       return (
         <Pressable 
           activeOpacity={0.8}
-          onPress={() => {setRestaurant_num(restaurant_info.id - 1)}}
+          onPress={() => {setRestaurant_num(restaurant_info.id%10 - 1)}}
           >
           <LinearGradient colors={["#EFF5F6", "#f3f3f3"]} style={styles.card2}>
             
@@ -194,7 +194,7 @@ const Discover_restaurant = ({navigation}) => {
             {/** <Map_preview/> */}
 
             {/* Restauarant image */}
-            <Image source={{uri: restaurant_info.image_src}} style={styles.cardImage} />
+            <Image source={{uri: restaurant_info['image_src']}} style={styles.cardImage} />
             
             <View style={{marginTop: 8, marginHorizontal: 1}}>
               {/* Title and price container */}

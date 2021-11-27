@@ -94,7 +94,7 @@ const Discover_hotel = ({navigation}) => {
     return (
       <Pressable 
         activeOpacity={0.8}
-        onPress={() => {setHotel_num(hotel_info.id - 1)}}
+        onPress={() => {setHotel_num(hotel_info.id%10 - 1)}}
         >
         <LinearGradient colors={["#EFF5F6", "#f3f3f3"]} style={styles.card2}>
           
@@ -138,6 +138,7 @@ const Discover_hotel = ({navigation}) => {
   }
 
   const Hotel_card = ({hotel_info}) => {
+    
     return (
       <Pressable 
         activeOpacity={0.8}
@@ -151,7 +152,7 @@ const Discover_hotel = ({navigation}) => {
           <Hotel_preview/>
 
           {/* Hotel image */}
-          <Image source={hotel_info.image_src} style={styles.cardImage} />
+          <Image source={{uri: hotel_info['image_src']}} style={styles.cardImage} />
           
           <View style={{marginTop: 8, marginHorizontal: 1}}>
             {/* Title and price container */}

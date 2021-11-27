@@ -185,7 +185,7 @@ const User_bookmark = ({navigation}) => {
           var filteredItems = [];
           if (res !== null && res!== []) {            
             res.forEach(element => {
-              if (element.title.toUpperCase().includes(searchWord.toUpperCase()) || element.location.toUpperCase().includes(searchWord.toUpperCase())) {
+              if (element.name.toUpperCase().includes(searchWord.toUpperCase()) || element.address.toUpperCase().includes(searchWord.toUpperCase())) {
                 filteredItems.push(element);
               }
           });
