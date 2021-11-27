@@ -66,13 +66,13 @@ const Discover_washroom = ({navigation}) => {
               flexDirection: 'row',
               justifyContent: 'space-between',
               }}>
-              <Text style={{fontSize: 15, fontWeight: 'bold', color: "#053466", lineHeight: 20,}}>
+              <Text style={{fontSize: 15, fontWeight: 'bold', color: "#552a2a", lineHeight: 20,}}>
               {washroom_info.name}
               </Text>
           </View>
 
           {/* Location text */}
-          <Text style={{color: "#053466", fontSize: 15, marginTop: 3.5, marginBottom: 5}}>
+          <Text style={{color: "#552a2a", fontSize: 15, marginTop: 3.5, marginBottom: 5}}>
             District: {washroom_info.district}
           </Text>
 
@@ -132,13 +132,13 @@ const Discover_washroom = ({navigation}) => {
         {/** Return Button to previous page */}
         <Pressable style={{marginLeft: 8, flexDirection: 'row', alignItems: 'center',}}
             onPress={() => navigation.navigate("Entry", {screen: "Entry_home"})}>
-            <Icon style={{color: "#053466"}}name="chevron-left" size={25}/>
+            <Icon style={{color: "#552a2a"}}name="chevron-left" size={25}/>
             <Text style={{fontSize: 16, marginLeft: -3}}>Back</Text>
         </Pressable>
 
         {/** Title header */}
         <View style={{flexDirection: "row", marginLeft: 4.5, marginTop: 3.6}}>
-            <Text style={{marginLeft: 18, fontSize: 24, fontWeight: "bold", color: "#053466",}}>Discover: ALL</Text>
+            <Text style={{marginLeft: 18, fontSize: 24, fontWeight: "bold", color: "#552a2a",}}>Discover: ALL</Text>
         </View>
 
         {/* Input and sort button container */}
@@ -148,7 +148,7 @@ const Discover_washroom = ({navigation}) => {
                 justifyContent: 'space-between',
                 paddingRight: 5,
             }}>
-            <LinearGradient colors={["#AFE6FE", "#C9E2FA"]} style={styles.searchInputContainer}>
+            <LinearGradient colors={["#fbceb1", "#ffd9cc"]} style={styles.searchInputContainer}>
             <View style={styles.searchRow}>
                 <Icon name="search" color="grey" size={25} style={styles.searchIcon}/>
                 <TextInput style={styles.barText} placeholder="Search address, city, location" value={searchWord} onChangeText={(text) => { setSearchWord(text)}}/>
@@ -193,7 +193,7 @@ const styles = StyleSheet.create({
         fontWeight: "500",
         paddingTop: 4,
         paddingBottom: 10,
-        color: "#053466",
+        color: "#552a2a",
     },
     searchInputContainer: {
         height: 35,
@@ -218,7 +218,7 @@ const styles = StyleSheet.create({
         paddingLeft: 8,
       },
       sortBtn: {
-        backgroundColor: "#053466",
+        backgroundColor: "#552a2a",
         height: 30,
         width: 30,
         borderRadius: 12,
