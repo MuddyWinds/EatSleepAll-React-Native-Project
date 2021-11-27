@@ -348,8 +348,8 @@ const styles = StyleSheet.create({
   optionListsContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginTop: 10,
-    marginBottom: 8,
+    marginTop: 7,
+    marginBottom: 12,
   },
   categoryListText: {
     fontSize: 15,
@@ -391,6 +391,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     paddingHorizontal: 20,
+    marginBottom: 3
   },
   Ranking: {
     fontSize: 14,
