@@ -1,12 +1,9 @@
-import React, {StatusBar, useState, useEffect} from 'react';
-import { StyleSheet, Image, Text, View, SafeAreaView, Dimensions, ScrollView, Pressable, Button, FlatList, TextInput } from 'react-native';
+import React, {useState, useEffect} from 'react';
+import { StyleSheet, Text, View, SafeAreaView, Dimensions, Pressable, FlatList, TextInput } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import { Feather } from '@expo/vector-icons';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useIsFocused } from '@react-navigation/native';
-import Stock_data from '../assets/data/Stock_data';
-import Shopping_data from '../assets/data/Shopping_data';
 import Airline_data from '../assets/data/Airline_data';
 
 const {width, height} = Dimensions.get('screen');
