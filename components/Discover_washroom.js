@@ -1,16 +1,20 @@
 import React, {useState, useEffect} from 'react';
-import { StyleSheet, Text, View, SafeAreaView, Dimensions, Pressable, FlatList, TextInput } from 'react-native';
+import { StyleSheet, Text, View, SafeAreaView, Dimensions, Pressable, FlatList, TextInput, Modal } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useIsFocused } from '@react-navigation/native';
-import Washroom_data from '../assets/data/washroom_data';
+import Washroom_data from '../assets/data/Washroom_data';
+import { WebView } from 'react-native-webview';
+
 
 const {width, height} = Dimensions.get('screen');
 
 
 const Discover_washroom = ({navigation}) => {
-
+  
+  let searchingAdress = Washroom_data[0].address;
+  const [modalVisible, setModalVisible] = useState(false);
   const [cardItems, setCardItems] = useState([])
   const [searchWord, setSearchWord] = useState("");
   const isFocused = useIsFocused();
@@ -44,8 +48,16 @@ const Discover_washroom = ({navigation}) => {
     return (
       <Pressable 
       activeOpacity={0.8}
+      onPress={() => {
+        searchingAdress = washroom_info.name;
+        setModalVisible(!modalVisible);
+      }}
       >
       <LinearGradient colors={["#EFF5F6", "#f3f3f3"]} style={styles.card2}> 
+          
+           {/** Restaurant Preview */}
+           <Washroom_preview/>
+    
           <View>
           {/* Title */}
           <View
@@ -72,6 +84,46 @@ const Discover_washroom = ({navigation}) => {
       </LinearGradient>
       </Pressable>
   );}
+
+  const Washroom_preview = () => {   
+    return (
+      <View style={styles.centeredView}>
+        <Modal
+          animationType="slide"
+          transparent={true}
+          visible={modalVisible}
+          onRequestClose={() => {
+            setModalVisible(!modalVisible);
+          }}
+        >
+          <View style={styles.centeredView}>
+            <View style={styles.modalView}>
+
+              {/** Preview Header */}
+              <View style={styles.Modealheader}>
+              <Text style={styles.modelHeaderText}>Location Preview</Text>
+
+              {/** If user clcik on map icon */}
+              <View style={{flexDirection: "row", alignItems: "center"}}>
+
+                {/** User click on close icon */}
+                <Pressable 
+                  style={[styles.previewButton, styles.previewButtonClose]}
+                  onPress={() => { setModalVisible(false); }}>
+                  <Text style={{color: "white"}}>Close</Text>
+                </Pressable>
+              </View>
+              </View>
+
+              {/** Show Preview Content */}
+              <WebView source={{uri: `https://www.google.com.hk/maps/search/${searchingAdress}`}} />
+
+            </View>
+          </View>
+        </Modal>
+      </View>
+    )
+  }
     
     return (
         <SafeAreaView style={styles.container}>
@@ -188,6 +240,49 @@ const styles = StyleSheet.create({
         marginLeft: 5, 
         color: "grey"
       },
+
+  centeredView: {
+    flex: 1, 
+    justifyContent: 'center', 
+    alignItems: 'center', 
+  },
+  modalView: {
+    height: 445,
+    width: 335,
+    margin: 10,
+    backgroundColor: 'white',
+    borderRadius: 20,
+    paddingTop: 12.5,
+    paddingBottom: 17,
+    paddingHorizontal: 20,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 25,
+    elevation: 5,
+  },
+  previewButton: {
+    borderRadius: 20,
+    padding: 8,
+    elevation: 2,
+  },
+  previewButtonClose: {
+    backgroundColor: "#2196F3"
+  },
+  modelHeaderText: {
+    fontWeight: "500",
+    textAlign: "justify",
+    fontSize: 16.5,
+  },
+  Modealheader: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    marginBottom: 10,
+  }
 });
 
 export default Discover_washroom;

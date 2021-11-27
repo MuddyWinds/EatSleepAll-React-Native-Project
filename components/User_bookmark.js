@@ -60,18 +60,14 @@ const User_bookmark = ({navigation}) => {
     
                 {/* Facilities container */}
                 <View style={{marginTop: 8, flexDirection: 'row'}}>
-                  <View style={styles.facility}>
-                    <Icon name="hotel" size={18} />
-                    <Text style={styles.facilityText}>2</Text>
-                  </View>
-                  <View style={styles.facility}>
-                    <Icon name="bathtub" size={18} />
-                    <Text style={styles.facilityText}>2</Text>
-                  </View>
-                  <View style={styles.facility}>
-                    <Icon name="aspect-ratio" size={18} />
-                    <Text style={styles.facilityText}>{hotel_info.website}</Text>
-                  </View>
+                    <View style={styles.facility}>
+                    <Feather name="heart" size={18}/>
+                  <Text style={styles.facilityText}>2</Text>
+                </View>
+                <View style={styles.facility}>
+                  <Icon name="aspect-ratio" size={18} />
+                  <Text style={styles.facilityText}>{hotel_info.website}</Text>
+                </View>
                   <BookMark_Icon info={hotel_info} type={"hotel"}/>
                 </View>
               </View>
@@ -111,18 +107,14 @@ const User_bookmark = ({navigation}) => {
 
                 {/* Facilities container */}
                 <View style={{marginTop: 8, flexDirection: 'row'}}>
-                    <View style={styles.facility}>
-                    <Icon name="hotel" size={18} />
-                    <Text style={styles.facilityText}>2</Text>
-                    </View>
-                    <View style={styles.facility}>
-                    <Icon name="bathtub" size={18} />
-                    <Text style={styles.facilityText}>2</Text>
-                    </View>
-                    <View style={styles.facility}>
-                    <Icon name="aspect-ratio" size={18} />
-                    <Text style={styles.facilityText}>{restaurant_info.website}</Text>
-                    </View>
+                <View style={styles.facility}>
+                  <Feather name="heart" size={18} />
+                  <Text style={styles.facilityText}>2</Text>
+                </View>
+                <View style={styles.facility}>
+                  <Icon name="aspect-ratio" size={18} />
+                  <Text style={styles.facilityText}>{restaurant_info.website}</Text>
+                </View>
                     <BookMark_Icon info={restaurant_info} type={"restaurant"}/>
                 </View>
                 </View>

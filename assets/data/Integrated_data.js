@@ -5,7 +5,7 @@ import Shopping_data from './Shopping_data';
 import Airline_data from './Airline_data';
 import Stock_data from './Stock_data';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import Washroom_data from './washroom_data';
+import Washroom_data from './Washroom_data';
 
 
 const getIntegrated_data = async () => {
@@ -46,11 +46,11 @@ const getIntegrated_data = async () => {
         //     data.push(Stock_data[i]);
         //     i++;
         // }
-        // i=0;
-        // while (i < num_of_items && i < Washroom_data.length) {
-        //     data.push(Washroom_data[i]);
-        //     i++;
-        // }
+        i=0;
+        while (i < num_of_items && i < Washroom_data.length) {
+             data.push(Washroom_data[i]);
+             i++;
+        }
     });
     return data;
 }
