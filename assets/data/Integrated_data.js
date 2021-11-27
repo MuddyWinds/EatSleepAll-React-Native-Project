@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Restaurant_data from './Restaurant_data';
 import Hotel_data from './Hotel_data';
-import Shopping_data from './Shopping_data';
-import Airline_data from './Airline_data';
-import Stock_data from './Stock_data';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Washroom_data from './Washroom_data';
 
