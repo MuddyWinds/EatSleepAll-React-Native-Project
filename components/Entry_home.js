@@ -78,7 +78,7 @@ const Entry_home = ({navigation}) => {
 
   const DiscoverOptions = () => {
 
-    const Discover_linkage = ["Discover_hotel", "Discover_restaurant", "Discover_washroom"]
+    const Discover_linkage = ["Discover_restaurant", "Discover_hotel", "Discover_washroom"]
     const BackgroundColor = [["#93CAED", "#a0e6ff"], ["#E393ED", "#f4bbff"], ["#EDB693", "#ffc87c"]]
     const iconColor = ["#00008b", "#730d73", "#8d712e"];
     const marginText = [6, 3, 12];

@@ -1,5 +1,5 @@
 import React, {StatusBar, useEffect, useState} from 'react';
-import { StyleSheet, Image, Text, View, SafeAreaView, Dimensions, ScrollView, Pressable, Modal, FlatList, TextInput } from 'react-native';
+import { StyleSheet, Image, Text, View, SafeAreaView, Dimensions, ScrollView, Pressable, Modal, FlatList, TextInput, Linking } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import Restaurant_data from '../assets/data/Restaurant_data';
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -14,11 +14,12 @@ const sortList = ['Name','Rating', 'Popularity', 'Price'];
 
 
 const Discover_restaurant = ({navigation, route}) => {
-  const PreviewLinkHeight = [445, 610];
-  const PreviewLinkWidth = [335, 350];
+  // const PreviewLinkHeight = [445, 610];
+  // const PreviewLinkWidth = [335, 350];
   const [PreviewOption, setPreview] = useState(0); 
 
-  const [mapModalView, setMapModalView] = useState(false);
+  let mapModalView = false;
+  // const [mapModalView, setMapModalView] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
   const [restaurant_num, setRestaurant_num] = useState(() => {
     if (route.params != null) {
@@ -65,24 +66,17 @@ const Discover_restaurant = ({navigation, route}) => {
       );
     };
 
-    const Restaurant_or_map = () => {
-      {/** Show Preview Content */}
-        if (!mapModalView) {
-          setPreview(0);
-          return (
-            <WebView source={{uri: Restaurant_data[restaurant_num].url}} />
-          )
-        } else {
-          setPreview(1);
-          console.log("map chosen")
-          return (
-            /** <MapView provider={null}></MapView> */
-            <Text>Hello World</Text>
-          )
-        }
-    }
-
-    const Restaurant_preview = () => {      
+    const Restaurant_preview = () => {   
+      let URL, title;
+      if (modalVisible && !mapModalView) { 
+        URL = Restaurant_data[restaurant_num].url; 
+        title = 'Restaurant Preview';
+      }
+      else if (modalVisible && mapModalView) {
+        URL = `https://www.google.com.hk/maps/search/${Restaurant_data[restaurant_num].name}`;
+        title = "Location Preview";
+      }
+ 
       return (
         <View style={styles.centeredView}>
           <Modal
@@ -98,14 +92,16 @@ const Discover_restaurant = ({navigation, route}) => {
 
                 {/** Preview Header */}
                 <View style={styles.Modealheader}>
-                <Text style={styles.modelHeaderText}>Restaurant Preview</Text>
+                <Text style={styles.modelHeaderText}>{title}</Text>
 
                 {/** If user clcik on map icon */}
                 <View style={{flexDirection: "row", alignItems: "center"}}>
                   <Pressable 
                     onPress={() => {
-                      // setModalVisible(!modalVisible);
-                      setMapModalView(true);
+                      mapModalView = true;
+                      Restaurant_preview();
+
+                      // Reload page 
                     }}
                     style={{paddingRight: 12}}>
                     <Feather name="map" size={23.5} style={{color: "#1D7CC6"}}/>
@@ -116,7 +112,7 @@ const Discover_restaurant = ({navigation, route}) => {
                     style={[styles.previewButton, styles.previewButtonClose]}
                     onPress={() => {
                     setModalVisible(false);
-                    setMapModalView(false);
+                    mapModalView = false;
                     }}>
                     <Text style={{color: "white"}}>Close</Text>
                   </Pressable>
@@ -124,7 +120,7 @@ const Discover_restaurant = ({navigation, route}) => {
                 </View>
 
                 {/** Show Preview Content */}
-                <Restaurant_or_map/>
+                <WebView source={{uri: URL}} />
 
               </View>
             </View>
@@ -186,8 +182,8 @@ const Discover_restaurant = ({navigation, route}) => {
         <Pressable 
           activeOpacity={0.8}
           onPress={() => {
-            // Restaurant_preview()
             setModalVisible(true);
+            mapModalView = false;
           }}>
 
           <LinearGradient colors={["#8BDCEC", "#D0E9EE"]} style={styles.card}>
@@ -196,7 +192,7 @@ const Discover_restaurant = ({navigation, route}) => {
             <Restaurant_preview/>
 
             {/** Location Preview */}
-            {/** <Map_preview/> */}
+            {/** <Map_preview/>*/}
 
             {/* Restauarant image */}
             <Image source={{uri: restaurant_info['image_src']}} style={styles.cardImage} />
@@ -552,6 +548,24 @@ const styles = StyleSheet.create({
   modalView: {
     height: 445,
     width: 335,
+    margin: 10,
+    backgroundColor: 'white',
+    borderRadius: 20,
+    paddingTop: 12.5,
+    paddingBottom: 17,
+    paddingHorizontal: 20,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 25,
+    elevation: 5,
+  },
+  modalView2: {
+    height: 610,
+    width: 350,
     margin: 10,
     backgroundColor: 'white',
     borderRadius: 20,
