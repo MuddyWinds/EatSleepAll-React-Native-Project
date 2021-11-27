@@ -1,7 +1,8 @@
 import Switch from 'expo-dark-mode-switch';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import { StyleSheet, Text, View, SafeAreaView, Pressable, useColorScheme, } from 'react-native';
 import { Switch as Switch2 } from 'react-native-switch';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
@@ -10,6 +11,16 @@ const User_settings = ({navigation}) => {
     const [darkMode, setDarkMode] = useState(false);
     const [receiveNoti, setReceiveNoti] = useState(true);
     const [integratedNum, setIntegratedData] = useState(3);
+
+    useEffect(() => {
+        if (!receiveNoti) {
+            clearNotifications();
+        }
+    },[receiveNoti]);
+
+    const clearNotifications = async() => {
+        await AsyncStorage.setItem('notification_Items', JSON.stringify([]));
+      }
 
     return (
         <SafeAreaView style={styles.container}>
