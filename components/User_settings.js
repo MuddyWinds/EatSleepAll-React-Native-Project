@@ -1,5 +1,5 @@
 import Switch from "expo-dark-mode-switch";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import {
   StyleSheet,
   Text,
@@ -7,13 +7,16 @@ import {
   SafeAreaView,
   Pressable,
   useColorScheme,
-} from "react-native";
+}from "react-native";
 import { Switch as Switch2 } from "react-native-switch";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import Icon from "react-native-vector-icons/MaterialIcons";
+import themeContext from './themeContext';
+import EventRegister from "react-native-event-listeners";
 
 const User_settings = ({ navigation }) => {
+    const theme = useContext(themeContext);
   const [darkMode, setDarkMode] = useState(false);
   const [receiveNoti, setReceiveNoti] = useState(true);
   const [integratedNum, setIntegratedData] = useState(false);
@@ -59,8 +62,8 @@ const User_settings = ({ navigation }) => {
       </Pressable>
 
       {/** Title header */}
-      <View style={styles.header}>
-        <Text style={styles.noti}>Settings</Text>
+      <View style={[styles.header, {backgroundColor: theme.backgroud}]}>
+        <Text style={[styles.noti, {color: theme.color}]}>Settings</Text>
       </View>
 
       {/** All settings stored here */}
@@ -75,8 +78,10 @@ const User_settings = ({ navigation }) => {
           </View>
           <Switch
             value={darkMode}
-            onChange={(darkMode) => setDarkMode(darkMode)}
-          />
+            onValueChange = {(value) => {
+                setMode(value);
+                EventRegister.emit("changeTheme", value)
+                }}/> 
         </View>
 
         {/** Store Notification */}
