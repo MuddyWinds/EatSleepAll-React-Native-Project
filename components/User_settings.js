@@ -38,7 +38,7 @@ const User_settings = ({navigation}) => {
                 <Switch value={darkMode} onChange={darkMode => setDarkMode(darkMode)} /> 
             </View>
 
-            {/** Stock Notification */}
+            {/** Store Notification */}
             <View style={styles.changeThemeBar}>
                 <View style={{paddingRight: 102}}>
                     <Text style={styles.settingSubHeading}>Hot Choice Today</Text>
@@ -59,7 +59,7 @@ const User_settings = ({navigation}) => {
                     /> 
             </View>
 
-            {/** Stock Notification */}
+            {/** Set number of data columns */}
             <View style={styles.changeThemeBar}>
                 <View style={{paddingRight: 35}}>
                     <Text style={styles.settingSubHeading}>Integrate All</Text>

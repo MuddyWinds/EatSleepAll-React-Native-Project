@@ -7,7 +7,6 @@ import AsyncStorage from '@react-native-async-storage/async-storage'
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useIsFocused } from '@react-navigation/native';
 import { WebView } from 'react-native-webview';
-import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
 import { Feather } from '@expo/vector-icons';
 
 const {width, height} = Dimensions.get('screen');

@@ -8,7 +8,6 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useIsFocused } from '@react-navigation/native';
 import { WebView } from 'react-native-webview';
 import { Feather } from '@expo/vector-icons';
-import MapView from 'react-native-maps'
 
 
 const {width, height} = Dimensions.get('screen');
