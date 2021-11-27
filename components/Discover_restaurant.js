@@ -466,6 +466,7 @@ const styles = StyleSheet.create({
   },
   barText: {
     paddingLeft: 8,
+    fontWeight: "300"
   },
   sortBtn: {
     backgroundColor: "#053466",
@@ -521,16 +522,16 @@ const styles = StyleSheet.create({
   sortListContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    paddingHorizontal: 20,
+    paddingHorizontal: 30,
   },
   Ranking: {
     fontSize: 14,
-    fontWeight: 'bold',
+    fontWeight: '400',
     marginLeft: 4.5,
   },
   sortListText: {
     fontSize: 14,
-    fontWeight: 'bold',
+    fontWeight: '400',
     paddingBottom: 5,
     color: "grey",
     marginHorizontal: 4.5,
@@ -539,6 +540,7 @@ const styles = StyleSheet.create({
     color: "#000058",
     borderBottomWidth: 1,
     paddingBottom: 5,
+    fontWeight: "bold"
   },
   centeredView: {
     flex: 1, 

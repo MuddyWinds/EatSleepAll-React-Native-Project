@@ -216,6 +216,7 @@ const styles = StyleSheet.create({
       },
       barText: {
         paddingLeft: 8,
+        fontWeight: "300"
       },
       sortBtn: {
         backgroundColor: "#552a2a",

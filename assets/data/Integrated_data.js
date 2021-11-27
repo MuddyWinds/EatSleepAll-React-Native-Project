@@ -43,11 +43,11 @@ const getIntegrated_data = async () => {
         //     data.push(Stock_data[i]);
         //     i++;
         // }
-        i=0;
-        while (i < num_of_items && i < Washroom_data.length) {
-             data.push(Washroom_data[i]);
-             i++;
-        }
+        // i=0;
+        // while (i < num_of_items && i < Washroom_data.length) {
+        //     data.push(Washroom_data[i]);
+        //    i++;
+        //}
     });
     return data;
 }

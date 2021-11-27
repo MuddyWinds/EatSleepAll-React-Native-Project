@@ -95,7 +95,7 @@ const Entry_home = ({navigation}) => {
 
 
             {/* Option title */}
-            <Text style={{marginTop: marginText[index], fontSize: 15, fontWeight: '400', color: iconColor[index]}}>
+            <Text style={{marginTop: marginText[index], fontSize: 15, fontWeight: '300', color: iconColor[index]}}>
               {option.title}
             </Text>
           </LinearGradient>
@@ -271,7 +271,17 @@ const Entry_home = ({navigation}) => {
             </View>
 
             {/** Display filter options */}
-            {/* <ListCategories/> */}
+            <Text style={{
+              fontSize: 30,
+              fontWeight: "200",
+              color: "#053466",
+              marginTop: 3,
+              marginBottom: 12,
+              marginHorizontal: width/2-78,
+              alignContent: "center",
+              alignItems:"center",
+              justifyContent: "center",
+            }}>Hot Picks</Text>
             <SortCategories/>
             </>
           }
@@ -328,6 +338,7 @@ const styles = StyleSheet.create({
   },
   barText: {
     paddingLeft: 8,
+    fontWeight: "300"
   },
   sortBtn: {
     backgroundColor: "#053466",
@@ -407,17 +418,18 @@ const styles = StyleSheet.create({
   },
   Ranking: {
     fontSize: 14,
-    fontWeight: 'bold',
+    fontWeight: '400',
     marginLeft: 4.5,
   },
   sortListText: {
     fontSize: 14,
-    fontWeight: 'bold',
+    fontWeight: '400',
     paddingBottom: 5,
     color: "grey",
     marginHorizontal: 4.5,
   },
   activeSortListText: {
+    fontWeight: "bold",
     color: "#000058",
     borderBottomWidth: 1,
     paddingBottom: 5,
