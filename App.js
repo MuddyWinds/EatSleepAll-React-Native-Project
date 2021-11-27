@@ -6,6 +6,8 @@ import { BottomTabNavigator } from './Routes/BottomTabStack';
 import { Provider as PaperProvider, DarkTheme as PaperDarkTheme } from 'react-native-paper';
 
 
+// Activate when for demo: console.disableYellowBox = true;
+
 const Stack = createStackNavigator();
 
 export default function App() {
