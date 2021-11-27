@@ -8,12 +8,15 @@ import {EventRegister} from "react-native-event-listeners";
 import themeContext from './components/themeContext';
 import theme from './components/theme';
 
-// Activate when for demo: console.disableYellowBox = true;
+
+// console.disableYellowBox = true;
+
 
 const Stack = createStackNavigator();
 
 export default function App() {
   // const appTheme = darkMode? DarkTheme : DefaultTheme;
+  const [mode, setMode] = useState(false);
   useEffect(() => {
     let eventListener = EventRegister.addEventListener(
       "changeTheme",
@@ -28,7 +31,7 @@ export default function App() {
   return (
     // <PaperProvider theme={PaperDarkTheme}>
     <themeContext.Provider value = {mode === true ? theme.dark: theme.light}>
-      <NavigationContainer theme = {theme}>   
+      <NavigationContainer theme = {mode === true ? DarkTheme: DefaultTheme}>   
         <Stack.Navigator screenOptions={{headerShown: false}}>
           <Stack.Screen name="Entry_onboard " component={Entry_onboard}/>
           <Stack.Screen name="main_info" component={BottomTabNavigator}/>
@@ -37,4 +40,3 @@ export default function App() {
     </themeContext.Provider>
   );
 };
- 

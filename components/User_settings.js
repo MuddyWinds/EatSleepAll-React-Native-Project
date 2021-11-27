@@ -16,7 +16,7 @@ import themeContext from './themeContext';
 import EventRegister from "react-native-event-listeners";
 
 const User_settings = ({ navigation }) => {
-    const theme = useContext(themeContext);
+  const theme = useContext(themeContext);
   const [darkMode, setDarkMode] = useState(false);
   const [receiveNoti, setReceiveNoti] = useState(true);
   const [integratedNum, setIntegratedData] = useState(false);
@@ -78,8 +78,8 @@ const User_settings = ({ navigation }) => {
           </View>
           <Switch
             value={darkMode}
-            onValueChange = {(value) => {
-                setMode(value);
+            onChange = {(value) => {
+                setDarkMode(value);
                 EventRegister.emit("changeTheme", value)
                 }}/> 
         </View>
@@ -87,7 +87,7 @@ const User_settings = ({ navigation }) => {
         {/** Store Notification */}
         <View style={styles.changeThemeBar}>
           <View style={{ paddingRight: 102 }}>
-            <Text style={styles.settingSubHeading}>Hot Choice Today</Text>
+            <Text style={styles.settingSubHeading}>Keep Me Updated</Text>
             <Text style={{ fontSize: 11, color: "grey" }}>
               Receive daily Notifications.
             </Text>
