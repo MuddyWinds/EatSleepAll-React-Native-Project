@@ -172,7 +172,7 @@ const Discover_washroom = ({navigation}) => {
           scrollEnabled = {true}
 
           // Render Washroom Cards
-          data={Washroom_data}
+          data={cardItems}
           renderItem={({item}) => <Washroom_card washroom_info={item} />}
           keyExtractor={(item, index) => index}
         />
