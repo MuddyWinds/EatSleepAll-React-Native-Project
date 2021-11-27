@@ -7,12 +7,13 @@ import AsyncStorage from '@react-native-async-storage/async-storage'
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useIsFocused } from '@react-navigation/native';
 import { render } from 'react-dom';
+import theme from './theme';
 
 const {width, height} = Dimensions.get('screen');
 const filterList = ['Rating', 'Popularity', 'Location', 'Price'];
 
 const User_bookmark = ({navigation}) => {
-
+    var mode = theme.choice.theme;
     const [bookmarkedHotelItems, setbookmarkedHotelItems] = useState([]);
     const [bookmarkedRestaurantItems, setbookmarkedRestaurantItems] = useState([]);
     const isFocused = useIsFocused();
@@ -229,7 +230,7 @@ const User_bookmark = ({navigation}) => {
     
 
     return (
-        <SafeAreaView style={styles.container}>
+        <SafeAreaView style={mode == 'light'?styles.container:styles.containerDark}>
             
         {/** Return Button to previous page */}
         <Pressable style={{marginLeft: 8, flexDirection: 'row', alignItems: 'center',}}
@@ -321,6 +322,11 @@ const styles = StyleSheet.create({
         backgroundColor: '#FFFFFF',
         marginTop: -8,
     },
+    containerDark: {
+      flex: 1,
+      backgroundColor: '#121212',
+      marginTop: -8,
+  },
     sectionSubText: {
         marginLeft: 18,
         fontSize: 12.5,

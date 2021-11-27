@@ -4,9 +4,9 @@ import { LinearGradient } from 'expo-linear-gradient';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useIsFocused } from '@react-navigation/native';
-import Washroom_data from '../assets/data/Washroom_data';
+import Washroom_data from '../assets/data/washroom_data';
 import { WebView } from 'react-native-webview';
-
+import theme from './theme';
 
 const {width, height} = Dimensions.get('screen');
 
@@ -18,7 +18,8 @@ const Discover_washroom = ({navigation}) => {
   const [cardItems, setCardItems] = useState([])
   const [searchWord, setSearchWord] = useState("");
   const isFocused = useIsFocused();
-  
+  var mode = theme.choice.theme;
+
   useEffect(() => {
     filterCardItems();
   },[]);
@@ -127,7 +128,7 @@ const Discover_washroom = ({navigation}) => {
   }
     
     return (
-        <SafeAreaView style={styles.container}>
+        <SafeAreaView style={mode == 'light'?styles.container : styles.containerDark}>
 
         {/** Return Button to previous page */}
         <Pressable style={{marginLeft: 8, flexDirection: 'row', alignItems: 'center',}}
@@ -187,6 +188,11 @@ const styles = StyleSheet.create({
         backgroundColor: '#FFFFFF',
         marginTop: -8,
     },
+    containerDark: {
+      flex: 1,
+      backgroundColor: '#121212',
+      marginTop: -8,
+  },
     sectionSubText: {
         marginLeft: 18,
         fontSize: 12.5,

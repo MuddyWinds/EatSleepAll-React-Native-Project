@@ -10,6 +10,9 @@ const theme = {
         color:"white",
         background: "black",
     },
+    choice:{
+        theme: "light"
+    },
 };
 
 export default theme;

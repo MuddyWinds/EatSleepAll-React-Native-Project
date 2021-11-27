@@ -6,7 +6,7 @@ import {
   View,
   SafeAreaView,
   Pressable,
-  useColorScheme,
+  Appearance
 }from "react-native";
 import { Switch as Switch2 } from "react-native-switch";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -14,13 +14,27 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import themeContext from './themeContext';
 import EventRegister from "react-native-event-listeners";
+import theme from './theme';
+
+
 
 const User_settings = ({ navigation }) => {
-  const theme = useContext(themeContext);
-  const [darkMode, setDarkMode] = useState(false);
+  //const theme = useContext(themeContext);
+  const [mode, setMode] = useState(Appearance.getColorScheme() == 'dark'); // false = dark
   const [receiveNoti, setReceiveNoti] = useState(true);
   const [integratedNum, setIntegratedData] = useState(false);
-
+  var mode1 = theme.choice.theme;
+  console.log("Here: " +mode);
+  console.log(Appearance.getColorScheme());
+  console.log("_____________________");
+  /*
+  function updateTheme (){
+    if(mode == true)
+      theme.choice.theme = 'light'
+    else 
+      theme.choice.theme = 'dark';
+  }
+  */
   useEffect(() => {
     if (!receiveNoti) {
       clearNotifications();
@@ -51,7 +65,7 @@ const User_settings = ({ navigation }) => {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={mode1 == 'light' ? styles.container:styles.containerDark}>
       {/** Return Button to previous page */}
       <Pressable
         style={{ marginLeft: 8, flexDirection: "row", alignItems: "center" }}
@@ -77,11 +91,23 @@ const User_settings = ({ navigation }) => {
             </Text>
           </View>
           <Switch
-            value={darkMode}
+            value={mode}
             onChange = {(value) => {
-                setDarkMode(value);
-                EventRegister.emit("changeTheme", value)
-                }}/> 
+                setMode(() => !mode);
+                //updateTheme();
+                if(mode == true){
+                  Appearance.colorScheme = 'light';
+                  theme.choice.theme = 'light';
+                }
+                else if(mode == false){
+                  Appearance.colorScheme = 'dark';
+                  theme.choice.theme = 'dark';
+                }
+                console.log("Mode is: " + mode);
+                console.log(Appearance.colorScheme);
+                console.log(theme.choice.theme);
+           }}
+            /> 
         </View>
 
         {/** Store Notification */}
@@ -138,6 +164,11 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#FFF",
+    marginTop: -8,
+  },
+  containerDark: {
+    flex: 1,
+    backgroundColor: "#121212",
     marginTop: -8,
   },
   sectionSubText: {

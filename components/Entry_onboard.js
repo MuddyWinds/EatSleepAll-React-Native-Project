@@ -26,7 +26,7 @@ const Entry_onboard = ({navigation}) => {
     // INCOMPLETE UNTIL HERE
 
     return (
-        <SafeAreaView style={{flex: 1, backgroundColor: 'white'}}>
+        <SafeAreaView style={{flex: 1, backgroundColor: 'grey'}}>
              <StatusBar translucent backgroundColor={'rgba(52, 52, 52, 0.8)'} />
             
             {/* Onboarding Image */}
