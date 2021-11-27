@@ -1,12 +1,11 @@
 import React, {useState, useEffect} from 'react';
 import { TouchableOpacity,SafeAreaView, View, StatusBar, Text, TextInput, FlatList, Dimensions, StyleSheet,Image,Pressable, ScrollView, } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import { FontAwesome } from '@expo/vector-icons';
+import { FontAwesome, FontAwesome5, Ionicons, MaterialIcons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
 import Restaurant_data from '../assets/data/Restaurant_data';
 import getIntegrated_data from '../assets/data/Integrated_data';
 import { useIsFocused } from '@react-navigation/native';
-
 
 const {width} = Dimensions.get('screen');
 const sortList = ['Name','Rating', 'Popularity', 'Price'];
@@ -28,10 +27,11 @@ const Entry_home = ({navigation}) => {
   },[isFocused, selectedSort]);
 
   const optionsList = [
-    {title: 'Book a hotel for staycation', img: require('../assets/nice_hotel.jpg')},
-    {title: 'Find the closet Michelin restaurant', img: require('../assets/nice_restaurant.jpg')},
-    {title: 'Explore your district', img: require('../assets/nice_airlines.jpg')},
+    {icon: Ionicons, name: "fast-food-sharp", title: "Eat", size: 40},
+    {icon: MaterialIcons, name: "local-hotel", title: "Sleep", size: 45},
+    {icon: FontAwesome5, name: "toilet", title: "All", size: 37}
   ];
+
 
   const discoverList = ['Top Rated', 'Trending', 'Nearest', 'Discounts'];
 
@@ -79,17 +79,23 @@ const Entry_home = ({navigation}) => {
   const DiscoverOptions = () => {
 
     const Discover_linkage = ["Discover_hotel", "Discover_restaurant", "Discover_washroom"]
+    const BackgroundColor = [["#93CAED", "#a0e6ff"], ["#E393ED", "#f4bbff"], ["#EDB693", "#ffc87c"]]
+    const iconColor = ["#00008b", "#730d73", "#8d712e"];
+    const marginText = [6, 3, 12];
 
     return (
       <View style={styles.optionListsContainer}>
         {optionsList.map((option, index) => (
           <TouchableOpacity key={index} onPress={() => navigation.push(`${Discover_linkage[index]}`)}>
-          <LinearGradient colors={["#e8f4f8", "#f3f3f3"]} style={styles.optionsCard}>
+          <LinearGradient colors={BackgroundColor[index]} style={[styles.optionsCard]}>
+
             {/* Option image */}
-            <Image source={option.img} style={styles.optionsCardImage}/>
+            {/** <Image source={option.img} style={styles.optionsCardImage}/> */}
+            <option.icon name={`${option.name}`} size={option.size} style={{color: iconColor[index]}}/> 
+
 
             {/* Option title */}
-            <Text style={{marginLeft: 5, marginTop: 12, fontSize: 12, fontWeight: '600', color: "#053466"}}>
+            <Text style={{marginTop: marginText[index], fontSize: 15, fontWeight: '400', color: iconColor[index]}}>
               {option.title}
             </Text>
           </LinearGradient>
@@ -251,9 +257,9 @@ const Entry_home = ({navigation}) => {
           ListHeaderComponent={
             <>
             {/** Display Eat, sleep, all cards */}
-            <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+            <View>
               <DiscoverOptions/>
-            </ScrollView>
+            </View>
 
             {/** Display filter options */}
             {/* <ListCategories/> */}
@@ -323,15 +329,16 @@ const styles = StyleSheet.create({
     marginRight: 5,
   },
   optionsCard: {
-    height: 210,
-    width: width / 2 - 30,
+    height: 100,
+    width: (width - 60.2)/ 3,
     elevation: 15,
-    alignItems: 'flex-start',
+    alignItems: 'center',
     backgroundColor: "white",
     borderRadius: 20,
-    paddingTop: 12,
+    paddingTop: 10,
     paddingHorizontal: 12,
     marginRight: 10,
+    justifyContent: "center",
   },
   optionsCardImage: {
     height: 140,
