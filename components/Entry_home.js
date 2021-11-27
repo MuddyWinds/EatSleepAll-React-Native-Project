@@ -5,6 +5,7 @@ import { FontAwesome, FontAwesome5, Ionicons, MaterialIcons } from '@expo/vector
 import { LinearGradient } from 'expo-linear-gradient';
 import getIntegrated_data from '../assets/data/Integrated_data';
 import { useIsFocused } from '@react-navigation/native';
+import { Feather } from '@expo/vector-icons';
 
 const {width} = Dimensions.get('screen');
 const sortList = ['Name','Rating', 'Popularity', 'Price'];
@@ -146,12 +147,8 @@ const Entry_home = ({navigation}) => {
 
             {/* Facilities container */}
             <View style={{marginTop: 10, flexDirection: 'row'}}>
-              <View style={styles.facility}>
-                <Icon name="hotel" size={18} />
-                <Text style={styles.facilityText}>2</Text>
-              </View>
-              <View style={styles.facility}>
-                <Icon name="bathtub" size={18} />
+            <View style={styles.facility}>
+              <Feather name="heart" size={18} />
                 <Text style={styles.facilityText}>2</Text>
               </View>
               <View style={styles.facility}>
@@ -378,7 +375,7 @@ const styles = StyleSheet.create({
     marginBottom: 3.5
   },
   card: {
-    height: 250,
+    // height: 250,
     backgroundColor: "white",
     elevation: 10,
     width: width - 40,
