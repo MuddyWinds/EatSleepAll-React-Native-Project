@@ -95,7 +95,7 @@ const Entry_home = ({navigation}) => {
 
 
             {/* Option title */}
-            <Text style={{marginTop: marginText[index], fontSize: 15, fontWeight: '300', color: iconColor[index]}}>
+            <Text style={{marginTop: marginText[index], fontSize: 15, fontWeight: '600', color: iconColor[index]}}>
               {option.title}
             </Text>
           </LinearGradient>
