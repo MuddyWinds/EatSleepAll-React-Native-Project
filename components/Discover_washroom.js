@@ -4,7 +4,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useIsFocused } from '@react-navigation/native';
-import Airline_data from '../assets/data/Airline_data';
+import Washroom_data from '../assets/data/washroom_data';
 
 const {width, height} = Dimensions.get('screen');
 
@@ -25,13 +25,11 @@ const Discover_washroom = ({navigation}) => {
 
   
   const filterCardItems = () => {
-    /** 
-    // Please change the Stock_data to Stock_data + Airline_data + Shopping_data
-    const items = Stock_data;
+    const items = Washroom_data;
     var filteredItems = [];
     if (items !== null && items !== []) {
       items.forEach(element => {
-        if (element.title.toUpperCase().includes(searchWord.toUpperCase()) || element.location.toUpperCase().includes(searchWord.toUpperCase())) {
+        if (element.name.toUpperCase().includes(searchWord.toUpperCase()) || element.district.toUpperCase().includes(searchWord.toUpperCase()) || element.address.toUpperCase().includes(searchWord.toUpperCase())) {
           filteredItems.push(element);
         }
       });
@@ -39,53 +37,37 @@ const Discover_washroom = ({navigation}) => {
     } else {
       setCardItems([]);
     }
-    */
   }
   
 
-  const Airline_card = ({airline_info}) => {
+  const Washroom_card = ({washroom_info}) => {
     return (
       <Pressable 
       activeOpacity={0.8}
-      // onPress={() => navigation.push("Discover", {screen: "Discover_restaurant"})}>
       >
       <LinearGradient colors={["#EFF5F6", "#f3f3f3"]} style={styles.card2}> 
           <View>
-          {/* Title and price container */}
+          {/* Title */}
           <View
               style={{
               flexDirection: 'row',
               justifyContent: 'space-between',
               }}>
-              <Text style={{fontSize: 15, fontWeight: 'bold', color: "#053466"}}>
-              {airline_info.name}
-              </Text>
-              <Text
-              style={{fontWeight: '400', color: "#053466", fontSize: 15}}>
-              {airline_info.price_range}
+              <Text style={{fontSize: 15, fontWeight: 'bold', color: "#053466", lineHeight: 20,}}>
+              {washroom_info.name}
               </Text>
           </View>
 
           {/* Location text */}
-          <Text style={{color: "grey", fontSize: 14, marginTop: 3.5}}>
-              {airline_info.address}
+          <Text style={{color: "#053466", fontSize: 15, marginTop: 3.5, marginBottom: 5}}>
+            District: {washroom_info.district}
           </Text>
 
-          {/* Facilities container */}
-          <View style={{marginTop: 8, flexDirection: 'row'}}>
-              <View style={styles.facility}>
-              <Icon name="hotel" size={18} />
-              <Text style={styles.facilityText}>2</Text>
-              </View>
-              <View style={styles.facility}>
-              <Icon name="bathtub" size={18} />
-              <Text style={styles.facilityText}>2</Text>
-              </View>
-              <View style={styles.facility}>
-              <Icon name="aspect-ratio" size={18} />
-              <Text style={styles.facilityText}>{airline_info.website}</Text>
-              </View>
-          </View>
+          {/* Location text */}
+          <Text style={{color: "grey", fontSize: 14, marginTop: 3.5, lineHeight: 21,}}>
+              {washroom_info.address}
+          </Text>
+
           </View>
       </LinearGradient>
       </Pressable>
@@ -136,9 +118,9 @@ const Discover_washroom = ({navigation}) => {
           vertical
           scrollEnabled = {true}
 
-          // Render Airline Cards
-          data={Airline_data}
-          renderItem={({item}) => <Airline_card airline_info={item} />}
+          // Render Washroom Cards
+          data={Washroom_data}
+          renderItem={({item}) => <Washroom_card washroom_info={item} />}
         />
 
         </SafeAreaView>
@@ -191,7 +173,6 @@ const styles = StyleSheet.create({
         marginRight: 5,
       },
       card2: {
-        // height: 84,
         width: width - 40,
         marginRight: 20,
         paddingHorizontal: 16,
