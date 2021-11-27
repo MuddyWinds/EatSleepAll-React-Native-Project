@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import { TouchableOpacity,SafeAreaView, View, StatusBar, Text, TextInput, FlatList, Dimensions, StyleSheet,Image,Pressable, ScrollView, } from 'react-native';
+import { TouchableOpacity,SafeAreaView, View, StatusBar, Text, TextInput, FlatList, Dimensions, StyleSheet,Image,Pressable, ScrollView, TabBarIOSItem, } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { FontAwesome, FontAwesome5, Ionicons, MaterialIcons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
@@ -109,7 +109,15 @@ const Entry_home = ({navigation}) => {
     return (
       <Pressable
         activeOpacity={0.8}
-        onPress={() => navigation.push("Discover_restaurant")}>
+        onPress={() => {
+          if (item.id.includes('001')) {
+            navigation.push("Discover_hotel", item.id);
+          } else if (item.id.includes('002')){
+            navigation.push("Discover_restaurant", item.id);
+          } else {
+            navigation.push("Discover_washroom");
+          }
+        }}>
         <LinearGradient colors={["#e8f4f8", "#f3f3f3"]} style={styles.card}>
 
           {/* Restaurant image */}
@@ -158,8 +166,8 @@ const Entry_home = ({navigation}) => {
     );
   };
 
-  const filterCardItems = () => {
-    const items = getIntegrated_data();
+  const filterCardItems = async () => {
+    const items = await getIntegrated_data();
     var filteredItems = [];
     if (items !== null && items !== []) {
       items.forEach(element => {

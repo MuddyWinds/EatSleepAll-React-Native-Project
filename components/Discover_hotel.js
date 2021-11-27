@@ -13,10 +13,16 @@ import { Feather } from '@expo/vector-icons';
 const {width, height} = Dimensions.get('screen');
 const sortList = ['Name','Rating', 'Popularity', 'Price'];
 
-const Discover_hotel = ({navigation}) => {
+const Discover_hotel = ({navigation, route}) => {
  
   const [modalVisible, setModalVisible] = useState(false);
-  const [hotel_num, setHotel_num] = useState(0);
+  const [hotel_num, setHotel_num] = useState(() => {
+    if (route.params != null) {
+      return route.params%10-1;
+    } else {
+      return 0;
+    }
+  });
   const [bookmarkedIds, setbookmarkedIds] = useState([]);
   const [cardItems, setCardItems] = useState([])
   const [searchWord, setSearchWord] = useState("");
@@ -36,8 +42,6 @@ const Discover_hotel = ({navigation}) => {
 
 
   const SortCategories = () => {
-    // Write filter function
-
     return  (
       <View style={styles.sortListContainer}>
         <Text style={styles.Ranking}>Sort :</Text>
