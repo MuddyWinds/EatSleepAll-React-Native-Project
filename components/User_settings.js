@@ -1,6 +1,6 @@
 import Switch from 'expo-dark-mode-switch';
 import React, {useEffect, useState} from 'react';
-import { StyleSheet, Text, View, SafeAreaView, Pressable, useColorScheme, } from 'react-native';
+import { StyleSheet, Text, View, SafeAreaView, Pressable, useColorScheme} from 'react-native';
 import { Switch as Switch2 } from 'react-native-switch';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 

@@ -3,7 +3,6 @@ import { TouchableOpacity,SafeAreaView, View, StatusBar, Text, TextInput, FlatLi
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { FontAwesome, FontAwesome5, Ionicons, MaterialIcons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
-import Restaurant_data from '../assets/data/Restaurant_data';
 import getIntegrated_data from '../assets/data/Integrated_data';
 import { useIsFocused } from '@react-navigation/native';
 

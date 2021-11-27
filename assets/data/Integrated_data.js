@@ -1,7 +1,7 @@
 import React from 'react';
 import Restaurant_data from './Restaurant_data';
 import Hotel_data from './Hotel_data';
-import Washroom_data from './washroom_data';
+import Washroom_data from './Washroom_data';
 
 var num_of_items = 5;
 const getIntegrated_data = () => {
