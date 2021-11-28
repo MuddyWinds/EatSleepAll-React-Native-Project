@@ -136,7 +136,7 @@ const Entry_home = ({navigation}) => {
                 justifyContent: 'space-between',
                 marginTop: 10,
               }}>
-              <Text style={{fontSize: 16, fontWeight: 'bold', color: "#053466"}}>
+              <Text style={{fontSize: 16, fontWeight: 'bold', color: "#053466", marginTop: -8}}>
                 {item.name}
               </Text>
               <Text
@@ -154,7 +154,7 @@ const Entry_home = ({navigation}) => {
             <View style={{marginTop: 10, flexDirection: 'row'}}>
             <View style={styles.facility}>
               <Feather name="heart" size={18} />
-                <Text style={styles.facilityText}>2</Text>
+                <Text style={styles.facilityText}>{item.popularity}</Text>
               </View>
               <View style={styles.facility}>
                 <Icon name="aspect-ratio" size={18} />

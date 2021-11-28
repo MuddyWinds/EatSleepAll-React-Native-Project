@@ -129,7 +129,7 @@ const Discover_hotel = ({navigation, route}) => {
             <View style={{marginTop: 8, flexDirection: 'row'}}>
               <View style={styles.facility}>
                 <Feather name="heart" size={18}/>
-                <Text style={styles.facilityText}>2</Text>
+                <Text style={styles.facilityText}>{hotel_info.popularity}</Text>
               </View>
               <View style={styles.facility}>
                 <Icon name="aspect-ratio" size={18} />
@@ -185,7 +185,7 @@ const Discover_hotel = ({navigation, route}) => {
             <View style={{marginTop: 8, flexDirection: 'row'}}>
               <View style={styles.facility}>
                 <Feather name="heart" size={18}/>
-                <Text style={styles.facilityText}>2</Text>
+                <Text style={styles.facilityText}>{hotel_info.popularity}</Text>
               </View>
               <View style={styles.facility}>
                 <Icon name="aspect-ratio" size={18} />
