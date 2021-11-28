@@ -235,13 +235,13 @@ const User_bookmark = ({navigation}) => {
         {/** Return Button to previous page */}
         <Pressable style={{marginLeft: 8, flexDirection: 'row', alignItems: 'center',}}
             onPress={() => navigation.navigate("Entry", {screen: "Entry_home"})}>
-            <Icon style={{color: "#053466"}}name="chevron-left" size={25}/>
-            <Text style={{fontSize: 16, marginLeft: -3}}>Back</Text>
+            <Icon style={mode == 'light'?{color: "#053466"}: {color: '#FFFFFF'}}name="chevron-left" size={25}/>
+            <Text style={mode == 'light'?{fontSize: 16, marginLeft: -3, color: 'black'}: {fontSize: 16, marginLeft: -3, color: '#FFFFFF'}}>Back</Text>
         </Pressable>
 
         {/** Title header */}
         <View style={styles.header}>
-            <Text style={styles.noti}>Bookmarks</Text>
+            <Text style={mode == 'light' ? styles.noti : styles.notiDark}>Bookmarks</Text>
         </View>
 
         {/* Input and sort button container */}
@@ -282,7 +282,7 @@ const User_bookmark = ({navigation}) => {
             data = {bookmarkedHotelItems}
             ListHeaderComponent = {() => {
               if (bookmarkedHotelItems.length != 0) {
-                return (<Text style={styles.subtitle}>Hotels</Text>);
+                return (<Text style={mode == 'light' ? styles.subtitle: styles.subtitleDark}>Hotels</Text>);
               } else {
                 return null;
               }
@@ -301,7 +301,7 @@ const User_bookmark = ({navigation}) => {
             data = {bookmarkedRestaurantItems}
             ListHeaderComponent = {() => {
               if (bookmarkedRestaurantItems.length != 0) {
-                return (<Text style={styles.subtitle}>Restaurants</Text>);
+                return (<Text style={mode == 'light' ? styles.subtitle: styles.subtitleDark}>Restaurants</Text>);
               } else {
                 return null;
               }
@@ -343,12 +343,26 @@ const styles = StyleSheet.create({
       marginBottom: 6.5,
       color: "#053466",
     },
+    subtitleDark: {
+      alignContent: "center",
+      justifyContent: "center",
+      marginLeft: 5,
+      marginTop: 10,
+      marginBottom: 6.5,
+      color: "#FFFFFF",
+    },
     noti: {
         marginLeft: 18, 
         fontSize: 24, 
         fontWeight: "bold", 
         color: "#053466",
     },
+    notiDark: {
+      marginLeft: 18, 
+      fontSize: 24, 
+      fontWeight: "bold", 
+      color: "#FFFFFF",
+  },
     header: {
         flexDirection: "row", 
         marginLeft: 4.5, 

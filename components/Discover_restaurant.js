@@ -373,9 +373,9 @@ const Discover_restaurant = ({navigation, route}) => {
 
         {/** Return Button to previous page */}
         <Pressable style={{marginLeft: 8, flexDirection: 'row', alignItems: 'center',}}
-           onPress={() => navigation.navigate("Entry", {screen: "Entry_home"})}>
-          <Icon style={{color: "#053466"}}name="chevron-left" size={25}/>
-          <Text style={{fontSize: 16, marginLeft: -3}}>Back</Text>
+            onPress={() => navigation.navigate("Entry", {screen: "Entry_home"})}>
+            <Icon style={mode == 'light'?{color: "#053466"}: {color: '#FFFFFF'}}name="chevron-left" size={25}/>
+            <Text style={mode == 'light'?{fontSize: 16, marginLeft: -3, color: 'black'}: {fontSize: 16, marginLeft: -3, color: '#FFFFFF'}}>Back</Text>
         </Pressable>
 
         {/** Title header */}

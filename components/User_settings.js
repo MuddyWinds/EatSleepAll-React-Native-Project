@@ -24,9 +24,9 @@ const User_settings = ({ navigation }) => {
   const [receiveNoti, setReceiveNoti] = useState(true);
   const [integratedNum, setIntegratedData] = useState(false);
   var mode1 = theme.choice.theme;
-  console.log("Here: " + mode);
-  console.log(Appearance.getColorScheme());
-  console.log("_____________________");
+  //console.log("Here: " + mode);
+  //console.log(Appearance.getColorScheme());
+  //console.log("_____________________");
   /*
   function updateTheme (){
     if(mode == true)
@@ -67,17 +67,14 @@ const User_settings = ({ navigation }) => {
   return (
     <SafeAreaView style={mode1 == 'light' ? styles.container:styles.containerDark}>
       {/** Return Button to previous page */}
-      <Pressable
-        style={{ marginLeft: 8, flexDirection: "row", alignItems: "center" }}
-        onPress={() => navigation.navigate("Entry", { screen: "Entry_home" })}
-      >
-        <Icon style={{ color: "#053466" }} name="chevron-left" size={25} />
-        <Text style={{ fontSize: 16, marginLeft: -3 }}>Back</Text>
-      </Pressable>
-
+      <Pressable style={{marginLeft: 8, flexDirection: 'row', alignItems: 'center',}}
+            onPress={() => navigation.navigate("Entry", {screen: "Entry_home"})}>
+            <Icon style={mode == 'light'?{color: "#053466"}: {color: '#053466'}}name="chevron-left" size={25}/>
+            <Text style={mode == 'light'?{fontSize: 16, marginLeft: -3, color: '053466'}: {fontSize: 16, marginLeft: -3, color: '#053466'}}>Back</Text>
+        </Pressable>
       {/** Title header */}
-      <View style={[styles.header, {backgroundColor: theme.backgroud}]}>
-        <Text style={[styles.noti, {color: theme.color}]}>Settings</Text>
+      <View style={styles.header}>
+        <Text style={styles.noti}>Settings</Text>
       </View>
 
       {/** All settings stored here */}
@@ -103,9 +100,9 @@ const User_settings = ({ navigation }) => {
                   Appearance.colorScheme = 'dark';
                   theme.choice.theme = 'dark';
                 }
-                console.log("Mode is: " + mode);
-                console.log(Appearance.colorScheme);
-                console.log(theme.choice.theme);
+                //console.log("Mode is: " + mode);
+                //console.log(Appearance.colorScheme);
+                //console.log(theme.choice.theme);
            }}
             /> 
         </View>

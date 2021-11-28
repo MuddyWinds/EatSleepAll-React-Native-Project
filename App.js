@@ -7,11 +7,11 @@ import { BottomTabNavigator } from './Routes/BottomTabStack';
 import {EventRegister} from "react-native-event-listeners";
 import themeContext from './components/themeContext';
 import theme from './components/theme';
-import { Appearance, LogBox } from 'react-native';
+import { Appearance } from 'react-native';
 import { color } from 'react-native-reanimated';
 
 
-LogBox.ignoreAllLogs();
+// console.disableYellowBox = true;
 
 
 const Stack = createStackNavigator();
@@ -19,25 +19,12 @@ const Stack = createStackNavigator();
 
 export default function App() {
   // const appTheme = darkMode? DarkTheme : DefaultTheme;
-  const [mode, setMode] = useState(Appearance.getColorScheme());
+  var mode = theme.choice.theme;
   console.log(mode);
-  /*
-  useEffect(() => {
-    let eventListener = EventRegister.addEventListener(
-      "changeTheme",
-      (data) => {
-        setMode(data);
-      }
-    );
-    return() => {
-      EventRegister.removeEventListener(eventListener);
-    };
-  });
-  */
-  //console.log("theme is: " + themeColor);
+  // theme={mode == 'light' ? {DefaultTheme}: {DarkTheme}
+  
   return (
-      // <NavigationContainer theme = {DarkTheme}>   
-      <NavigationContainer>  
+      <NavigationContainer theme={mode == 'light' ? DefaultTheme: DarkTheme}>   
         <Stack.Navigator screenOptions={{headerShown: false}}>
           <Stack.Screen name="Entry_onboard " component={Entry_onboard}/>
           <Stack.Screen name="main_info" component={BottomTabNavigator}/>

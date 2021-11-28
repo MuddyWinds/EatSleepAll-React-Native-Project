@@ -45,6 +45,16 @@ const styles = StyleSheet.create({
         marginBottom: 20,
         borderWidth:1 ,
     }, 
+    item: {
+        backgroundColor: '#121212',
+        padding:15,
+        borderRadius: 10,
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        marginBottom: 20,
+        borderWidth:1 ,
+    }, 
     itemLeft: {
         flexDirection: 'row',
         alignItems: 'center',

@@ -6,12 +6,13 @@ import User_settings from "../components/User_settings";
 import User_notification from "../components/User_notification";
 import User_bookmark from "../components/User_bookmark";
 
+
 const Tab = createBottomTabNavigator();
 
 const BottomTabNavigator = () => {
-
     return (
-        <Tab.Navigator screenOptions={{
+        <Tab.Navigator screenOptions={
+            {
             activeTintColor: "#053466", 
             tabStyle: {paddingTop: 11,},
             headerShown: false,
