@@ -18,12 +18,11 @@ const Entry_onboard = ({navigation}) => {
     React.useEffect(() => {
         const interval = setInterval(() => {
             setvalue((v) => (v === 2 ? 0 : v + 1));
-        }, 5000);
+        }, 3000);
 
         return clearInterval(interval);
     }, []);
 
-    // INCOMPLETE UNTIL HERE
 
     return (
         <SafeAreaView style={{flex: 1, backgroundColor: 'white'}}>

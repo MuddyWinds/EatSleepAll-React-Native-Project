@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { LogBox } from 'react-native';
 import Entry_onboard from './components/Entry_onboard';
 import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer,  DefaultTheme, DarkTheme } from '@react-navigation/native';
@@ -6,7 +7,7 @@ import { BottomTabNavigator } from './Routes/BottomTabStack';
 import { Provider as PaperProvider, DarkTheme as PaperDarkTheme } from 'react-native-paper';
 
 
-// Activate when for demo: console.disableYellowBox = true;
+LogBox.ignoreAllLogs();
 
 const Stack = createStackNavigator();
 
