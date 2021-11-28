@@ -45,14 +45,14 @@ const Send_notification = () => {
   const insertNotifications = async () => {
     await AsyncStorage.getItem('notification_Items').then(token => {
       const res = JSON.parse(token);
-      if (notification.request.data !== undefined) {
+      // if (notification.request.data !== undefined) {
         if (res !== null && res !== []) {
             res.push(notification.request.content.data);
             AsyncStorage.setItem('notification_Items', JSON.stringify(res));
         } else {
             AsyncStorage.setItem('notification_Items', JSON.stringify([notification.request.content.data]));
         }
-      }
+      // }
     })   
   }
 
