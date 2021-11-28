@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Restaurant_data from './Restaurant_data';
 import Hotel_data from './Hotel_data';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import Washroom_data from './washroom_data';
+import Washroom_data from './Washroom_data';
 
 
 const getIntegrated_data = async () => {

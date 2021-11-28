@@ -24,7 +24,7 @@ const User_settings = ({ navigation }) => {
   const [receiveNoti, setReceiveNoti] = useState(true);
   const [integratedNum, setIntegratedData] = useState(false);
   var mode1 = theme.choice.theme;
-  console.log("Here: " +mode);
+  console.log("Here: " + mode);
   console.log(Appearance.getColorScheme());
   console.log("_____________________");
   /*

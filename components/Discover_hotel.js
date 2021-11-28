@@ -8,7 +8,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useIsFocused } from '@react-navigation/native';
 import { WebView } from 'react-native-webview';
 import { Feather } from '@expo/vector-icons';
-import {darkModeHotel} from '../style/Hotel_style';
+// import {darkModeHotel} from '../style/Hotel_style';
 import theme from './theme';
 
 

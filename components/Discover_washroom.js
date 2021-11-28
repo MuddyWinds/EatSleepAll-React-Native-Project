@@ -4,7 +4,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useIsFocused } from '@react-navigation/native';
-import Washroom_data from '../assets/data/washroom_data';
+import Washroom_data from '../assets/data/Washroom_data';
 import { WebView } from 'react-native-webview';
 import theme from './theme';
 
