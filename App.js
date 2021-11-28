@@ -36,7 +36,8 @@ export default function App() {
   */
   //console.log("theme is: " + themeColor);
   return (
-      <NavigationContainer theme = {DarkTheme}>   
+      // <NavigationContainer theme = {DarkTheme}>   
+      <NavigationContainer>  
         <Stack.Navigator screenOptions={{headerShown: false}}>
           <Stack.Screen name="Entry_onboard " component={Entry_onboard}/>
           <Stack.Screen name="main_info" component={BottomTabNavigator}/>
