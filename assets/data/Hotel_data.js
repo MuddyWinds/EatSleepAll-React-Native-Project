@@ -11,7 +11,7 @@ const Hotel_data = [
       price: '492',
       price_min: 492,
       rating: 80,
-      popularity: 80,
+      popularity: 87,
       details: `8.1 激讚 18,634 條評價`,
       url:'https://www.agoda.com/zh-tw/ibis-hong-kong-central-sheung-wan-hotel/hotel/hong-kong-hk.html?finalPriceView=1&isShowMobileAppPrice=false&cid=1729890&numberOfBedrooms=&familyMode=false&adults=2&children=0&rooms=1&maxRooms=0&checkIn=2021-12-4&isCalendarCallout=false&childAges=&numberOfGuest=0&missingChildAges=false&travellerType=1&showReviewSubmissionEntry=false&currencyCode=HKD&isFreeOccSearch=false&tag=272992264I5WJy61a1302765&isCityHaveAsq=false&los=1&searchrequestid=8167c1ab-0fd4-49e9-91ed-e29048d7aef0',
       interiors: [
@@ -26,7 +26,7 @@ const Hotel_data = [
       price: '831',
       price_min: 831,
       rating: 75,
-      popularity: 75,
+      popularity: 76,
       details: `8.5 激讚 4,430 條評價`,
       url: 'https://www.agoda.com/zh-tw/eco-tree-hotel/hotel/hong-kong-hk.html?finalPriceView=1&isShowMobileAppPrice=false&cid=1729890&numberOfBedrooms=&familyMode=false&adults=2&children=0&rooms=1&maxRooms=0&checkIn=2021-12-4&isCalendarCallout=false&childAges=&numberOfGuest=0&missingChildAges=false&travellerType=1&showReviewSubmissionEntry=false&currencyCode=HKD&isFreeOccSearch=false&tag=272992264I5WJy61a1302765&isCityHaveAsq=false&tspTypes=4&los=1&searchrequestid=f6121ef0-2a19-4d36-8ee0-687bdd8c347e',
       interiors: [
@@ -42,7 +42,7 @@ const Hotel_data = [
       price: '364',
       price_min: 364,
       rating: 70,
-      popularity: 85,
+      popularity: 89,
       url: 'https://hk.trip.com/hotels/hong-kong-hotel-detail-436864/ibis-hong-kong-central-and-sheung-wan-hotel/?cityId=58&checkIn=2021-12-07&checkOut=2021-12-08&adult=2&children=0&crn=1&ages=&travelpurpose=0&curr=HKD&link=title&hoteluniquekey=H4sIAAAAAAAAAONaz8jFK8Fk8B8GGIWYOBilZjJyXNgyu4_FYLaAxcxcRwYQUCh08AQzLhQ5BPBMYpTihPEEPR5Wiax7XuDgxMbxdh6TBMsMxoarUhsZwfIM1g47GJlOMJ5jWsB06PJihV1MUEWHmFg5uqQkWE4xMVxiYrjFxPCIieEVE8MnJoZfMCVNzAxdzAyTmCEKZzEzLGJmEGIFu0xKIdHMMDUxLTHZzMjCzMQ8zSLRzNgoOTnVyNTM0MzcwtBAgVtj78OWXjYj8VOMIoZmxubm5qbGhqaGBqZ6RqUG2SnFVsxSjG4ejEFsLi4GlkYWUTJczM5-kYIQV3-wl2L28HZRdGx6dHyG9Sv7JNaqDF0P74z1HAWMXYxsAowejBGMAIxvDVo-AQAA',
       interiors: [
       ],
@@ -57,7 +57,7 @@ const Hotel_data = [
       price: '691',
       price_min: 691,
       rating: 60,
-      popularity: 90,
+      popularity: 91,
       url: 'https://hk.trip.com/hotels/hong-kong-hotel-detail-708765/99-bonham/?cityId=58&checkIn=2021-12-07&checkOut=2021-12-08&adult=2&children=0&crn=1&ages=&travelpurpose=0&curr=HKD&link=title&hoteluniquekey=H4sIAAAAAAAAAOO6xsTFK8Fk8B8GGIWYOBilDjBxTN7azeTIAAICTQ6eYMaDZocAnkIwkyHNoZHRW3NeZsW9SIdJjKsZOcGiH_ocBMEMny4HJWeOqZtWsQmIS9y6tYpPgVETLNEQ52AIY1iUOXJlKOWAjPCEMYJYOc5ySzBFsXFMvMUuwaakzfFr_1ROAUaJ_T_micIMYVCCGgJkWHTyBLFwJAO1MCgpKLBAbXGD2eLmYPGME2joUhaQCidmjnvsMxjnLtTeyAgxwNdhByPTCcZDrAuY-hZq72ICKTjExMrRYS7BcoqJ4RITwy0mhkdAgasCEkyvmBg-MUFd9gustImZoYuZYRIzRMMsZoi6RcwMQiygAJRSSDS0NLZINU02MTE0MklKMbY0sEhNTDNMsTCztEgzNDRQ4Nb48LCll81I_BSjiKGZsbm5uamxoamhgameUalBdkqxFbMUo5sHYxCbhaOLm5NBlAwXs4e3i6Bj06PjM6xf2UuBeIowXhJrVYauh3fGeo4Cxi5GNgFGD8YIRgAz7KSp5AEAAA&barcurr=HKD',
       interiors: [
       ],
@@ -72,7 +72,7 @@ const Hotel_data = [
       price: '575',
       price_min: 575,
       rating: 55,
-      popularity: 95,
+      popularity: 93,
       url: 'https://zh.hotels.com/ho415581/?q-check-in=2021-11-27&q-check-out=2021-11-28&q-rooms=1&q-room-0-adults=2&q-room-0-children=0&WOD=6&WOE=7&MGT=1&ZSX=0&SYE=3&YGF=1',
       interiors: [
       ],
@@ -87,7 +87,7 @@ const Hotel_data = [
       price: '585',
       price_min: 585,
       rating: 100,
-      popularity: 80,
+      popularity: 78,
       url:'https://zh.hotels.com/ho450301/?q-check-in=2021-11-27&q-check-out=2021-11-28&q-rooms=1&q-room-0-adults=2&q-room-0-children=0&WOD=6&WOE=7&MGT=1&ZSX=0&SYE=3&YGF=1',
       interiors: [
       ],
