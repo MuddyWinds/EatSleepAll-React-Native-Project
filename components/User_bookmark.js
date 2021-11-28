@@ -36,7 +36,7 @@ const User_bookmark = ({navigation}) => {
           <Pressable 
             activeOpacity={0.8}
             >
-            <LinearGradient colors={["#EFF5F6", "#f3f3f3"]} style={styles.card2}>
+            <LinearGradient colors={mode == 'light' ? ["#EFF5F6", "#f3f3f3"] : ["#485461", "#485461"]} style={styles.card2}>
               
               <View>
                 {/* Title and price container */}
@@ -45,29 +45,29 @@ const User_bookmark = ({navigation}) => {
                     flexDirection: 'row',
                     justifyContent: 'space-between',
                   }}>
-                  <Text style={{fontSize: 15, fontWeight: 'bold', color: "#053466"}}>
+                  <Text style={mode == 'light' ? {fontSize: 15, fontWeight: 'bold', color: "#053466"}: {fontSize: 15, fontWeight: 'bold', color: "white"}}>
                     {hotel_info.name}
                   </Text>
                   <Text
-                    style={{fontWeight: 'bold', color: "#053466", fontSize: 15}}>
+                    style={mode == 'light' ? {fontWeight: 'bold', color: "#053466", fontSize: 15} : {fontWeight: 'bold', color: "white", fontSize: 15}}>
                     ${hotel_info.price}
                   </Text>
                 </View>
     
                 {/* Location text */}
-                <Text style={{color: "grey", fontSize: 14, marginTop: 3.5}}>
+                <Text style={mode == 'light' ? {color: "grey", fontSize: 14, marginTop: 3.5} : {color: "white", fontSize: 14, marginTop: 3.5}}>
                   {hotel_info.address}
                 </Text>
     
                 {/* Facilities container */}
                 <View style={{marginTop: 8, flexDirection: 'row'}}>
                     <View style={styles.facility}>
-                    <Feather name="heart" size={18}/>
-                  <Text style={styles.facilityText}>{hotel_info.popularity}</Text>
+                    <Feather name="heart" size={18} color = {mode == 'light' ? "black" : "white"}/>
+                  <Text style={mode == 'light'?styles.facilityText : styles.facilityTextDark}>{hotel_info.popularity}</Text>
                 </View>
                 <View style={styles.facility}>
-                  <Icon name="aspect-ratio" size={18} />
-                  <Text style={styles.facilityText}>{hotel_info.website}</Text>
+                  <Icon name="aspect-ratio" size={18} color = {mode == 'light' ? "black" : "white"}/>
+                  <Text style={mode == 'light'?styles.facilityText : styles.facilityTextDark}>{hotel_info.website}</Text>
                 </View>
                   <BookMark_Icon info={hotel_info} type={"hotel"}/>
                 </View>
@@ -83,7 +83,7 @@ const User_bookmark = ({navigation}) => {
             activeOpacity={0.8}
             // onPress={() => navigation.push("Discover", {screen: "Discover_restaurant"})}>
             >
-            <LinearGradient colors={["#EFF5F6", "#f3f3f3"]} style={styles.card2}>
+            <LinearGradient colors={mode == 'light' ? ["#EFF5F6", "#f3f3f3"] : ["#485461", "#485461"]} style={styles.card2}>
                 
                 <View>
                 {/* Title and price container */}
@@ -92,29 +92,29 @@ const User_bookmark = ({navigation}) => {
                     flexDirection: 'row',
                     justifyContent: 'space-between',
                     }}>
-                    <Text style={{fontSize: 15, fontWeight: 'bold', color: "#053466"}}>
+                    <Text style={mode == 'light' ? {fontSize: 15, fontWeight: 'bold', color: "#053466"}: {fontSize: 15, fontWeight: 'bold', color: "white"}}>
                     {restaurant_info.name}
                     </Text>
                     <Text
-                    style={{fontWeight: 'bold', color: "#053466", fontSize: 15}}>
+                    style={mode == 'light' ? {fontWeight: 'bold', color: "#053466", fontSize: 15} : {fontWeight: 'bold', color: "white", fontSize: 15}}>
                     ${restaurant_info.price}
                     </Text>
                 </View>
 
                 {/* Location text */}
-                <Text style={{color: "grey", fontSize: 14, marginTop: 3.5}}>
+                <Text style={mode == 'light' ? {color: "grey", fontSize: 14, marginTop: 3.5} : {color: "white", fontSize: 14, marginTop: 3.5}}>
                     {restaurant_info.address}
                 </Text>
 
                 {/* Facilities container */}
                 <View style={{marginTop: 8, flexDirection: 'row'}}>
                 <View style={styles.facility}>
-                  <Feather name="heart" size={18} />
-                  <Text style={styles.facilityText}>{restaurant_info.popularity}</Text>
+                  <Feather name="heart" size={18} color = {mode == 'light' ? "black" : "white"}/>
+                  <Text style={mode == 'light'?styles.facilityText : styles.facilityTextDark}>{restaurant_info.popularity}</Text>
                 </View>
                 <View style={styles.facility}>
-                  <Icon name="aspect-ratio" size={18} />
-                  <Text style={styles.facilityText}>{restaurant_info.website}</Text>
+                  <Icon name="aspect-ratio" size={18} color = {mode == 'light' ? "black" : "white"}/>
+                  <Text style={mode == 'light'?styles.facilityText : styles.facilityTextDark}>{restaurant_info.website}</Text>
                 </View>
                     <BookMark_Icon info={restaurant_info} type={"restaurant"}/>
                 </View>
@@ -128,8 +128,8 @@ const User_bookmark = ({navigation}) => {
     
         return (
           <TouchableOpacity onPress={() => removeBookMark(props.info,props.type)} style={styles.facility}>
-            <Icon name="star" size={18}/>
-            <Text style={styles.facilityText}>Bookmark</Text>
+            <Icon name="star" size={18} color = {mode == 'light' ? "black" : "white"}/>
+            <Text style={mode == 'light' ? styles.facilityText : styles.facilityTextDark}>Bookmark</Text>
           </TouchableOpacity>
         );
       
@@ -236,7 +236,7 @@ const User_bookmark = ({navigation}) => {
         <Pressable style={{marginLeft: 8, flexDirection: 'row', alignItems: 'center',}}
             onPress={() => navigation.navigate("Entry", {screen: "Entry_home"})}>
             <Icon style={mode == 'light'?{color: "#053466"}: {color: '#FFFFFF'}}name="chevron-left" size={25}/>
-            <Text style={mode == 'light'?{fontSize: 16, marginLeft: -3, color: 'black'}: {fontSize: 16, marginLeft: -3, color: '#FFFFFF'}}>Back</Text>
+            <Text style={mode == 'light'?{fontSize: 16, marginLeft: -3, color: 'lack'}: {fontSize: 16, marginLeft: -3, color: '#FFFFFF'}}>Back</Text>
         </Pressable>
 
         {/** Title header */}
@@ -422,6 +422,10 @@ const styles = StyleSheet.create({
       facilityText: {
         marginLeft: 5, 
         color: "grey"
+      },
+      facilityTextDark: {
+        marginLeft: 5, 
+        color: "white"
       },
 })
 

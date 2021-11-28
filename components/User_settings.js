@@ -69,12 +69,13 @@ const User_settings = ({ navigation }) => {
       {/** Return Button to previous page */}
       <Pressable style={{marginLeft: 8, flexDirection: 'row', alignItems: 'center',}}
             onPress={() => navigation.navigate("Entry", {screen: "Entry_home"})}>
-            <Icon style={mode == 'light'?{color: "#053466"}: {color: '#053466'}}name="chevron-left" size={25}/>
-            <Text style={mode == 'light'?{fontSize: 16, marginLeft: -3, color: '053466'}: {fontSize: 16, marginLeft: -3, color: '#053466'}}>Back</Text>
+            
+            <Icon style={mode1 == 'light'?{color: "#053466"}: {color: '#FFFFFF'}}name="chevron-left" size={25}/>
+            <Text style={mode1 == 'light'?{fontSize: 16, marginLeft: -3, color: '#053466'}: {fontSize: 16, marginLeft: -3, color: '#FFFFFF'}}>Back</Text>
         </Pressable>
       {/** Title header */}
       <View style={styles.header}>
-        <Text style={styles.noti}>Settings</Text>
+        <Text style={mode1 == 'light'? styles.noti : styles.notiDark}>Settings</Text>
       </View>
 
       {/** All settings stored here */}
@@ -82,8 +83,8 @@ const User_settings = ({ navigation }) => {
         {/** Swipe Button for the user to change the color scheme */}
         <View style={styles.changeThemeBar}>
           <View style={{ paddingRight: 60 }}>
-            <Text style={styles.settingSubHeading}>Theme Color</Text>
-            <Text style={{ fontSize: 11, color: "grey" }}>
+            <Text style={mode1 == 'light'? styles.settingSubHeading : styles.settingSubHeadingDark}>Theme Color</Text>
+            <Text style={mode1 == 'light'? { fontSize: 11, color: "grey" } : { fontSize: 11, color: "white" }}>
               Shift between light and dark mode.
             </Text>
           </View>
@@ -110,8 +111,8 @@ const User_settings = ({ navigation }) => {
         {/** Store Notification */}
         <View style={styles.changeThemeBar}>
           <View style={{ paddingRight: 102 }}>
-            <Text style={styles.settingSubHeading}>Keep Me Updated</Text>
-            <Text style={{ fontSize: 11, color: "grey" }}>
+            <Text style={mode1 == 'light'? styles.settingSubHeading : styles.settingSubHeadingDark}>Keep Me Updated</Text>
+            <Text style={mode1 == 'light'? { fontSize: 11, color: "grey" } : { fontSize: 11, color: "white" }}>
               Receive daily Notifications.
             </Text>
           </View>
@@ -133,8 +134,8 @@ const User_settings = ({ navigation }) => {
         {/** Set number of data columns */}
         <View style={styles.changeThemeBar}>
           <View style={{ paddingRight: 35 }}>
-            <Text style={styles.settingSubHeading}>Integrate All</Text>
-            <Text style={{ fontSize: 11, color: "grey" }}>
+            <Text style={mode1 == 'light'? styles.settingSubHeading : styles.settingSubHeadingDark}>Integrate All</Text>
+            <Text style={mode1 == 'light'? { fontSize: 11, color: "grey" } : { fontSize: 11, color: "white" }}>
               Show more data columns in home page.
             </Text>
           </View>
@@ -182,7 +183,18 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     color: "#053466",
   },
+  notiDark: {
+    marginLeft: 18,
+    fontSize: 24,
+    fontWeight: "bold",
+    color: "#FFFFFF",
+  },
   header: {
+    flexDirection: "row",
+    marginLeft: 4.5,
+    marginTop: 3.6,
+  },
+  headerDark: {
     flexDirection: "row",
     marginLeft: 4.5,
     marginTop: 3.6,
@@ -198,6 +210,12 @@ const styles = StyleSheet.create({
   },
   settingSubHeading: {
     color: "#053466",
+    fontSize: 16,
+    fontWeight: "500",
+    paddingBottom: 5,
+  },
+  settingSubHeadingDark: {
+    color: "#FFFFFF",
     fontSize: 16,
     fontWeight: "500",
     paddingBottom: 5,
