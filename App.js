@@ -7,11 +7,11 @@ import { BottomTabNavigator } from './Routes/BottomTabStack';
 import {EventRegister} from "react-native-event-listeners";
 import themeContext from './components/themeContext';
 import theme from './components/theme';
-import { Appearance } from 'react-native';
+import { Appearance, LogBox } from 'react-native';
 import { color } from 'react-native-reanimated';
 
 
-// console.disableYellowBox = true;
+LogBox.ignoreAllLogs();
 
 
 const Stack = createStackNavigator();
