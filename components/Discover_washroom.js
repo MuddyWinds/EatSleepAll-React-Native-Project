@@ -13,7 +13,7 @@ const {width, height} = Dimensions.get('screen');
 
 const Discover_washroom = ({navigation}) => {
   
-  let searchingAdress = 0;
+  const [searchingAdress, setAddress] = useState("");
   const [modalVisible, setModalVisible] = useState(false);
   const [cardItems, setCardItems] = useState([])
   const [searchWord, setSearchWord] = useState("");
@@ -50,7 +50,7 @@ const Discover_washroom = ({navigation}) => {
       <Pressable 
       activeOpacity={0.8}
       onPress={() => {
-        searchingAdress = washroom_info.index;
+        setAddress(washroom_info.address);
         setModalVisible(!modalVisible);
         console.log(washroom_info.index)
       }}
@@ -118,7 +118,7 @@ const Discover_washroom = ({navigation}) => {
               </View>
 
               {/** Show Preview Content */}
-              <WebView source={{uri: `https://www.google.com.hk/maps/search/${Washroom_data[searchingAdress].address}`}} />
+              <WebView source={{uri: `https://www.google.com.hk/maps/search/${searchingAdress}`}} />
 
             </View>
           </View>
