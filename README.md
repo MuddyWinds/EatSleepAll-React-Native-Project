@@ -14,7 +14,7 @@ EatSleepAll is an integration app that displays restaurants, hotels, and washroo
 (1) Home Page  
 [![Home Page](https://img.youtube.com/vi/b5gbeVCoDyo/0.jpg)](https://youtu.be/b5gbeVCoDyo)  
 
-(2) Sleep Page + Notification 
+(2) Sleep Page + Notification  
 [![Sleep Page + Notification](https://img.youtube.com/vi/mlZtpNdQ9pw/0.jpg)](https://youtu.be/mlZtpNdQ9pw)  
 
 (3) Searching in Sleep Page  
