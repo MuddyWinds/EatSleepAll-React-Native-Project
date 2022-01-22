@@ -10,4 +10,4 @@ EatSleepAll is an integration app that displays restaurants, hotels, and washroo
 
 
 ## Features
-{google_docs}https://docs.google.com/presentation/d/1wEPCd6nTG4BwT6jOtp1CnknV16eX9H4mV_nlIQMB0d8/edit#slide=id.g1048274a6ed_0_5{google_docs}
+{google_docs}https://docs.google.com/presentation/d/1wEPCd6nTG4BwT6jOtp1CnknV16eX9H4mV_nlIQMB0d8/edit#slide=id.g1048274a6ed_0_5{/google_docs}
