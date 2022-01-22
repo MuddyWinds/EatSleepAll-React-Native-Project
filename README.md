@@ -31,5 +31,10 @@ EatSleepAll is an integration app that displays restaurants, hotels, and washroo
   
 (7) Opening map preview on All Page  
 [![Opening preview on All Page](https://img.youtube.com/vi/17VYpquEEIs)](https://youtu.be/17VYpquEEIs)  
+  
+(8) Customise the interface  
+[![Customise the interface](https://img.youtube.com/vi/GKCIQYR31GM)](https://youtu.be/GKCIQYR31GM)  
+
+
 
 
